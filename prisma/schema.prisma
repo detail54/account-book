@@ -11,26 +11,26 @@ model StoreCategory {
   id      Int       @id @default(autoincrement())
   name    String    @unique
   stores  Store[]
-  Account Account[]
+  account Account[]
 }
 
 model Store {
-  id         Int           @id @default(autoincrement())
-  category   StoreCategory @relation(fields: [categoryId], references: [id])
-  categoryId Int
-  name       String        @unique
-  Account    Account[]
+  id          Int           @id @default(autoincrement())
+  category    StoreCategory @relation(fields: [category_id], references: [id])
+  category_id Int
+  name        String        @unique
+  account     Account[]
 }
 
 model Account {
-  id         Int           @id @default(autoincrement())
-  createDt   DateTime      @default(now())
-  updatedDt  DateTime      @updatedAt
-  paymentDt  DateTime
-  category   StoreCategory @relation(fields: [categoryId], references: [id])
-  categoryId Int
-  store      Store         @relation(fields: [storeId], references: [id])
-  storeId    Int
-  amount     Int
-  memo       String?
+  id          Int           @id @default(autoincrement())
+  create_dt   DateTime      @default(now())
+  updated_dt  DateTime      @updatedAt
+  payment_dt  DateTime
+  category    StoreCategory @relation(fields: [category_id], references: [id])
+  category_id Int
+  store       Store         @relation(fields: [store_id], references: [id])
+  store_id    Int
+  amount      Int
+  memo        String?
 }
