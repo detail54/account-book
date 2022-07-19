@@ -7,7 +7,7 @@ datasource db {
   url      = "file:account.db"
 }
 
-model Category {
+model StoreCategory {
   id      Int       @id @default(autoincrement())
   name    String    @unique
   stores  Store[]
@@ -15,21 +15,21 @@ model Category {
 }
 
 model Store {
-  id         Int       @id @default(autoincrement())
-  category   Category  @relation(fields: [categoryId], references: [id])
+  id         Int           @id @default(autoincrement())
+  category   StoreCategory @relation(fields: [categoryId], references: [id])
   categoryId Int
-  name       String    @unique
+  name       String        @unique
   Account    Account[]
 }
 
 model Account {
-  id         Int      @id @default(autoincrement())
-  createDt   DateTime @default(now())
-  updatedDt  DateTime @updatedAt
+  id         Int           @id @default(autoincrement())
+  createDt   DateTime      @default(now())
+  updatedDt  DateTime      @updatedAt
   paymentDt  DateTime
-  category   Category @relation(fields: [categoryId], references: [id])
+  category   StoreCategory @relation(fields: [categoryId], references: [id])
   categoryId Int
-  store      Store    @relation(fields: [storeId], references: [id])
+  store      Store         @relation(fields: [storeId], references: [id])
   storeId    Int
   amount     Int
   memo       String?
