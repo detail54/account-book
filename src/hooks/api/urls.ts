@@ -1,11 +1,8 @@
 const API_URL = {
-  POSTS: 'posts',
-  COMMENTS: 'comments',
-  ALBUMS: 'albums',
-  PHOTOS: 'photos',
-  TODOS: 'todos',
   USERS: 'users',
-  ERROR_TEST: 'error',
+  ACCOUNTS: 'accounts',
+  STORES: 'stores',
+  STORE_CATEGORYS: 'store-categorys',
 }
 
 export default API_URL

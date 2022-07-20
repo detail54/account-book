@@ -30,6 +30,7 @@
     ],
     "react/jsx-props-no-spreading": "off",
     "import/prefer-default-export": "off", // import, export rules 비활성화
-    "prettier/prettier": ["error", { "endOfLine": "auto" }]
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "react/prop-types": [0]
   }
 }

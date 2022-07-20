@@ -7,13 +7,12 @@ import {
   UseMutationOptions,
   UseMutationResult,
   useQueryClient,
-  QueryFunction,
   dehydrate,
   QueryFunctionContext,
 } from 'react-query'
+import queryClient from 'utils/reactQuery'
 import api from '../utils/axios'
 import useApiError, { TErrorHandlers } from './useApiError'
-import queryClient from 'utils/reactQuery'
 
 export type TQueryKey = [string, object | undefined]
 export type TQueryErr = (err: AxiosError) => void
@@ -87,15 +86,15 @@ export const useMutation = <T, S>(
 ): UseMutationResult<AxiosResponse, AxiosError, T | S> => {
   const { handleMutationError } = useApiError(errorHandlers)
 
-  const queryClient = useQueryClient()
+  const client = useQueryClient()
 
   return useMutationOrigin<AxiosResponse, AxiosError, T | S>(mutationFn, {
     onMutate: async (data) => {
-      await queryClient.cancelQueries([url, params])
+      await client.cancelQueries([url, params])
 
-      const previousData = queryClient.getQueriesData([url, params])
+      const previousData = client.getQueriesData([url, params])
 
-      queryClient.setQueriesData<T>([url, params], (oldData) => {
+      client.setQueriesData<T>([url, params], (oldData) => {
         return updater && oldData ? updater(oldData, data as S) : (data as T)
       })
 
@@ -103,7 +102,7 @@ export const useMutation = <T, S>(
     },
     onError: onError || handleMutationError,
     onSettled: () => {
-      queryClient.invalidateQueries([url, params])
+      client.invalidateQueries([url, params])
     },
     ...options,
   })

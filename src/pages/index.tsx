@@ -1,12 +1,10 @@
+import useUser from 'hooks/useUser'
 import type { NextPage } from 'next'
-import Link from 'next/link'
 
 const Home: NextPage = () => {
-  return (
-    <>
-      <Link href='posts'>post</Link>
-    </>
-  )
+  const { getUsers } = useUser()
+  const { data: usersData } = getUsers()
+  return <>{usersData}</>
 }
 
 export default Home
