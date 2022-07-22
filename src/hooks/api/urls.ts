@@ -1,4 +1,5 @@
 const API_URL = {
+  SESSION: 'auth/session',
   USERS: 'users',
   ACCOUNTS: 'accounts',
   STORES: 'stores',
