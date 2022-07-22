@@ -10,6 +10,7 @@ import DarkTheme from 'styles/ThemeDark'
 import Header from 'layout/Header'
 import Footer from 'layout/Footer'
 import Main from 'layout/Main'
+import { SessionProvider } from 'next-auth/react'
 
 const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false)
@@ -21,24 +22,26 @@ const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={isDarkMode ? DarkTheme : RightTheme}>
-        <GlobalStyle />
-        <Hydrate state={pageProps.dehydratedState}>
-          <Header
-            changeThemeButtonText={changeThemeButtonText}
-            onChangeTheme={onChangeTheme}
-          />
-          <Main Component={Component} pageProps={pageProps} router={router} />
-          <Footer />
-          <ReactQueryDevtools
-            initialIsOpen={false}
-            position='bottom-right'
-            panelProps={{ className: 'devtools' }}
-          />
-        </Hydrate>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <SessionProvider session={pageProps.session}>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={isDarkMode ? DarkTheme : RightTheme}>
+          <GlobalStyle />
+          <Hydrate state={pageProps.dehydratedState}>
+            <Header
+              changeThemeButtonText={changeThemeButtonText}
+              onChangeTheme={onChangeTheme}
+            />
+            <Main Component={Component} pageProps={pageProps} router={router} />
+            <Footer />
+            <ReactQueryDevtools
+              initialIsOpen={false}
+              position='bottom-right'
+              panelProps={{ className: 'devtools' }}
+            />
+          </Hydrate>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </SessionProvider>
   )
 }
 

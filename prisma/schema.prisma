@@ -8,30 +8,30 @@ datasource db {
 }
 
 model StoreCategory {
-  id       Int       @id @default(autoincrement()) @map("store_category_id")
+  id       Int       @id @default(autoincrement())
   name     String    @unique
   stores   Store[]
   accounts Account[]
 }
 
 model Store {
-  id         Int           @id @default(autoincrement()) @map("store_id")
-  category   StoreCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  id         Int           @id @default(autoincrement())
+  category   StoreCategory @relation(fields: [categoryId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   categoryId Int
   name       String        @unique
   accounts   Account[]
 }
 
 model Account {
-  id         Int           @id @default(autoincrement()) @map("account_id")
-  user       User          @relation(fields: [userId], references: [id])
+  id         Int           @id @default(autoincrement())
+  user       User          @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   userId     Int
   regDt      DateTime      @default(now())
   updatedDt  DateTime      @updatedAt
   paymentDt  DateTime
-  category   StoreCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  category   StoreCategory @relation(fields: [categoryId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   categoryId Int
-  store      Store         @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  store      Store         @relation(fields: [storeId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   storeId    Int
   amount     Int
   memo       String?
@@ -43,4 +43,6 @@ model User {
   password String
   accounts Account[]
   regDt    DateTime  @default(now())
+
+  @@unique([userName])
 }
