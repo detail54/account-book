@@ -6,21 +6,21 @@ import API_URL from './api/urls'
 export const fetchSession = async () => {
   const res = await api.get(API_URL.SESSION)
   const { data: session } = res
-
-  if (Object.keys(res).length) {
+  console.log('Api session::', session)
+  if (Object.keys(session).length) {
     return session
   }
 
   return null
 }
 
-export const useSession = () => {
+export const useSession = (required?: boolean) => {
   const router = useRouter()
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const redirect = process.env.NEXTAUTH_URL!
+  const redirect = '/api/auth/signin?error=SessionExpired'
   const query = useQuery([API_URL.SESSION], fetchSession, {
     onSettled(data) {
-      if (data) return
+      console.log('settleData::', data)
+      if (data || !required) return
       router.push(redirect)
     },
   })

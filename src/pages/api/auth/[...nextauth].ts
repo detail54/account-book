@@ -6,7 +6,7 @@ import prisma from 'utils/prismaClient'
 export default NextAuth({
   providers: [
     CredentialsProvider({
-      name: 'username-password-credential',
+      name: 'account-book-login',
       credentials: {
         userName: {
           label: 'Username',
@@ -20,6 +20,8 @@ export default NextAuth({
             userName: credentials?.userName,
           },
         })
+        console.log('user:::', user)
+        if (user) return user
 
         return user || null
       },
@@ -40,7 +42,13 @@ export default NextAuth({
     },
     async session({ session, token, user }) {
       session.accessToken = token.accessToken
+      console.log('session:::', session)
       return session
     },
+  },
+  secret: process.env.NEXT_PUBLIC_SECRET,
+  pages: {
+    signIn: '/login',
+    signOut: '/',
   },
 })
