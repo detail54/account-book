@@ -2,6 +2,7 @@ import UserForm, { TChangeValueType } from 'components/templates/form/UserForm'
 import { NextPage } from 'next'
 import { signIn } from 'next-auth/react'
 import React, { useState } from 'react'
+import Wrap from './Login.styles'
 
 const Login: NextPage = () => {
   const [userInfo, setUserInfo] = useState({
@@ -36,12 +37,14 @@ const Login: NextPage = () => {
   }
 
   return (
-    <UserForm
-      userName={userInfo.userName}
-      password={userInfo.password}
-      onChange={onChange}
-      onSubmit={login}
-    />
+    <Wrap>
+      <UserForm
+        userName={userInfo.userName}
+        password={userInfo.password}
+        onChange={onChange}
+        onSubmit={login}
+      />
+    </Wrap>
   )
 }
 

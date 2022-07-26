@@ -25,7 +25,7 @@ export default createGlobalStyle`
   ul, ol {
     list-style: none;
   }
-  button, div, span, li {
+  button, div, span, li, main {
     align-items: center;
     justify-content: center;
   }
