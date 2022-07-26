@@ -2,6 +2,7 @@ import { NextPage } from 'next'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import React from 'react'
+import MainEl from './Main.styles'
 
 const Main: NextPage<AppProps> = ({ Component, pageProps, router }) => {
   const domain = `https://도메인명`
@@ -34,7 +35,9 @@ const Main: NextPage<AppProps> = ({ Component, pageProps, router }) => {
           content='__next react query boilerplate'
         />
       </Head>
-      <Component {...pageProps} />
+      <MainEl>
+        <Component {...pageProps} />
+      </MainEl>
     </>
   )
 }
