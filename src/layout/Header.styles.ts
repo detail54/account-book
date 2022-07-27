@@ -1,11 +1,15 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const HeaderEl = styled.header`
   width: 100vw;
-  background-color: ${({ theme }) => theme.colors.black_1};
-  color: ${({ theme }) => theme.fontColors.white};
   align-items: center;
   justify-content: space-between;
+  ${({ theme }) => css`
+    background-color: ${theme.colors.black_1};
+    color: ${theme.fontColors.white};
+    padding-top: ${theme.paddings.sm};
+    padding-bottom: ${theme.paddings.sm};
+  `}
 `
 
 const UserInfo = styled.h3`
@@ -13,7 +17,15 @@ const UserInfo = styled.h3`
   margin-left: ${({ theme }) => theme.margins.md};
 `
 
+const Buttons = styled.div`
+  justify-content: space-around;
+  button {
+    flex: 1;
+  }
+`
+
 export default {
   HeaderEl,
   UserInfo,
+  Buttons,
 }

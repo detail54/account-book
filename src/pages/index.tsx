@@ -1,10 +1,11 @@
 import type { NextPage } from 'next'
 import { useSession } from 'hooks/useSession'
+import { useRouter } from 'next/router'
 
 const Home: NextPage = () => {
-  const [session, loading] = useSession()
+  const { data: session, isLoading } = useSession()
 
-  if (loading) {
+  if (isLoading) {
     return <>Loading...</>
   }
 

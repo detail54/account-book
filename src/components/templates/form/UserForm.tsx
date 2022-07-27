@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 // components
 import Text from 'components/atoms/text/Text'
 import Input from 'components/atoms/input/Input'
@@ -28,25 +28,53 @@ const UserForm: React.FC<IProps> = ({
   onSubmit,
   error,
 }) => {
+  const idRef = useRef<HTMLInputElement>(null)
+  const pwRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (error?.includes('아이디')) {
+      idRef.current?.focus()
+    }
+
+    if (error?.includes('비밀번호')) {
+      pwRef.current?.focus()
+    }
+  }, [error])
+
+  const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      onSubmit()
+    }
+  }
+
   return (
     <>
-      <Form onSubmit={(e) => e.preventDefault()}>
-        <Text text='아이디' paddingY='sm' type='BoldText' />
+      <Form>
+        <Text text='아이디' paddingY='sm' type='BoldText' fontColor='black' />
         <Input
           value={userName}
           onChange={(e) => onChange(e, 'userName')}
+          onKeyPress={onKeyPress}
           paddingY='sm'
+          inputRef={idRef}
         />
-        <Text text='비밀번호' paddingY='sm' type='BoldText' />
+        <Text text='비밀번호' paddingY='sm' type='BoldText' fontColor='black' />
         <Input
           value={password}
           type='password'
           onChange={(e) => onChange(e, 'password')}
+          onKeyPress={onKeyPress}
           paddingY='sm'
+          inputRef={pwRef}
         />
         {passwordCheck && (
           <>
-            <Text text='비밀번호 확인' paddingY='sm' />
+            <Text
+              text='비밀번호 확인'
+              paddingY='sm'
+              type='BoldText'
+              fontColor='black'
+            />
             <Input
               value={passwordCheck}
               onChange={(e) => onChange(e, 'passwordCheck')}

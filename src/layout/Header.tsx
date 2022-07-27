@@ -14,40 +14,40 @@ interface IProps {
 }
 
 const Header: React.FC<IProps> = ({ changeThemeButtonText, onChangeTheme }) => {
-  const [session] = useSession()
-  const { HeaderEl, UserInfo } = HeaderStyles
+  const { data: session } = useSession()
+  const { HeaderEl, UserInfo, Buttons } = HeaderStyles
 
   return (
     <HeaderEl>
       <UserInfo>
-        {!session
-          ? '로그인 해주세요.'
-          : `${session.user.userName}님 안녕하세요`}
+        {!session ? '로그인 해주세요.' : `${session.user.name}님`}
       </UserInfo>
-      <Button
-        type='RoundButton'
-        size='xl'
-        bgColor='orange_4'
-        text={changeThemeButtonText}
-        onClick={onChangeTheme}
-      />
-      {!session ? (
+      <Buttons>
         <Button
-          type='RoundButton'
-          size='xl'
-          bgColor='orange_1'
-          text='로그인'
-          onClick={() => signIn()}
+          buttonStyle='RoundButton'
+          size='md'
+          bgColor='orange_4'
+          text={changeThemeButtonText}
+          onClick={onChangeTheme}
         />
-      ) : (
-        <Button
-          type='RoundButton'
-          size='xl'
-          bgColor='grey_4'
-          text='로그아웃'
-          onClick={signOut}
-        />
-      )}
+        {!session ? (
+          <Button
+            buttonStyle='RoundButton'
+            size='md'
+            bgColor='orange_1'
+            text='로그인'
+            onClick={() => signIn()}
+          />
+        ) : (
+          <Button
+            buttonStyle='RoundButton'
+            size='md'
+            bgColor='grey_4'
+            text='로그아웃'
+            onClick={signOut}
+          />
+        )}
+      </Buttons>
     </HeaderEl>
   )
 }

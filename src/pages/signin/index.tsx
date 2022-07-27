@@ -1,22 +1,31 @@
-import UserForm, { TChangeValueType } from 'components/templates/form/UserForm'
-import { NextPage } from 'next'
-import { signIn } from 'next-auth/react'
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { useState } from 'react'
+import { NextPage } from 'next'
+import UserForm, { TChangeValueType } from 'components/templates/form/UserForm'
+import { signIn } from 'next-auth/react'
+import Text from 'components/atoms/text/Text'
 import Wrap from './Login.styles'
 
-const Login: NextPage = () => {
+const SingIn: NextPage = () => {
+  const [errorMsg, setErrorMsg] = useState<string | undefined>()
   const [userInfo, setUserInfo] = useState({
     userName: '',
     password: '',
   })
 
   const login = async () => {
-    const response = await signIn('account-book-login', {
+    const result = await signIn('credentials', {
       userName: userInfo.userName,
       password: userInfo.password,
       redirect: false,
     })
-    console.log('response:::')
+
+    if (result?.error) {
+      setErrorMsg(result.error)
+    } else {
+      // 커스텀 로그인의 경우 새로고침을 해야 세션 정상 반영되어 루트경로로 리다이렉트 시킴.
+      window.location.href = process.env.NEXT_PUBLIC_HOST!
+    }
   }
 
   const onChange = (
@@ -38,14 +47,16 @@ const Login: NextPage = () => {
 
   return (
     <Wrap>
+      <Text text='로그인' paddingY='xl' type='BoldText' fontSize='xxl' />
       <UserForm
         userName={userInfo.userName}
         password={userInfo.password}
         onChange={onChange}
         onSubmit={login}
+        error={errorMsg}
       />
     </Wrap>
   )
 }
 
-export default Login
+export default SingIn
