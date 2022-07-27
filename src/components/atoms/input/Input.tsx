@@ -13,7 +13,7 @@ interface IProps {
   onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void
   placeHolder?: string
   paddingY?: TSize<'zero'>
-  ref?: React.RefObject<HTMLInputElement>
+  inputRef?: React.RefObject<HTMLInputElement>
 }
 
 const Input: React.FC<IProps> = ({
@@ -24,9 +24,10 @@ const Input: React.FC<IProps> = ({
   onChange,
   onKeyPress,
   paddingY,
-  ref,
+  inputRef,
 }) => {
   const InputEl = Inputs[inputStyle]
+
   return (
     <InputEl
       type={type}
@@ -35,7 +36,7 @@ const Input: React.FC<IProps> = ({
       onKeyPress={onKeyPress}
       placeholder={placeHolder}
       paddingY={paddingY}
-      ref={ref}
+      ref={inputRef}
     />
   )
 }
@@ -46,7 +47,7 @@ Input.defaultProps = {
   placeHolder: undefined,
   paddingY: undefined,
   onKeyPress: undefined,
-  ref: undefined,
+  inputRef: undefined,
 }
 
 export default Input
