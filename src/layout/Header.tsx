@@ -20,7 +20,7 @@ const Header: React.FC<IProps> = ({ changeThemeButtonText, onChangeTheme }) => {
   return (
     <HeaderEl>
       <UserInfo>
-        {!session ? '로그인 해주세요.' : `${session.user.name}님`}
+        {!session ? '로그인 해주세요.' : `${session.user.name} 님`}
       </UserInfo>
       <Buttons>
         <Button
