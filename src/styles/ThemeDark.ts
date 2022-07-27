@@ -19,6 +19,7 @@ export const colors: Record<TColor, string> = {
   grey_3: '#EAEAEA',
   grey_4: '#E5E5E5',
   white: '#fff',
+  themeColor: '#fff',
 }
 
 const fontColors: Record<TFontColor, string> = {
@@ -26,15 +27,20 @@ const fontColors: Record<TFontColor, string> = {
   grey: '#d9d9d9',
   white: '#fff',
   black: '#000000',
+  red: '#ff2424',
 }
 
 const backgroundColor = '#202124'
+
+const boxShadow =
+  '0px 3px 3px -2px rgb(255 255 255 / 80%), 0px 3px 4px 0px rgb(255 255 255 / 86%), 0px 1px 8px 0px rgb(255 255 255 / 88%);'
 
 const theme: DefaultTheme = {
   ...RightTheme,
   colors,
   fontColors,
   backgroundColor,
+  boxShadow,
 }
 
 export default theme

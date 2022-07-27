@@ -33,6 +33,7 @@ declare module 'styled-components' {
     | 'grey_3'
     | 'grey_4'
     | 'white'
+    | 'themeColor'
 
   export interface ITheme {
     calcRem: (size: number) => string
@@ -46,6 +47,7 @@ declare module 'styled-components' {
     colors: Record<TColor, string>
     fontColors: Record<TFontColor, string>
     backgroundColor: string
+    boxShadow: string
   }
 
   export interface IStyleProps {
