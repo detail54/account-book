@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { useEffect, useRef } from 'react'
 // components
 import Text from 'components/atoms/text/Text'
@@ -8,10 +9,13 @@ import Form from './UserForm.styles'
 
 export type TChangeValueType = 'userName' | 'password' | 'passwordCheck'
 
-interface IProps {
+export interface IUserInfo {
   userName: string
   password: string
   passwordCheck?: string
+}
+interface IProps {
+  userInfo: IUserInfo
   onChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     type: TChangeValueType,
@@ -21,15 +25,15 @@ interface IProps {
 }
 
 const UserForm: React.FC<IProps> = ({
-  userName,
-  password,
-  passwordCheck,
+  userInfo,
   onChange,
   onSubmit,
   error,
 }) => {
   const idRef = useRef<HTMLInputElement>(null)
   const pwRef = useRef<HTMLInputElement>(null)
+  const pwCheckRef = useRef<HTMLInputElement>(null)
+  const { userName, password, passwordCheck } = userInfo
 
   useEffect(() => {
     if (error?.includes('아이디')) {
@@ -67,7 +71,7 @@ const UserForm: React.FC<IProps> = ({
           paddingY='sm'
           inputRef={pwRef}
         />
-        {passwordCheck && (
+        {Object.keys(userInfo).includes('passwordCheck') && (
           <>
             <Text
               text='비밀번호 확인'
@@ -76,9 +80,11 @@ const UserForm: React.FC<IProps> = ({
               fontColor='black'
             />
             <Input
-              value={passwordCheck}
+              value={passwordCheck!}
               onChange={(e) => onChange(e, 'passwordCheck')}
+              onKeyPress={onKeyPress}
               paddingY='sm'
+              inputRef={pwCheckRef}
             />
           </>
         )}
@@ -90,7 +96,6 @@ const UserForm: React.FC<IProps> = ({
 }
 
 UserForm.defaultProps = {
-  passwordCheck: '',
   error: undefined,
 }
 

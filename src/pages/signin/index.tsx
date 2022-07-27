@@ -1,14 +1,17 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { useState } from 'react'
 import { NextPage } from 'next'
-import UserForm, { TChangeValueType } from 'components/templates/form/UserForm'
+import UserForm, {
+  IUserInfo,
+  TChangeValueType,
+} from 'components/templates/form/UserForm'
 import { signIn } from 'next-auth/react'
 import Text from 'components/atoms/text/Text'
 import Wrap from './SignIn.styles'
 
 const SingIn: NextPage = () => {
   const [errorMsg, setErrorMsg] = useState<string | undefined>()
-  const [userInfo, setUserInfo] = useState({
+  const [userInfo, setUserInfo] = useState<IUserInfo>({
     userName: '',
     password: '',
   })
@@ -49,8 +52,7 @@ const SingIn: NextPage = () => {
     <Wrap>
       <Text text='로그인' paddingY='xl' type='BoldText' fontSize='xxl' />
       <UserForm
-        userName={userInfo.userName}
-        password={userInfo.password}
+        userInfo={userInfo}
         onChange={onChange}
         onSubmit={login}
         error={errorMsg}
