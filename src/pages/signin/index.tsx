@@ -52,6 +52,7 @@ const SingIn: NextPage = () => {
     <Wrap>
       <Text text='로그인' paddingY='xl' type='BoldText' fontSize='xxl' />
       <UserForm
+        type='로그인'
         userInfo={userInfo}
         onChange={onChange}
         onSubmit={login}

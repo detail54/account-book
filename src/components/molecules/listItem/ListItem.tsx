@@ -51,7 +51,7 @@ const ListItem: React.FC<IListItemProps> = ({
   const buttonEl = (type === 'ButtonListItem' ||
     type === 'NumberAndButtonListItem') && (
     <Button
-      type={button}
+      buttonStyle={button}
       size={buttonSize}
       text={buttonText}
       onClick={onClick}

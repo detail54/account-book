@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query'
 import { useRouter } from 'next/router'
 import api from '../utils/axios'
-import API_URL from './api/urls'
+import API_URL from './config/urls'
 
 export const fetchSession = async () => {
   const res = await api.get(API_URL.SESSION)

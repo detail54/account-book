@@ -16,13 +16,14 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
       }
     },
     POST: async () => {
-      await prisma.user.create({
-        data: {
-          ...body,
-          regDt: new Date(),
-        },
-      })
-      console.log('post hihi')
+      try {
+        const data = await prisma.user.create({
+          data: body.data,
+        })
+        res.status(200).json(data.userName)
+      } catch (e) {
+        res.status(500).json(e)
+      }
     },
   }
 

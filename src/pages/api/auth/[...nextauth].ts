@@ -2,6 +2,7 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import prisma from 'utils/prismaClient'
+import { validationMsg } from 'hooks/config/messages'
 
 export default NextAuth({
   providers: [
@@ -21,10 +22,10 @@ export default NextAuth({
           },
         })
 
-        if (!user) throw new Error('등록되지 않은 아이디 입니다.')
+        if (!user) throw new Error(validationMsg.ERROR_NOT_EXIST_ID)
         if (user) {
           if (user.password !== credentials?.password) {
-            throw new Error('비밀번호를 확인해주세요.')
+            throw new Error(validationMsg.ERROR_DIFFERENT_PW)
           } else {
             // DefaultUser type 키값에 맞춰서 리턴시 token콜백에서 추가 작업 불필요.
             /**

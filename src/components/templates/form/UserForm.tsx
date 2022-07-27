@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react'
 import Text from 'components/atoms/text/Text'
 import Input from 'components/atoms/input/Input'
 import Button from 'components/atoms/button/Button'
+import { validationMsg } from 'hooks/config/messages'
 // styles
 import Form from './UserForm.styles'
 
@@ -15,6 +16,7 @@ export interface IUserInfo {
   passwordCheck?: string
 }
 interface IProps {
+  type: '로그인' | '회원가입'
   userInfo: IUserInfo
   onChange: (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -25,6 +27,7 @@ interface IProps {
 }
 
 const UserForm: React.FC<IProps> = ({
+  type,
   userInfo,
   onChange,
   onSubmit,
@@ -36,12 +39,19 @@ const UserForm: React.FC<IProps> = ({
   const { userName, password, passwordCheck } = userInfo
 
   useEffect(() => {
-    if (error?.includes('아이디')) {
+    if (error?.includes(validationMsg.ERROR_BLANKED_ID)) {
       idRef.current?.focus()
     }
 
-    if (error?.includes('비밀번호')) {
+    if (
+      error?.includes(validationMsg.ERROR_BLANKED_PW) ||
+      error?.includes(validationMsg.ERROR_DIFFERENT_PW)
+    ) {
       pwRef.current?.focus()
+    }
+
+    if (error?.includes(validationMsg.ERROR_DIFFERENT_PWCHECK)) {
+      pwCheckRef.current?.focus()
     }
   }, [error])
 
@@ -71,7 +81,7 @@ const UserForm: React.FC<IProps> = ({
           paddingY='sm'
           inputRef={pwRef}
         />
-        {Object.keys(userInfo).includes('passwordCheck') && (
+        {type === '회원가입' && (
           <>
             <Text
               text='비밀번호 확인'
@@ -80,6 +90,7 @@ const UserForm: React.FC<IProps> = ({
               fontColor='black'
             />
             <Input
+              type='password'
               value={passwordCheck!}
               onChange={(e) => onChange(e, 'passwordCheck')}
               onKeyPress={onKeyPress}
@@ -89,7 +100,7 @@ const UserForm: React.FC<IProps> = ({
           </>
         )}
         {error && <Text text={error} paddingY='md' fontColor='red' />}
-        <Button text='로그인' onClick={onSubmit} size='md' marginY='sm' />
+        <Button text={type} onClick={onSubmit} size='md' marginY='sm' />
       </Form>
     </>
   )
