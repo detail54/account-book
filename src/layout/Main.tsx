@@ -8,13 +8,13 @@ const Main: NextPage<AppProps> = ({ Component, pageProps, router }) => {
   const domain = `https://도메인명`
   const currentUrl = `${domain}/${router.asPath}`
   const pageName =
-    router.pathname === '/' ? '' : router.pathname.replace('/', '')
+    router.pathname === '/' ? '' : router.pathname.replace('/', '/ ')
 
   return (
     <>
       <Head>
         <link rel='canonical' href={currentUrl} />
-        <title>{`가계부 / ${pageName}`}</title>
+        <title>{`가계부 ${pageName}`}</title>
         <meta name='description' content='가계부' />
         <meta property='og:title' content='가계부' />
         <meta
