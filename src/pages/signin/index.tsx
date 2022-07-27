@@ -4,7 +4,7 @@ import { NextPage } from 'next'
 import UserForm, { TChangeValueType } from 'components/templates/form/UserForm'
 import { signIn } from 'next-auth/react'
 import Text from 'components/atoms/text/Text'
-import Wrap from './Login.styles'
+import Wrap from './SignIn.styles'
 
 const SingIn: NextPage = () => {
   const [errorMsg, setErrorMsg] = useState<string | undefined>()
