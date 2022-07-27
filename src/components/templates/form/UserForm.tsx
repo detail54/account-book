@@ -29,33 +29,35 @@ const UserForm: React.FC<IProps> = ({
   error,
 }) => {
   return (
-    <Form onSubmit={(e) => e.preventDefault()}>
-      <Text text='아이디' paddingY='md' type='BoldText' />
-      <Input
-        value={userName}
-        onChange={(e) => onChange(e, 'userName')}
-        paddingY='sm'
-      />
-      <Text text='비밀번호' paddingY='md' type='BoldText' />
-      <Input
-        value={password}
-        type='password'
-        onChange={(e) => onChange(e, 'password')}
-        paddingY='sm'
-      />
-      {passwordCheck && (
-        <>
-          <Text text='비밀번호 확인' paddingY='md' />
-          <Input
-            value={passwordCheck}
-            onChange={(e) => onChange(e, 'passwordCheck')}
-            paddingY='sm'
-          />
-        </>
-      )}
-      {error && <Text text={error} paddingY='md' fontColor='red' />}
-      <Button text='로그인' onClick={onSubmit} size='md' marginY='sm' />
-    </Form>
+    <>
+      <Form onSubmit={(e) => e.preventDefault()}>
+        <Text text='아이디' paddingY='sm' type='BoldText' />
+        <Input
+          value={userName}
+          onChange={(e) => onChange(e, 'userName')}
+          paddingY='sm'
+        />
+        <Text text='비밀번호' paddingY='sm' type='BoldText' />
+        <Input
+          value={password}
+          type='password'
+          onChange={(e) => onChange(e, 'password')}
+          paddingY='sm'
+        />
+        {passwordCheck && (
+          <>
+            <Text text='비밀번호 확인' paddingY='sm' />
+            <Input
+              value={passwordCheck}
+              onChange={(e) => onChange(e, 'passwordCheck')}
+              paddingY='sm'
+            />
+          </>
+        )}
+        {error && <Text text={error} paddingY='md' fontColor='red' />}
+        <Button text='로그인' onClick={onSubmit} size='md' marginY='sm' />
+      </Form>
+    </>
   )
 }
 
