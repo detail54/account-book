@@ -1,14 +1,13 @@
-import { IUser } from './api/interface'
-import API_URL from './api/urls'
-import { TQueryErr, useQuery } from './useReactQuery'
+import API_URL from './config/urls'
+import { TMutationErr, usePostMutation } from './useReactQuery'
 
 const useUser = () => {
-  const getUsers = (onError?: TQueryErr) => {
-    return useQuery<IUser>(API_URL.USERS, undefined, onError)
+  const addUser = (onError?: TMutationErr) => {
+    return usePostMutation(API_URL.USERS, undefined, undefined, onError)
   }
 
   return {
-    getUsers,
+    addUser,
   }
 }
 
