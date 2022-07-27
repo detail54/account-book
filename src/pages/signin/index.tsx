@@ -7,6 +7,7 @@ import UserForm, {
 } from 'components/templates/form/UserForm'
 import { signIn } from 'next-auth/react'
 import Text from 'components/atoms/text/Text'
+import { validationMsg } from 'hooks/config/messages'
 import Wrap from './SignIn.styles'
 
 const SingIn: NextPage = () => {
@@ -17,6 +18,16 @@ const SingIn: NextPage = () => {
   })
 
   const login = async () => {
+    if (!userInfo.userName) {
+      setErrorMsg(validationMsg.ERROR_BLANKED_ID)
+      return
+    }
+
+    if (!userInfo.password) {
+      setErrorMsg(validationMsg.ERROR_BLANKED_PW)
+      return
+    }
+
     const result = await signIn('credentials', {
       userName: userInfo.userName,
       password: userInfo.password,
