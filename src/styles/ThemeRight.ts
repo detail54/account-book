@@ -96,6 +96,7 @@ const fontColors: Record<TFontColor, string> = {
   grey: '#808080',
   white: '#fff',
   black: '#000000',
+  red: '#ff2424',
 }
 
 const backgroundColor = '#fff'

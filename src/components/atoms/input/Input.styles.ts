@@ -2,6 +2,8 @@ import styled, { css, IStyleProps } from 'styled-components'
 
 const Input = styled.input<IStyleProps>`
   width: 100%;
+  border: none;
+  border-bottom: 1px solid black;
   ${({ paddingY, theme }) => css`
     font-size: ${theme.fontSizes.base};
     padding-top: ${paddingY && theme.paddings[paddingY]};
@@ -13,7 +15,9 @@ const Input = styled.input<IStyleProps>`
   }
 `
 
-const BasicInput = styled(Input)``
+const BasicInput = styled(Input)`
+  font-weight: ${({ theme }) => theme.fontWeight.lg};
+`
 
 export default {
   BasicInput,

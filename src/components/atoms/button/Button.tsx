@@ -7,7 +7,8 @@ import Buttons from './Button.styles'
 export type ButtonType = 'BasicButton' | 'RoundButton'
 
 interface IProps {
-  type?: ButtonType
+  type?: 'button' | 'submit' | 'reset'
+  buttonStyle?: ButtonType
   size: TSize
   fontColor?: TFontColor
   bgColor?: TColor
@@ -18,7 +19,8 @@ interface IProps {
 }
 
 const Button: React.FC<IProps> = ({
-  type = 'BasicButton',
+  type = 'button',
+  buttonStyle = 'BasicButton',
   size,
   fontColor,
   bgColor,
@@ -27,9 +29,10 @@ const Button: React.FC<IProps> = ({
   text,
   onClick,
 }) => {
-  const ButtonEl = Buttons[type]
+  const ButtonEl = Buttons[buttonStyle]
   return (
     <ButtonEl
+      type={type}
       onClick={onClick}
       size={size}
       fontColor={fontColor}
@@ -43,7 +46,8 @@ const Button: React.FC<IProps> = ({
 }
 
 Button.defaultProps = {
-  type: 'BasicButton',
+  type: 'button',
+  buttonStyle: 'BasicButton',
   fontColor: 'black',
   bgColor: 'white',
   marginY: undefined,

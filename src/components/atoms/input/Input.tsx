@@ -6,7 +6,8 @@ import Inputs from './Input.styles'
 type TInput = 'BasicInput'
 
 interface IProps {
-  type?: TInput
+  type?: string
+  inputStyle?: TInput
   value: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   placeHolder?: string
@@ -14,15 +15,17 @@ interface IProps {
 }
 
 const Input: React.FC<IProps> = ({
-  type = 'BasicInput',
+  type = 'text',
+  inputStyle = 'BasicInput',
   value,
   placeHolder = '',
   onChange,
   paddingY,
 }) => {
-  const InputEl = Inputs[type]
+  const InputEl = Inputs[inputStyle]
   return (
     <InputEl
+      type={type}
       value={value}
       onChange={onChange}
       placeholder={placeHolder}
@@ -32,7 +35,8 @@ const Input: React.FC<IProps> = ({
 }
 
 Input.defaultProps = {
-  type: 'BasicInput',
+  type: 'text',
+  inputStyle: 'BasicInput',
   placeHolder: undefined,
   paddingY: undefined,
 }

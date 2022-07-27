@@ -14,7 +14,7 @@ declare module 'styled-components' {
     | 'xxxl'
     | 'titleSize'
   export type TFontWeight = 100 | 200 | 300 | 400 | 500 | 600
-  export type TFontColor = 'themeColor' | 'grey' | 'white' | 'black'
+  export type TFontColor = 'themeColor' | 'grey' | 'white' | 'black' | 'red'
   export type TColor =
     | 'black_1'
     | 'black_2'

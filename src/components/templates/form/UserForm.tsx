@@ -17,6 +17,7 @@ interface IProps {
     type: TChangeValueType,
   ) => void
   onSubmit: () => void
+  error?: string
 }
 
 const UserForm: React.FC<IProps> = ({
@@ -25,18 +26,20 @@ const UserForm: React.FC<IProps> = ({
   passwordCheck,
   onChange,
   onSubmit,
+  error,
 }) => {
   return (
     <Form onSubmit={(e) => e.preventDefault()}>
-      <Text text='아이디' paddingY='md' />
+      <Text text='아이디' paddingY='md' type='BoldText' />
       <Input
         value={userName}
         onChange={(e) => onChange(e, 'userName')}
         paddingY='sm'
       />
-      <Text text='비밀번호' paddingY='md' />
+      <Text text='비밀번호' paddingY='md' type='BoldText' />
       <Input
         value={password}
+        type='password'
         onChange={(e) => onChange(e, 'password')}
         paddingY='sm'
       />
@@ -50,6 +53,7 @@ const UserForm: React.FC<IProps> = ({
           />
         </>
       )}
+      {error && <Text text={error} paddingY='md' fontColor='red' />}
       <Button text='로그인' onClick={onSubmit} size='md' marginY='sm' />
     </Form>
   )
@@ -57,6 +61,7 @@ const UserForm: React.FC<IProps> = ({
 
 UserForm.defaultProps = {
   passwordCheck: '',
+  error: undefined,
 }
 
 export default UserForm
