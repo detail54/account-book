@@ -29,11 +29,11 @@ const Button = styled.button<IButtonStyleProps>`
 `
 
 const BasicButton = styled(Button)`
-  border: 1px solid black;
+  border: 1px solid ${({ theme }) => theme.colors.black_4};
 `
 
 const RoundButton = styled(Button)`
-  border: 1px solid black;
+  border: 1px solid ${({ theme }) => theme.colors.black_4};
   border-radius: ${(props) => props.theme.calcRem(10)};
 `
 

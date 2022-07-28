@@ -1,6 +1,7 @@
 import React from 'react'
 // lib
 import { signIn, signOut } from 'next-auth/react'
+import { useRouter } from 'next/router'
 // components
 import Button from 'components/atoms/button/Button'
 import ImgButton from 'components/atoms/button/ImgButton'
@@ -18,12 +19,17 @@ interface IProps {
 }
 
 const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
+  const router = useRouter()
   const { data: session } = useSession()
   const { HeaderEl, UserInfo, Buttons } = HeaderStyles
 
+  const singUp = () => {
+    router.push('signup')
+  }
+
   return (
     <HeaderEl>
-      <UserInfo>{!session ? '' : `${session.user.name} 님`}</UserInfo>
+      <UserInfo>{!session ? '' : `${session.user.name} 가계부`}</UserInfo>
       <Buttons>
         <ImgButton
           src={isDarkMode ? moon : sun}
@@ -46,6 +52,15 @@ const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
             bgColor='grey_4'
             text='로그아웃'
             onClick={signOut}
+          />
+        )}
+        {!session && (
+          <Button
+            buttonStyle='RoundButton'
+            size='md'
+            bgColor='orange_2'
+            text='회원가입'
+            onClick={singUp}
           />
         )}
       </Buttons>

@@ -107,25 +107,3 @@ export const useMutation = <T, S>(
     ...options,
   })
 }
-
-export const usePostMutation = <T, S>(
-  url: string,
-  params?: object,
-  updater?: (oldData: T, newData: S) => T,
-  onError?: TMutationErr,
-  errorHandlers?: TErrorHandlers,
-  options?: Omit<
-    UseMutationOptions<AxiosResponse, AxiosError, T | S>,
-    'mutationFn' | 'onMutate' | 'onSettled' | 'onError'
-  >,
-): UseMutationResult<AxiosResponse, AxiosError, T | S> => {
-  return useMutation<T, S>(
-    url,
-    (data) => api.post<S>(url, { data, params }),
-    params,
-    errorHandlers,
-    updater,
-    onError,
-    options,
-  )
-}
