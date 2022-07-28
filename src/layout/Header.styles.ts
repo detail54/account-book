@@ -19,6 +19,7 @@ const UserInfo = styled.h3`
 
 const Buttons = styled.div`
   justify-content: space-around;
+  margin-right: 15px;
   button {
     flex: 1;
   }

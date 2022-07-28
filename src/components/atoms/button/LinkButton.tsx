@@ -1,12 +1,11 @@
-import Link from 'next/link'
 import React from 'react'
 // lib
+import Link from 'next/link'
 // interface
 import { TColor, TFontColor, TSize } from 'styled-components'
+import { ButtonType } from './Button'
 // styles
 import Buttons from './Button.styles'
-
-export type ButtonType = 'BasicButton' | 'RoundButton'
 
 interface IProps {
   type?: ButtonType

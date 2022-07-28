@@ -1,4 +1,4 @@
-import styled, { css, IButtonStyleProps } from 'styled-components'
+import styled, { css, IButtonStyleProps, IStyleProps } from 'styled-components'
 
 const Button = styled.button<IButtonStyleProps>`
   ${({
@@ -37,7 +37,19 @@ const RoundButton = styled(Button)`
   border-radius: ${(props) => props.theme.calcRem(10)};
 `
 
+const ImgButton = styled.button<IStyleProps>`
+  ${({ theme, marginX, marginY }) => css`
+    margin-top: ${marginY && theme.margins[marginY]};
+    margin-bottom: ${marginY && theme.margins[marginY]};
+    margin-left: ${marginX && theme.margins[marginX]};
+    margin-right: ${marginX && theme.margins[marginX]};
+    background-color: Transparent;
+    border: none;
+  `}
+`
+
 export default {
   BasicButton,
   RoundButton,
+  ImgButton,
 }

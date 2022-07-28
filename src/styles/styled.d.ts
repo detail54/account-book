@@ -66,6 +66,7 @@ declare module 'styled-components' {
   export interface IButtonStyleProps extends IStyleProps {
     size: TSize
   }
+
   export interface IBoareStyleProps extends IStyleProps {
     height: number
   }

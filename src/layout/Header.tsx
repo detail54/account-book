@@ -3,17 +3,21 @@ import React from 'react'
 import { signIn, signOut } from 'next-auth/react'
 // components
 import Button from 'components/atoms/button/Button'
+import ImgButton from 'components/atoms/button/ImgButton'
 // hook
 import { useSession } from 'hooks/useSession'
 // style
 import HeaderStyles from './Header.styles'
+// image
+import sun from '../../public/assets/images/icon/sun.png'
+import moon from '../../public/assets/images/icon/moon.png'
 
 interface IProps {
-  changeThemeButtonText: string
+  isDarkMode: boolean
   onChangeTheme: () => void
 }
 
-const Header: React.FC<IProps> = ({ changeThemeButtonText, onChangeTheme }) => {
+const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
   const { data: session } = useSession()
   const { HeaderEl, UserInfo, Buttons } = HeaderStyles
 
@@ -21,18 +25,17 @@ const Header: React.FC<IProps> = ({ changeThemeButtonText, onChangeTheme }) => {
     <HeaderEl>
       <UserInfo>{!session ? '' : `${session.user.name} 님`}</UserInfo>
       <Buttons>
-        <Button
-          buttonStyle='RoundButton'
-          size='md'
-          bgColor='orange_4'
-          text={changeThemeButtonText}
+        <ImgButton
+          src={isDarkMode ? moon : sun}
+          width={30}
+          height={30}
           onClick={onChangeTheme}
         />
         {!session ? (
           <Button
             buttonStyle='RoundButton'
             size='md'
-            bgColor='orange_1'
+            bgColor='orange_4'
             text='로그인'
             onClick={() => signIn()}
           />

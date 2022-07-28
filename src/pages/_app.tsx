@@ -15,8 +15,6 @@ import { SessionProvider } from 'next-auth/react'
 const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false)
 
-  const changeThemeButtonText = isDarkMode ? 'right mode' : 'dark mode'
-
   const onChangeTheme = () => {
     setIsDarkMode(!isDarkMode)
   }
@@ -27,10 +25,7 @@ const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
         <ThemeProvider theme={isDarkMode ? DarkTheme : RightTheme}>
           <GlobalStyle />
           <Hydrate state={pageProps.dehydratedState}>
-            <Header
-              changeThemeButtonText={changeThemeButtonText}
-              onChangeTheme={onChangeTheme}
-            />
+            <Header isDarkMode={isDarkMode} onChangeTheme={onChangeTheme} />
             <Main Component={Component} pageProps={pageProps} router={router} />
             <Footer />
             <ReactQueryDevtools
