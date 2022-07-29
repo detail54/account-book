@@ -45,13 +45,4 @@ const Button: React.FC<IProps> = ({
   )
 }
 
-Button.defaultProps = {
-  type: 'button',
-  buttonStyle: 'BasicButton',
-  fontColor: 'black',
-  bgColor: 'white',
-  marginY: undefined,
-  marginX: undefined,
-}
-
 export default Button

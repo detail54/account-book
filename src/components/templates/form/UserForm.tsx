@@ -106,8 +106,4 @@ const UserForm: React.FC<IProps> = ({
   )
 }
 
-UserForm.defaultProps = {
-  error: undefined,
-}
-
 export default UserForm

@@ -39,9 +39,4 @@ const Board: React.FC<IProps> = ({
   )
 }
 
-Board.defaultProps = {
-  headerText: undefined,
-  isLoading: false,
-}
-
 export default Board

@@ -56,11 +56,4 @@ const List: React.FC<IProps> = ({
   )
 }
 
-List.defaultProps = {
-  bgColor: undefined,
-  fontColor: undefined,
-  paddingX: undefined,
-  paddingY: undefined,
-}
-
 export default List

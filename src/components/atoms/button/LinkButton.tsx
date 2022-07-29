@@ -44,12 +44,4 @@ const LinkButton: React.FC<IProps> = ({
   )
 }
 
-LinkButton.defaultProps = {
-  type: 'BasicButton',
-  fontColor: 'black',
-  bgColor: 'white',
-  marginY: undefined,
-  marginX: undefined,
-}
-
 export default LinkButton

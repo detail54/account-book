@@ -41,13 +41,4 @@ const Input: React.FC<IProps> = ({
   )
 }
 
-Input.defaultProps = {
-  type: 'text',
-  inputStyle: 'BasicInput',
-  placeHolder: undefined,
-  paddingY: undefined,
-  onKeyPress: undefined,
-  inputRef: undefined,
-}
-
 export default Input

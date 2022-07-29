@@ -30,9 +30,4 @@ const ImgButton: React.FC<IProps> = ({
   )
 }
 
-ImgButton.defaultProps = {
-  marginY: undefined,
-  marginX: undefined,
-}
-
 export default ImgButton

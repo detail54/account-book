@@ -73,16 +73,4 @@ const ListItem: React.FC<IListItemProps> = ({
   )
 }
 
-ListItem.defaultProps = {
-  paddingX: undefined,
-  fontColor: undefined,
-  bgColor: undefined,
-  itemNumber: undefined,
-  button: undefined,
-  buttonSize: undefined,
-  buttonText: undefined,
-  onClick: undefined,
-  buttonClick: undefined,
-}
-
 export default ListItem
