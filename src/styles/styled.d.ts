@@ -67,6 +67,10 @@ declare module 'styled-components' {
     size: TSize
   }
 
+  export interface ITextStyleProps extends IStyleProps {
+    flex?: number
+  }
+
   export interface IBoareStyleProps extends IStyleProps {
     height: number
   }

@@ -1,13 +1,14 @@
-import styled, { css, IStyleProps } from 'styled-components'
+import styled, { css, ITextStyleProps } from 'styled-components'
 
-const Text = styled.span<IStyleProps>`
-  ${({ fontColor, fontSize, paddingY, theme }) => css`
+const Text = styled.span<ITextStyleProps>`
+  ${({ fontColor, fontSize, paddingY, flex, theme }) => css`
     font-size: ${fontSize ? theme.fontSizes[fontSize] : theme.fontSizes.base};
     color: ${fontColor
       ? theme.fontColors[fontColor]
       : theme.fontColors.themeColor};
     padding-top: ${paddingY && theme.paddings[paddingY]};
     padding-bottom: ${paddingY && theme.paddings[paddingY]};
+    flex: ${flex && flex};
   `}
 `
 

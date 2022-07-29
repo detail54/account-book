@@ -12,6 +12,7 @@ interface IProps {
   fontSize?: TFontSize
   paddingY?: TSize<'zero'>
   text: string | number | JSX.Element | undefined
+  flex?: number
 }
 
 const Text: React.FC<IProps> = ({
@@ -20,20 +21,19 @@ const Text: React.FC<IProps> = ({
   fontSize,
   paddingY,
   text,
+  flex,
 }) => {
   const TextEl = Texts[type]
   return (
-    <TextEl fontColor={fontColor} paddingY={paddingY} fontSize={fontSize}>
+    <TextEl
+      fontColor={fontColor}
+      paddingY={paddingY}
+      fontSize={fontSize}
+      flex={flex}
+    >
       {text}
     </TextEl>
   )
-}
-
-Text.defaultProps = {
-  type: undefined,
-  fontColor: undefined,
-  fontSize: undefined,
-  paddingY: undefined,
 }
 
 export default Text
