@@ -11,6 +11,7 @@ interface IProps {
   fontColor?: TFontColor
   fontSize?: TFontSize
   paddingY?: TSize<'zero'>
+  paddingX?: TSize<'zero'>
   text: string | number | JSX.Element | undefined
   flex?: number
 }
@@ -20,6 +21,7 @@ const Text: React.FC<IProps> = ({
   fontColor,
   fontSize,
   paddingY,
+  paddingX,
   text,
   flex,
 }) => {
@@ -28,6 +30,7 @@ const Text: React.FC<IProps> = ({
     <TextEl
       fontColor={fontColor}
       paddingY={paddingY}
+      paddingX={paddingX}
       fontSize={fontSize}
       flex={flex}
     >

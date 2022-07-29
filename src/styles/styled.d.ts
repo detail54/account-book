@@ -2,7 +2,15 @@
 import 'styled-components'
 
 declare module 'styled-components' {
-  export type TSize<T = string> = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | T
+  export type TSize<T = string> =
+    | 'xxxs'
+    | 'xxs'
+    | 'xs'
+    | 'sm'
+    | 'md'
+    | 'lg'
+    | 'xl'
+    | T
   export type TFontSize =
     | 'xxs'
     | 'xs'
@@ -14,7 +22,13 @@ declare module 'styled-components' {
     | 'xxxl'
     | 'titleSize'
   export type TFontWeight = 100 | 200 | 300 | 400 | 500 | 600
-  export type TFontColor = 'themeColor' | 'grey' | 'white' | 'black' | 'red'
+  export type TFontColor =
+    | 'themeColor'
+    | 'grey'
+    | 'white'
+    | 'black'
+    | 'red'
+    | 'blue'
   export type TColor =
     | 'black_1'
     | 'black_2'
@@ -44,9 +58,11 @@ declare module 'styled-components' {
     breakPoint: Record<TSize, string>
     paddings: Record<TSize<'zero'>, string>
     margins: Record<TSize<'zero'>, string>
+    gaps: Record<TSize, string>
     colors: Record<TColor, string>
     fontColors: Record<TFontColor, string>
     backgroundColor: string
+    subBackgroundColor: string
     boxShadow: string
   }
 
@@ -73,5 +89,15 @@ declare module 'styled-components' {
 
   export interface IBoareStyleProps extends IStyleProps {
     height: number
+  }
+
+  export interface IGridStyleProps extends IStyleProps {
+    gridColumnsCount: number
+    gridRowsCount?: number
+    gap?: TSize
+  }
+
+  export interface IGridItemStyleProps extends IStyleProps {
+    active?: boolean
   }
 }

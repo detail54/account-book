@@ -55,6 +55,8 @@ const breakPoint: Record<TSize, string> = {
 
 const paddings: Record<TSize<'zero'>, string> = {
   zero: '0',
+  xxxs: calcRem(2),
+  xxs: calcRem(5),
   xs: calcRem(8),
   sm: calcRem(10),
   md: calcRem(12),
@@ -64,11 +66,21 @@ const paddings: Record<TSize<'zero'>, string> = {
 
 const margins: Record<TSize<'zero'>, string> = {
   zero: '0',
+  xxxs: calcRem(2),
+  xxs: calcRem(5),
   xs: calcRem(8),
   sm: calcRem(10),
   md: calcRem(12),
   lg: calcRem(14),
   xl: calcRem(16),
+}
+
+const gaps: Record<TSize, string> = {
+  xs: calcRem(1),
+  sm: calcRem(2),
+  md: calcRem(3),
+  lg: calcRem(4),
+  xl: calcRem(5),
 }
 
 const colors: Record<TColor, string> = {
@@ -97,10 +109,12 @@ const fontColors: Record<TFontColor, string> = {
   grey: '#808080',
   white: '#fff',
   black: '#000000',
-  red: '#ff2424',
+  red: '#e03131',
+  blue: '#228be6',
 }
 
 const backgroundColor = '#fff'
+const subBackgroundColor = '#eeeeee'
 
 const boxShadow =
   '0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);'
@@ -114,9 +128,11 @@ const theme: DefaultTheme = {
   breakPoint,
   paddings,
   margins,
+  gaps,
   colors,
   fontColors,
   backgroundColor,
+  subBackgroundColor,
   boxShadow,
 }
 

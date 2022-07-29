@@ -28,9 +28,11 @@ const fontColors: Record<TFontColor, string> = {
   white: '#fff',
   black: '#000000',
   red: '#ff2424',
+  blue: '#228be6',
 }
 
 const backgroundColor = '#202124'
+const subBackgroundColor = '#424347'
 
 const boxShadow =
   '0px 3px 3px -2px rgb(255 255 255 / 80%), 0px 3px 4px 0px rgb(255 255 255 / 86%), 0px 1px 8px 0px rgb(255 255 255 / 88%);'
@@ -40,6 +42,7 @@ const theme: DefaultTheme = {
   colors,
   fontColors,
   backgroundColor,
+  subBackgroundColor,
   boxShadow,
 }
 
