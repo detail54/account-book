@@ -1,7 +1,10 @@
-import { useState } from 'react'
 import type { NextPage } from 'next'
+// hook
 import { useSession } from 'hooks/useSession'
+import useDate from 'hooks/useDate'
+// component
 import Calendar from 'components/templates/calendar/Calendar'
+// style
 import Wrap from './index.styles'
 
 const data = [
@@ -133,28 +136,7 @@ const data = [
 
 const Home: NextPage = () => {
   const { data: session } = useSession()
-
-  const [date, setDate] = useState<Date>(new Date())
-
-  const changeNextMonth = () => {
-    let changeDate
-    if (date.getMonth() === 11) {
-      changeDate = new Date(date.getFullYear() + 1, 0)
-    } else {
-      changeDate = new Date(date.getFullYear(), date.getMonth() + 1)
-    }
-    setDate(changeDate)
-  }
-
-  const changePrevMonth = () => {
-    let changeDate
-    if (date.getMonth() === 0) {
-      changeDate = new Date(date.getFullYear() - 1, 11)
-    } else {
-      changeDate = new Date(date.getFullYear(), date.getMonth() - 1)
-    }
-    setDate(changeDate)
-  }
+  const { date, changeNextMonth, changePrevMonth } = useDate()
 
   const onChangeDate = (type: 'prev' | 'next') => {
     if (type === 'next') changeNextMonth()

@@ -42,13 +42,13 @@ const Calendar: React.FC<IProps> = ({ date, contents, onChangeDate }) => {
   })
 
   const beforeContents = Array.from({ length: firstDay }, (v, i) => i).map(
-    (i) => {
+    (_) => {
       return {}
     },
   )
 
   const afterContents = Array.from({ length: 6 - lastDay }, (v, i) => i).map(
-    (i) => {
+    (_) => {
       return {}
     },
   )
