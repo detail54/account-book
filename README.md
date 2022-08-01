@@ -8,3 +8,8 @@
 > - styled-normalize v8.0.7
 > - node v16.15.0
 > - prisma v4.0.0
+
+# Start
+
+> - yarn install
+> - yarn dev

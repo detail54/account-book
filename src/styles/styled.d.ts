@@ -10,6 +10,7 @@ declare module 'styled-components' {
     | 'md'
     | 'lg'
     | 'xl'
+    | 'big'
     | T
   export type TFontSize =
     | 'xxs'

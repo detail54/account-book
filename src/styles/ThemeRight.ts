@@ -62,6 +62,7 @@ const paddings: Record<TSize<'zero'>, string> = {
   md: calcRem(12),
   lg: calcRem(14),
   xl: calcRem(16),
+  big: calcRem(30),
 }
 
 const margins: Record<TSize<'zero'>, string> = {
@@ -73,6 +74,7 @@ const margins: Record<TSize<'zero'>, string> = {
   md: calcRem(12),
   lg: calcRem(14),
   xl: calcRem(16),
+  big: calcRem(30),
 }
 
 const gaps: Record<TSize, string> = {

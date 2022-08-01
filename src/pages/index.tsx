@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { NextPage } from 'next'
 import { useSession } from 'hooks/useSession'
 import Calendar from 'components/templates/calendar/Calendar'
@@ -133,11 +134,21 @@ const data = [
 const Home: NextPage = () => {
   const { data: session } = useSession()
 
+  const today = new Date()
+  const [date, setDate] = useState<Date>(today)
+
+  const onChangeDate = (type: 'before' | 'after') => {
+    if (type === 'before') today.setMonth(date.getMonth() - 1)
+    else today.setMonth(date.getMonth() + 1)
+
+    setDate(today)
+  }
+
   if (!session) return <></>
 
   return (
     <Wrap>
-      <Calendar date='2022-07' contents={data} />
+      <Calendar date={date} contents={data} onChangeDate={onChangeDate} />
     </Wrap>
   )
 }

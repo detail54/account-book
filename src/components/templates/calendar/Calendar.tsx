@@ -1,32 +1,33 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react'
-import { IGridItem } from 'components/molecules/gridItem/GridItem'
+// components
 import Grid from 'components/organisms/grid/Grid'
+import ImgButton from 'components/atoms/button/ImgButton'
+import Text from 'components/atoms/text/Text'
+// interface
+import { IGridItem } from 'components/molecules/gridItem/GridItem'
+// image
+import leftArrow from '../../../../public/assets/images/icon/arrow_left.png'
+import rightArrow from '../../../../public/assets/images/icon/arrow_right.png'
 // style
 import Styles from './Calendar.styles'
 
 interface IProps {
-  date: string
+  date: Date
   contents: { [key: string]: string }[]
+  onChangeDate: (type: 'before' | 'after') => void
 }
 
-const Calendar: React.FC<IProps> = ({ date, contents }) => {
-  const { Wrap } = Styles
-  const dateObj = new Date(date)
-  const firstDay = new Date(
-    dateObj.getFullYear(),
-    dateObj.getMonth(),
-    1,
-  ).getDay()
-  const lastDay = new Date(
-    dateObj.getFullYear(),
-    dateObj.getMonth() + 1,
-    0,
-  ).getDay()
+const Calendar: React.FC<IProps> = ({ date, contents, onChangeDate }) => {
+  const { Wrap, DateBox } = Styles
+
+  const dateStr = `${date.getFullYear()}-${date.getMonth() + 1}`
+  const firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay()
+  const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDay()
 
   const gridContents: IGridItem[] = contents.map((content, index) => {
     const day = new Date(
-      `${dateObj.getFullYear()}-${dateObj.getMonth() + 1}-${index + 1}`,
+      `${date.getFullYear()}-${date.getMonth() + 1}-${index + 1}`,
     ).getDay()
     const dateFormat =
       String(index + 1).length === 1 ? `0${index + 1}` : String(index + 1)
@@ -54,6 +55,21 @@ const Calendar: React.FC<IProps> = ({ date, contents }) => {
 
   return (
     <Wrap>
+      <DateBox>
+        <ImgButton
+          src={leftArrow}
+          width={30}
+          height={30}
+          onClick={() => onChangeDate('before')}
+        />
+        <Text text={dateStr} fontSize='xxl' />
+        <ImgButton
+          src={rightArrow}
+          width={30}
+          height={30}
+          onClick={() => onChangeDate('after')}
+        />
+      </DateBox>
       <Grid
         gridColumnsCount={7}
         gap='sm'
