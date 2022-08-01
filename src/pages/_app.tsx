@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import type { AppProps } from 'next/app'
+import dynamic from 'next/dynamic'
 import { Hydrate, QueryClientProvider } from 'react-query'
 import queryClient from 'utils/reactQuery'
 import { ReactQueryDevtools } from 'react-query/devtools'
@@ -7,10 +8,11 @@ import { ThemeProvider } from 'styled-components'
 import GlobalStyle from 'styles/GlobalStyle'
 import RightTheme from 'styles/ThemeRight'
 import DarkTheme from 'styles/ThemeDark'
-import Header from 'layout/Header'
-import Footer from 'layout/Footer'
-import Main from 'layout/Main'
 import { SessionProvider } from 'next-auth/react'
+
+const Header = dynamic(() => import('layout/Header'))
+const Footer = dynamic(() => import('layout/Footer'))
+const Main = dynamic(() => import('layout/Main'))
 
 const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false)
