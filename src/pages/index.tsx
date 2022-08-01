@@ -1,11 +1,12 @@
 import type { NextPage } from 'next'
+import dynamic from 'next/dynamic'
 // hook
 import { useSession } from 'hooks/useSession'
 import useDate from 'hooks/useDate'
-// component
-import Calendar from 'components/templates/calendar/Calendar'
 // style
 import Wrap from './index.styles'
+// component
+const Calendar = dynamic(() => import('components/templates/calendar/Calendar'))
 
 const data = [
   {

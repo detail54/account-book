@@ -1,14 +1,18 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { useState } from 'react'
 import { NextPage } from 'next'
-import UserForm, {
-  IUserInfo,
-  TChangeValueType,
-} from 'components/templates/form/UserForm'
+import dynamic from 'next/dynamic'
+// type
+import { IUserInfo, TChangeValueType } from 'components/templates/form/UserForm'
+// lib
 import { signIn } from 'next-auth/react'
-import Text from 'components/atoms/text/Text'
+// hook
 import { validationMsg } from 'hooks/config/messages'
+// style
 import Wrap from './SignIn.styles'
+// component
+const Text = dynamic(() => import('components/atoms/text/Text'))
+const UserForm = dynamic(() => import('components/templates/form/UserForm'))
 
 const SingIn: NextPage = () => {
   const [errorMsg, setErrorMsg] = useState<string | undefined>()

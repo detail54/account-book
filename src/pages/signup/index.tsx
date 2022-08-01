@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import { NextPage } from 'next'
-import Text from 'components/atoms/text/Text'
-import UserForm, {
-  IUserInfo,
-  TChangeValueType,
-} from 'components/templates/form/UserForm'
-import useUser from 'hooks/useUser'
 import { useRouter } from 'next/router'
+import dynamic from 'next/dynamic'
+// type
+import { IUserInfo, TChangeValueType } from 'components/templates/form/UserForm'
+// hook
+import useUser from 'hooks/useUser'
 import { validationMsg } from 'hooks/config/messages'
+// style
 import Wrap from './SignUp.styles'
+// component
+const Text = dynamic(() => import('components/atoms/text/Text'))
+const UserForm = dynamic(() => import('components/templates/form/UserForm'))
 
 const SignUp: NextPage = () => {
   const [errorMsg, setErrorMsg] = useState<string | undefined>()
