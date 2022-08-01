@@ -134,14 +134,31 @@ const data = [
 const Home: NextPage = () => {
   const { data: session } = useSession()
 
-  const today = new Date()
-  const [date, setDate] = useState<Date>(today)
+  const [date, setDate] = useState<Date>(new Date())
 
-  const onChangeDate = (type: 'before' | 'after') => {
-    if (type === 'before') today.setMonth(date.getMonth() - 1)
-    else today.setMonth(date.getMonth() + 1)
+  const changeNextMonth = () => {
+    let changeDate
+    if (date.getMonth() === 11) {
+      changeDate = new Date(date.getFullYear() + 1, 0)
+    } else {
+      changeDate = new Date(date.getFullYear(), date.getMonth() + 1)
+    }
+    setDate(changeDate)
+  }
 
-    setDate(today)
+  const changePrevMonth = () => {
+    let changeDate
+    if (date.getMonth() === 0) {
+      changeDate = new Date(date.getFullYear() - 1, 11)
+    } else {
+      changeDate = new Date(date.getFullYear(), date.getMonth() - 1)
+    }
+    setDate(changeDate)
+  }
+
+  const onChangeDate = (type: 'prev' | 'next') => {
+    if (type === 'next') changeNextMonth()
+    else changePrevMonth()
   }
 
   if (!session) return <></>

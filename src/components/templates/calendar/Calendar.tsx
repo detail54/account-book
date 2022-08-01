@@ -15,7 +15,7 @@ import Styles from './Calendar.styles'
 interface IProps {
   date: Date
   contents: { [key: string]: string }[]
-  onChangeDate: (type: 'before' | 'after') => void
+  onChangeDate: (type: 'prev' | 'next') => void
 }
 
 const Calendar: React.FC<IProps> = ({ date, contents, onChangeDate }) => {
@@ -60,14 +60,14 @@ const Calendar: React.FC<IProps> = ({ date, contents, onChangeDate }) => {
           src={leftArrow}
           width={30}
           height={30}
-          onClick={() => onChangeDate('before')}
+          onClick={() => onChangeDate('prev')}
         />
         <Text text={dateStr} fontSize='xxl' />
         <ImgButton
           src={rightArrow}
           width={30}
           height={30}
-          onClick={() => onChangeDate('after')}
+          onClick={() => onChangeDate('next')}
         />
       </DateBox>
       <Grid
