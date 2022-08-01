@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 // hook
-import { useSession } from 'hooks/useSession'
+import { useSession } from 'next-auth/react'
 import useDate from 'hooks/useDate'
 // style
 import Wrap from './index.styles'

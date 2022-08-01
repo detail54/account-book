@@ -1,12 +1,10 @@
 import React from 'react'
 // lib
-import { signIn, signOut } from 'next-auth/react'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 // components
 import Button from 'components/atoms/button/Button'
 import ImgButton from 'components/atoms/button/ImgButton'
-// hook
-import { useSession } from 'hooks/useSession'
 // style
 import HeaderStyles from './Header.styles'
 // image
@@ -29,7 +27,7 @@ const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
 
   return (
     <HeaderEl>
-      <UserInfo>{!session ? '' : `${session.user.name} 가계부`}</UserInfo>
+      <UserInfo>{!session ? '' : `${session.user?.name} 가계부`}</UserInfo>
       <Buttons>
         <ImgButton
           src={isDarkMode ? moon : sun}
