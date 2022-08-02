@@ -22,7 +22,11 @@ const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
   }
 
   return (
-    <SessionProvider refetchInterval={5 * 60} refetchOnWindowFocus>
+    <SessionProvider
+      session={pageProps.session}
+      refetchInterval={5 * 60}
+      refetchOnWindowFocus
+    >
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={isDarkMode ? DarkTheme : RightTheme}>
           <GlobalStyle />

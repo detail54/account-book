@@ -1,5 +1,6 @@
-import type { NextPage } from 'next'
+import type { NextPage, NextPageContext } from 'next'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
 // hook
 import { useSession } from 'next-auth/react'
 import useDate from 'hooks/useDate'
@@ -154,3 +155,11 @@ const Home: NextPage = () => {
 }
 
 export default Home
+
+Home.getInitialProps = (ctx: NextPageContext) => {
+  // const router = useRouter()
+  const token = ctx.req?.headers.accessToken
+  console.log(JSON.stringify(ctx.req?.headers.cookie).includes('auth.session'))
+
+  return { token }
+}

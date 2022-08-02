@@ -14,8 +14,10 @@
   },
   "dependencies": {
     "@prisma/client": "^4.0.0",
+    "@types/jsonwebtoken": "^8.5.8",
     "axios": "^0.27.2",
     "env-cmd": "^10.1.0",
+    "jsonwebtoken": "^8.5.1",
     "next": "12.2.0",
     "next-auth": "^4.10.1",
     "react": "18.2.0",

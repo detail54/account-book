@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable no-param-reassign */
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import prisma from 'utils/prismaClient'
 import { validationMsg } from 'hooks/config/messages'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 
 export default NextAuth({
   providers: [
@@ -27,15 +29,8 @@ export default NextAuth({
           if (user.password !== credentials?.password) {
             throw new Error(validationMsg.ERROR_DIFFERENT_PW)
           } else {
-            // DefaultUser type 키값에 맞춰서 리턴시 token콜백에서 추가 작업 불필요.
-            /**
-             * {
-             *   name
-             *   email
-             *   image
-             * }
-             */
             return {
+              id: user.id,
               name: user.userName,
             }
           }
@@ -47,20 +42,32 @@ export default NextAuth({
   ],
   jwt: {
     maxAge: 60 * 5,
+    encode: async ({ secret, token }) => {
+      const encodedToken = jwt.sign(token!, secret)
+
+      return encodedToken
+    },
+    decode: async ({ secret, token }) => {
+      const verify = jwt.verify(token!, secret) as JwtPayload
+
+      return verify
+    },
   },
   session: {
     maxAge: 60 * 5,
     strategy: 'jwt',
   },
   callbacks: {
-    async jwt({ token, account }) {
+    async jwt({ token, account, user }) {
       if (account) {
         token.accessToken = account.access_token
+        token.id = user?.id
       }
       return token
     },
     async session({ session, token }) {
       session.accessToken = token.accessToken
+      session.id = token.id
 
       return session
     },
