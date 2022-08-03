@@ -155,11 +155,3 @@ const Home: NextPage = () => {
 }
 
 export default Home
-
-Home.getInitialProps = (ctx: NextPageContext) => {
-  // const router = useRouter()
-  const token = ctx.req?.headers.accessToken
-  console.log(JSON.stringify(ctx.req?.headers.cookie).includes('auth.session'))
-
-  return { token }
-}

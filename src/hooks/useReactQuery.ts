@@ -11,8 +11,8 @@ import {
   QueryFunctionContext,
 } from 'react-query'
 import queryClient from 'utils/reactQuery'
-import api from '../utils/axios'
 import useApiError, { TErrorHandlers } from './useApiError'
+import api from '../utils/axios'
 
 export type TQueryKey = [string, object | undefined]
 export type TQueryErr = (err: AxiosError) => void

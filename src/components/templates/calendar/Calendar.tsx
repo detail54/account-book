@@ -42,12 +42,14 @@ const Calendar: React.FC<IProps> = ({ date, contents, onChangeDate }) => {
   })
 
   const beforeContents = Array.from({ length: firstDay }, (v, i) => i).map(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (_) => {
       return {}
     },
   )
 
   const afterContents = Array.from({ length: 6 - lastDay }, (v, i) => i).map(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (_) => {
       return {}
     },
@@ -67,7 +69,7 @@ const Calendar: React.FC<IProps> = ({ date, contents, onChangeDate }) => {
           src={rightArrow}
           width={30}
           height={30}
-          onClick={() => onChangeDate('next')}
+          onClick={() => onChangeDate('prev')}
         />
       </DateBox>
       <Grid
