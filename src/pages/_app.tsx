@@ -24,7 +24,7 @@ const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
   return (
     <SessionProvider
       session={pageProps.session}
-      refetchInterval={5 * 60}
+      refetchInterval={60 * 5}
       refetchOnWindowFocus
     >
       <QueryClientProvider client={queryClient}>

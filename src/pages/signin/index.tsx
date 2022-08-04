@@ -41,8 +41,9 @@ const SingIn: NextPage = () => {
     if (result?.error) {
       setErrorMsg(result.error)
     } else {
-      // 커스텀 로그인의 경우 새로고침을 해야 세션 정상 반영되어 루트경로로 리다이렉트 시킴.
-      window.location.href = process.env.NEXT_PUBLIC_HOST!
+      // 커스텀 로그인의 경우 새로고침을 해야 세션 정상 반영되어 router를 사용하지않고
+      // dashbord로 바로 리다이렉트 시킴.
+      window.location.href = `${process.env.NEXT_PUBLIC_HOST}/dashboard`
     }
   }
 

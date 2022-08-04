@@ -25,6 +25,11 @@ const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
     router.push('signup')
   }
 
+  const onSignOut = () => {
+    sessionStorage.removeItem('session-token')
+    signOut({ callbackUrl: '/' })
+  }
+
   return (
     <HeaderEl>
       <UserInfo>{!session ? '' : `${session.user?.name} 가계부`}</UserInfo>
@@ -49,7 +54,7 @@ const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
             size='md'
             bgColor='grey_4'
             text='로그아웃'
-            onClick={signOut}
+            onClick={onSignOut}
           />
         )}
         {!session && (
