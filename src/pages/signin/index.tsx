@@ -50,17 +50,10 @@ const SingIn: NextPage = () => {
     e: React.ChangeEvent<HTMLInputElement>,
     type: TChangeValueType,
   ) => {
-    if (type === 'userName') {
-      setUserInfo({
-        ...userInfo,
-        userName: e.currentTarget.value,
-      })
-    } else {
-      setUserInfo({
-        ...userInfo,
-        password: e.currentTarget.value,
-      })
-    }
+    setUserInfo({
+      ...userInfo,
+      [type]: e.currentTarget.value,
+    })
   }
 
   return (

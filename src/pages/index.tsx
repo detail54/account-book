@@ -1,6 +1,5 @@
-import type { NextPage, NextPageContext } from 'next'
+import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
 // hook
 import { useSession } from 'next-auth/react'
 import useDate from 'hooks/useDate'

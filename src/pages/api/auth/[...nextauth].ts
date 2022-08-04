@@ -78,4 +78,5 @@ export default NextAuth({
     signOut: '/signin',
     error: '/signin',
   },
+  events: {},
 })

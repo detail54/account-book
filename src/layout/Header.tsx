@@ -41,7 +41,7 @@ const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
             size='md'
             bgColor='orange_4'
             text='로그인'
-            onClick={() => signIn()}
+            onClick={signIn}
           />
         ) : (
           <Button

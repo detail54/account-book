@@ -9,11 +9,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   const handler: { [key: string]: () => void } = {
     GET: async () => {
       try {
-        const data = await prisma.account.findUnique({
-          where: {
-            id: 1,
-          },
-        })
+        const data = await prisma.account.findMany()
         res.status(200).json(data)
       } catch (e) {
         res.status(500).json(e)
