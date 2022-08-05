@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import React from 'react'
 // hook
 import useDate from 'hooks/useDate'
+import useDashBoard from 'hooks/useDashBoard'
 // styte
 import Wrap from './DashBoard.styles'
 // component
@@ -137,6 +138,9 @@ const data = [
 
 const index: NextPage = () => {
   const { date, changeNextMonth, changePrevMonth } = useDate()
+  const { getDashBoardData } = useDashBoard()
+  const { data: dashBoardData } = getDashBoardData()
+  console.log(dashBoardData)
 
   const onChangeDate = (type: 'prev' | 'next') => {
     if (type === 'next') changeNextMonth()

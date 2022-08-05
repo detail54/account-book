@@ -1,3 +1,4 @@
+// db 스키마
 export interface IStoreCategory {
   name: string
   stores: IStore[]
@@ -26,4 +27,14 @@ export interface IUser {
   password: string
   accounts: IAccount[]
   regDt: string
+}
+
+// dashboard
+export interface IDashBoard {
+  list: {
+    income: number
+    expenditure: number
+  }[]
+  totalIncome: number
+  totalExpenditure: number
 }
