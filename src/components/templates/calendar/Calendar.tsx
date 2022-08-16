@@ -20,11 +20,9 @@ interface IProps {
 
 const Calendar: React.FC<IProps> = ({ date, contents, onChangeDate }) => {
   const { Wrap, DateBox } = Styles
-
   const dateStr = `${date.getFullYear()}-${date.getMonth() + 1}`
   const firstDate = new Date(date.getFullYear(), date.getMonth(), 1)
   const lastDate = new Date(date.getFullYear(), date.getMonth() + 1, 0)
-  const dates = Array.from({ length: lastDate.getDate() }, (v, i) => i + 1)
 
   const gridContents: IGridItem[] = contents.map((content, index) => {
     const day = new Date(

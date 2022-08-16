@@ -9,140 +9,31 @@ import Wrap from './DashBoard.styles'
 // component
 const Calendar = dynamic(() => import('components/templates/calendar/Calendar'))
 
-const data = [
-  {
-    earnings: '2,000,000',
-    expenditure: '15,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '25,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '10,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '1,500',
-  },
-  {
-    earnings: '100,000',
-    expenditure: '100,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '15,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '151,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '200',
-  },
-  {
-    earnings: '0',
-    expenditure: '0',
-  },
-  {
-    earnings: '0',
-    expenditure: '0',
-  },
-  {
-    earnings: '0',
-    expenditure: '18,380',
-  },
-  {
-    earnings: '0',
-    expenditure: '0',
-  },
-  {
-    earnings: '50,000',
-    expenditure: '15,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '4,500',
-  },
-  {
-    earnings: '0',
-    expenditure: '5,200',
-  },
-  {
-    earnings: '10,000',
-    expenditure: '8,900',
-  },
-  {
-    earnings: '0',
-    expenditure: '55,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '15,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '15,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '15,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '15,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '15,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '15,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '15,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '15,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '15,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '15,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '15,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '15,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '15,200',
-  },
-  {
-    earnings: '0',
-    expenditure: '15,200',
-  },
-]
-
 const index: NextPage = () => {
   const { format, changeNextMonth, changePrevMonth, getDateObj, getLastDate } =
     useDate()
-  const date = format('YYYY-MM')
   const { getDashBoardData } = useDashBoard()
+
+  const date = format('YYYY-MM')
   const { data: dashBoardData } = getDashBoardData(date)
-  console.log('dashBoardData:::', dashBoardData)
+
+  const initDataList = Array.from({ length: getLastDate() }, (v, i) => i).map(
+    (_) => {
+      return {
+        income: `+ 0`,
+        expenditure: `- 0`,
+      }
+    },
+  )
+
+  const formatDataList = dashBoardData
+    ? dashBoardData.list.map((data) => {
+        return {
+          income: `+ ${data.income.toLocaleString()}`,
+          expenditure: `- ${data.expenditure.toLocaleString()}`,
+        }
+      })
+    : initDataList
 
   const onChangeDate = (type: 'prev' | 'next') => {
     if (type === 'next') changeNextMonth()
@@ -153,7 +44,7 @@ const index: NextPage = () => {
     <Wrap>
       <Calendar
         date={getDateObj()}
-        contents={data}
+        contents={formatDataList}
         onChangeDate={onChangeDate}
       />
     </Wrap>
