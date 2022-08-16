@@ -12,12 +12,22 @@ export interface IStore {
 }
 
 export interface IAccount {
+  id: number
   user: IUser
+  store: IStore
+  category: IStoreCategory
+  amount: number
+  memo?: string
   regDt: string
   updatedDt: string
   paymentDt: string
-  category: IStoreCategory
-  store: IStore
+}
+
+export interface IInCome {
+  user: IUser
+  regDt: string
+  updatedDt: string
+  incomeDt: string
   amount: number
   memo?: string
 }

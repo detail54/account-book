@@ -22,8 +22,9 @@ const Calendar: React.FC<IProps> = ({ date, contents, onChangeDate }) => {
   const { Wrap, DateBox } = Styles
 
   const dateStr = `${date.getFullYear()}-${date.getMonth() + 1}`
-  const firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay()
-  const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDay()
+  const firstDate = new Date(date.getFullYear(), date.getMonth(), 1)
+  const lastDate = new Date(date.getFullYear(), date.getMonth() + 1, 0)
+  const dates = Array.from({ length: lastDate.getDate() }, (v, i) => i + 1)
 
   const gridContents: IGridItem[] = contents.map((content, index) => {
     const day = new Date(
@@ -41,14 +42,20 @@ const Calendar: React.FC<IProps> = ({ date, contents, onChangeDate }) => {
     }
   })
 
-  const beforeContents = Array.from({ length: firstDay }, (v, i) => i).map(
+  const beforeContents = Array.from(
+    { length: firstDate.getDay() },
+    (v, i) => i,
+  ).map(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (_) => {
       return {}
     },
   )
 
-  const afterContents = Array.from({ length: 6 - lastDay }, (v, i) => i).map(
+  const afterContents = Array.from(
+    { length: 6 - lastDate.getDay() },
+    (v, i) => i,
+  ).map(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (_) => {
       return {}
@@ -69,7 +76,7 @@ const Calendar: React.FC<IProps> = ({ date, contents, onChangeDate }) => {
           src={rightArrow}
           width={30}
           height={30}
-          onClick={() => onChangeDate('prev')}
+          onClick={() => onChangeDate('next')}
         />
       </DateBox>
       <Grid

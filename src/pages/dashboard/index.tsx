@@ -137,18 +137,25 @@ const data = [
 ]
 
 const index: NextPage = () => {
-  const { date, changeNextMonth, changePrevMonth } = useDate()
+  const { format, changeNextMonth, changePrevMonth, getDateObj, getLastDate } =
+    useDate()
+  const date = format('YYYY-MM')
   const { getDashBoardData } = useDashBoard()
-  const { data: dashBoardData } = getDashBoardData()
-  console.log(dashBoardData)
+  const { data: dashBoardData } = getDashBoardData(date)
+  console.log('dashBoardData:::', dashBoardData)
 
   const onChangeDate = (type: 'prev' | 'next') => {
     if (type === 'next') changeNextMonth()
     else changePrevMonth()
   }
+
   return (
     <Wrap>
-      <Calendar date={date} contents={data} onChangeDate={onChangeDate} />
+      <Calendar
+        date={getDateObj()}
+        contents={data}
+        onChangeDate={onChangeDate}
+      />
     </Wrap>
   )
 }

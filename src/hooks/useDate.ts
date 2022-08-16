@@ -8,8 +8,8 @@ type TDateFormat =
   | 'YYYY-MM-DD HH:MM:SS'
   | undefined
 
-const useDate = () => {
-  const [date, setDate] = useState<Date>(new Date())
+const useDate = (dateProps?: Date) => {
+  const [date, setDate] = useState<Date>(dateProps || new Date())
 
   const format = (type: TDateFormat) => {
     const leftPad = (value: number) => {
@@ -41,6 +41,10 @@ const useDate = () => {
     }
   }
 
+  const getDateObj = () => {
+    return date
+  }
+
   const getYear = () => {
     return date.getFullYear()
   }
@@ -65,6 +69,10 @@ const useDate = () => {
     return date.getSeconds()
   }
 
+  const getLastDate = () => {
+    return new Date(date.getFullYear(), date.getMonth(), 0).getDate()
+  }
+
   const changeNextMonth = () => {
     if (date.getMonth() === 11) {
       setDate(new Date(date.getFullYear() + 1, 0))
@@ -84,12 +92,14 @@ const useDate = () => {
   return {
     format,
     setDate,
+    getDateObj,
     getYear,
     getMonth,
     getDate,
     getHour,
     getMinute,
     getSeconds,
+    getLastDate,
     changeNextMonth,
     changePrevMonth,
   }
