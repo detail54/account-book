@@ -35,6 +35,7 @@ const Grid: React.FC<IProps> = ({
             texts={content.texts}
             textsColor={content.textsColor}
             active={content.active}
+            onClick={content.onClick}
           />
         )
       })}

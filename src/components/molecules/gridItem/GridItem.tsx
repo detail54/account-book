@@ -10,6 +10,7 @@ export interface IGridItem {
   texts?: string[]
   textsColor?: TFontColor[]
   active?: boolean
+  onClick?: () => void
 }
 
 const GridItem: React.FC<IGridItem> = ({
@@ -18,11 +19,12 @@ const GridItem: React.FC<IGridItem> = ({
   texts,
   textsColor,
   active,
+  onClick,
 }) => {
   const { Item, Contents } = GridStyles
 
   return (
-    <Item active={active}>
+    <Item active={active} onClick={onClick}>
       {title && (
         <Text
           type='BoldText'

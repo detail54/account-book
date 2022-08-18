@@ -19,9 +19,15 @@ interface IProps {
   date: Date
   contents: { [key: string]: string }[]
   onChangeDate: (type: 'prev' | 'next') => void
+  handleSelectDate: (date: number) => void
 }
 
-const Calendar: React.FC<IProps> = ({ date, contents, onChangeDate }) => {
+const Calendar: React.FC<IProps> = ({
+  date,
+  contents,
+  onChangeDate,
+  handleSelectDate,
+}) => {
   const [isDarkTheme] = useRecoilState(themeState)
   const { Wrap, DateBox } = Styles
   const dateStr = `${date.getFullYear()}-${date.getMonth() + 1}`
@@ -41,6 +47,9 @@ const Calendar: React.FC<IProps> = ({ date, contents, onChangeDate }) => {
       texts: Object.values(content),
       textsColor: ['blue', 'red'],
       active: true,
+      onClick: () => {
+        handleSelectDate(index + 1)
+      },
     }
   })
 

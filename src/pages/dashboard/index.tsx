@@ -1,21 +1,28 @@
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
 import React from 'react'
 // hook
 import useDate from 'hooks/useDate'
 import useDashBoard from 'hooks/useDashBoard'
+// store
+import { useRecoilState } from 'recoil'
+import { selectDashBoardDateState } from 'store/atoms'
 // styte
 import Wrap from './DashBoard.styles'
 // component
 const Calendar = dynamic(() => import('components/templates/calendar/Calendar'))
 
 const index: NextPage = () => {
+  const router = useRouter()
   const { format, changeNextMonth, changePrevMonth, getDateObj, getLastDate } =
     useDate()
   const { getDashBoardData } = useDashBoard()
 
-  const date = format('YYYY-MM')
-  const { data: dashBoardData } = getDashBoardData(date)
+  const dateFormat = format('YYYY-MM')
+  const { data: dashBoardData } = getDashBoardData(dateFormat)
+
+  const [selectDate, setSelectDate] = useRecoilState(selectDashBoardDateState)
 
   const calendarData = dashBoardData
     ? dashBoardData.list.map((data) => {
@@ -36,12 +43,18 @@ const index: NextPage = () => {
     else changePrevMonth()
   }
 
+  const handleSelectDate = (date: number) => {
+    setSelectDate(date)
+    router.push('detail')
+  }
+
   return (
     <Wrap>
       <Calendar
         date={getDateObj()}
         contents={calendarData}
         onChangeDate={onChangeDate}
+        handleSelectDate={handleSelectDate}
       />
     </Wrap>
   )
