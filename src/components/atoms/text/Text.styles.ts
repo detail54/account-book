@@ -16,7 +16,7 @@ const Text = styled.span<ITextStyleProps>`
 `
 
 const BoldText = styled(Text)`
-  font-weight: ${({ theme }) => theme.fontWeight.xl};
+  font-weight: ${({ theme }) => theme.fontWeight.big};
 `
 
 export default {

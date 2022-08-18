@@ -27,6 +27,7 @@ const fontWeight: Record<TSize, TFontWeight> = {
   md: 300,
   lg: 400,
   xl: 500,
+  big: 600,
 }
 
 const buttonWidth: Record<TSize, string> = {

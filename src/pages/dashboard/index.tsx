@@ -9,8 +9,9 @@ import useDashBoard from 'hooks/useDashBoard'
 import { useRecoilState } from 'recoil'
 import { selectDashBoardDateState } from 'store/atoms'
 // styte
-import Wrap from './DashBoard.styles'
+import DashBoardStyles from './DashBoard.styles'
 // component
+const Text = dynamic(() => import('components/atoms/text/Text'))
 const Calendar = dynamic(() => import('components/templates/calendar/Calendar'))
 
 const index: NextPage = () => {
@@ -23,6 +24,8 @@ const index: NextPage = () => {
   const { data: dashBoardData } = getDashBoardData(dateFormat)
 
   const [selectDate, setSelectDate] = useRecoilState(selectDashBoardDateState)
+
+  const { Wrap, TotalInfo } = DashBoardStyles
 
   const calendarData = dashBoardData
     ? dashBoardData.list.map((data) => {
@@ -50,6 +53,24 @@ const index: NextPage = () => {
 
   return (
     <Wrap>
+      <TotalInfo>
+        <Text
+          text={`수익: ${
+            dashBoardData ? dashBoardData.totalIncome.toLocaleString() : 0
+          }`}
+          fontColor='red'
+          fontSize='xl'
+          type='BoldText'
+        />
+        <Text
+          text={`지출: ${
+            dashBoardData ? dashBoardData.totalExpenditure.toLocaleString() : 0
+          }`}
+          fontColor='blue'
+          fontSize='xl'
+          type='BoldText'
+        />
+      </TotalInfo>
       <Calendar
         date={getDateObj()}
         contents={calendarData}
