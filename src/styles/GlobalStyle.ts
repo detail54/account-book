@@ -10,7 +10,9 @@ export default createGlobalStyle`
     color: ${({ theme }) => theme.fontColors.themeColor};
     
     #__next {
-      display: block;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
     }
   }
   section, article, header, main, footer, nav, span, div, ul, ol, li, a, h1, h2, h3, h4, h5, h6, button, p {

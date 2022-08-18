@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Wrap = styled.div`
-  width: 80%;
+  width: 100%;
   flex-direction: column;
   padding-top: ${({ theme }) => theme.paddings.big};
 `

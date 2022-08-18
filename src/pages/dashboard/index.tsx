@@ -11,6 +11,7 @@ import { selectDashBoardDateState } from 'store/atoms'
 // styte
 import DashBoardStyles from './DashBoard.styles'
 // component
+const Skeleton = dynamic(() => import('components/atoms/skeleton/Skeleton'))
 const Text = dynamic(() => import('components/atoms/text/Text'))
 const Calendar = dynamic(() => import('components/templates/calendar/Calendar'))
 
