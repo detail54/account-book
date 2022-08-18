@@ -17,23 +17,19 @@ const index: NextPage = () => {
   const date = format('YYYY-MM')
   const { data: dashBoardData } = getDashBoardData(date)
 
-  const initDataList = Array.from({ length: getLastDate() }, (v, i) => i).map(
-    (_) => {
-      return {
-        income: `+ 0`,
-        expenditure: `- 0`,
-      }
-    },
-  )
-
-  const formatDataList = dashBoardData
+  const calendarData = dashBoardData
     ? dashBoardData.list.map((data) => {
         return {
           income: `+ ${data.income.toLocaleString()}`,
           expenditure: `- ${data.expenditure.toLocaleString()}`,
         }
       })
-    : initDataList
+    : Array.from({ length: getLastDate() }, (v, i) => i).map((_) => {
+        return {
+          income: `+ 0`,
+          expenditure: `- 0`,
+        }
+      })
 
   const onChangeDate = (type: 'prev' | 'next') => {
     if (type === 'next') changeNextMonth()
@@ -44,7 +40,7 @@ const index: NextPage = () => {
     <Wrap>
       <Calendar
         date={getDateObj()}
-        contents={formatDataList}
+        contents={calendarData}
         onChangeDate={onChangeDate}
       />
     </Wrap>

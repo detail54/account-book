@@ -84,6 +84,10 @@ declare module 'styled-components' {
     size: TSize
   }
 
+  export interface IImgButtonStyleProps extends IStyleProps {
+    invertImgColor?: boolean
+  }
+
   export interface ITextStyleProps extends IStyleProps {
     flex?: number
   }

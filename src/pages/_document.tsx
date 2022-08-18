@@ -39,7 +39,7 @@ class MyDocument extends Document {
         <Head>
           <meta httpEquiv='X-UA-Compatible' content='IE=edge, chrome=1' />
           <meta name='format-detection' content='telephone=no' />
-          <meta name='description' content='next react query boilerplate' />
+          <meta name='description' content='account-book' />
           <meta charSet='utf-8' />
         </Head>
         <body>

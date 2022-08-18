@@ -13,7 +13,7 @@ type ListTypee = 'List'
 interface IProps {
   type: ListTypee
   listItemType: TListItem
-  contents: IListItemProps[] | undefined
+  contents?: IListItemProps[]
   bgColor?: TColor
   fontColor?: TFontColor
   paddingX?: TSize<'zero'>

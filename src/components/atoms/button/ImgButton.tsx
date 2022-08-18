@@ -11,6 +11,7 @@ interface IProps {
   height: number
   marginY?: TSize<'zero'>
   marginX?: TSize<'zero'>
+  invertImgColor?: boolean
   onClick: () => void
 }
 
@@ -20,11 +21,17 @@ const ImgButton: React.FC<IProps> = ({
   height,
   marginY,
   marginX,
+  invertImgColor,
   onClick,
 }) => {
   const ButtonEl = Buttons.ImgButton
   return (
-    <ButtonEl marginX={marginX} marginY={marginY} onClick={onClick}>
+    <ButtonEl
+      marginX={marginX}
+      marginY={marginY}
+      invertImgColor={invertImgColor && invertImgColor}
+      onClick={onClick}
+    >
       <Image src={src} width={width} height={height} />
     </ButtonEl>
   )

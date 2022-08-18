@@ -2,6 +2,9 @@ import React from 'react'
 // lib
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
+// store
+import { useRecoilState } from 'recoil'
+import { themeState } from 'store/atoms'
 // components
 import Button from 'components/atoms/button/Button'
 import ImgButton from 'components/atoms/button/ImgButton'
@@ -20,6 +23,7 @@ const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
   const router = useRouter()
   const { data: session } = useSession()
   const { HeaderEl, UserInfo, Buttons } = HeaderStyles
+  const [isDarkTheme, setIsDarkTheme] = useRecoilState(themeState)
 
   const singUp = () => {
     router.push('signup')
@@ -30,15 +34,20 @@ const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
     signOut({ callbackUrl: '/' })
   }
 
+  const handleChangeTheme = () => {
+    setIsDarkTheme(!isDarkMode)
+    onChangeTheme()
+  }
+
   return (
     <HeaderEl>
       <UserInfo>{!session ? '' : `${session.user?.name} 가계부`}</UserInfo>
       <Buttons>
         <ImgButton
-          src={isDarkMode ? moon : sun}
+          src={isDarkTheme ? moon : sun}
           width={30}
           height={30}
-          onClick={onChangeTheme}
+          onClick={handleChangeTheme}
         />
         {!session ? (
           <Button

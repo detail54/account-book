@@ -59,10 +59,7 @@ export const useQuery = <T>(
 
   return useQueryOrigin<T, AxiosError, T, TQueryKey>(
     [url, params],
-    async () => {
-      const { data } = await api.get<T>(url, { params: { ...params } })
-      return data
-    },
+    ({ queryKey }) => fetcher({ queryKey }),
     {
       enabled: !!url,
       onError: onError || handleQueryError,

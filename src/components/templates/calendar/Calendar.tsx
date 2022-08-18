@@ -4,6 +4,9 @@ import React from 'react'
 import Grid from 'components/organisms/grid/Grid'
 import ImgButton from 'components/atoms/button/ImgButton'
 import Text from 'components/atoms/text/Text'
+// store
+import { useRecoilState } from 'recoil'
+import { themeState } from 'store/atoms'
 // interface
 import { IGridItem } from 'components/molecules/gridItem/GridItem'
 // image
@@ -19,6 +22,7 @@ interface IProps {
 }
 
 const Calendar: React.FC<IProps> = ({ date, contents, onChangeDate }) => {
+  const [isDarkTheme] = useRecoilState(themeState)
   const { Wrap, DateBox } = Styles
   const dateStr = `${date.getFullYear()}-${date.getMonth() + 1}`
   const firstDate = new Date(date.getFullYear(), date.getMonth(), 1)
@@ -67,6 +71,7 @@ const Calendar: React.FC<IProps> = ({ date, contents, onChangeDate }) => {
           src={leftArrow}
           width={30}
           height={30}
+          invertImgColor={isDarkTheme}
           onClick={() => onChangeDate('prev')}
         />
         <Text text={dateStr} fontSize='xxl' />
@@ -74,6 +79,7 @@ const Calendar: React.FC<IProps> = ({ date, contents, onChangeDate }) => {
           src={rightArrow}
           width={30}
           height={30}
+          invertImgColor={isDarkTheme}
           onClick={() => onChangeDate('next')}
         />
       </DateBox>

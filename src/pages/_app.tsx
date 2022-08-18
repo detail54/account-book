@@ -9,6 +9,7 @@ import GlobalStyle from 'styles/GlobalStyle'
 import RightTheme from 'styles/ThemeRight'
 import DarkTheme from 'styles/ThemeDark'
 import { SessionProvider } from 'next-auth/react'
+import { RecoilRoot } from 'recoil'
 
 const Header = dynamic(() => import('layout/Header'))
 const Footer = dynamic(() => import('layout/Footer'))
@@ -31,9 +32,15 @@ const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
         <ThemeProvider theme={isDarkMode ? DarkTheme : RightTheme}>
           <GlobalStyle />
           <Hydrate state={pageProps.dehydratedState}>
-            <Header isDarkMode={isDarkMode} onChangeTheme={onChangeTheme} />
-            <Main Component={Component} pageProps={pageProps} router={router} />
-            <Footer />
+            <RecoilRoot>
+              <Header isDarkMode={isDarkMode} onChangeTheme={onChangeTheme} />
+              <Main
+                Component={Component}
+                pageProps={pageProps}
+                router={router}
+              />
+              <Footer />
+            </RecoilRoot>
             <ReactQueryDevtools
               initialIsOpen={false}
               position='bottom-right'

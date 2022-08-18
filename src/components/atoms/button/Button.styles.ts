@@ -1,4 +1,8 @@
-import styled, { css, IButtonStyleProps, IStyleProps } from 'styled-components'
+import styled, {
+  css,
+  IButtonStyleProps,
+  IImgButtonStyleProps,
+} from 'styled-components'
 
 const Button = styled.button<IButtonStyleProps>`
   ${({
@@ -37,15 +41,19 @@ const RoundButton = styled(Button)`
   border-radius: ${(props) => props.theme.calcRem(10)};
 `
 
-const ImgButton = styled.button<IStyleProps>`
-  ${({ theme, marginX, marginY }) => css`
+const ImgButton = styled.button<IImgButtonStyleProps>`
+  ${({ theme, marginX, marginY, invertImgColor }) => css`
     margin-top: ${marginY && theme.margins[marginY]};
     margin-bottom: ${marginY && theme.margins[marginY]};
     margin-left: ${marginX && theme.margins[marginX]};
     margin-right: ${marginX && theme.margins[marginX]};
     background-color: Transparent;
     border: none;
+    filter: ${invertImgColor &&
+    'invert(100%) sepia(0%) saturate(0%) hue-rotate(176deg) brightness(112%) contrast(101%)'};
   `}
+
+  transition: 0.3s;
 `
 
 export default {
