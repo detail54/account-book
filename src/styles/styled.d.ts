@@ -77,8 +77,6 @@ declare module 'styled-components' {
     marginY?: TSize<'zero'>
     paddingX?: TSize<'zero'>
     paddingY?: TSize<'zero'>
-    width?: number
-    height?: number
   }
 
   export interface DefaultTheme extends ITheme {}
@@ -106,5 +104,11 @@ declare module 'styled-components' {
 
   export interface IGridItemStyleProps extends IStyleProps {
     active?: boolean
+  }
+
+  export interface ISkeletonStyleProps {
+    width?: number
+    height?: number
+    borderRadius?: number
   }
 }

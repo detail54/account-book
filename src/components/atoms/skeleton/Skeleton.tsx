@@ -5,22 +5,32 @@ import SkeletonStyles from './Skeleton.styles'
 interface IProps {
   children: JSX.Element
   isLoading: boolean
+  width: number
   height: number
+  borderRadius: number
 }
 
-const Skeleton: React.FC<IProps> = ({ children, isLoading, height }) => {
+const Skeleton: React.FC<IProps> = ({
+  children,
+  isLoading,
+  width,
+  height,
+  borderRadius,
+}) => {
   const { Wrap, AnimationBar, DefaultBox } = SkeletonStyles
 
   return (
-    <Wrap height={height}>
+    <>
       {isLoading ? (
-        <DefaultBox>
-          <AnimationBar />
-        </DefaultBox>
+        <Wrap height={height} width={width}>
+          <DefaultBox borderRadius={borderRadius}>
+            <AnimationBar />
+          </DefaultBox>
+        </Wrap>
       ) : (
         children
       )}
-    </Wrap>
+    </>
   )
 }
 
