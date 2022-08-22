@@ -57,10 +57,12 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
             paymentDt: true,
           },
         })
-        console.log('data:::', data)
+
         res.status(200).json(data)
+        res.end()
       } catch (e) {
         res.status(500).json(e)
+        res.end()
       }
     },
     POST: async () => {
