@@ -3,8 +3,8 @@ import API_URL from './config/urls'
 import { useQuery } from './useReactQuery'
 
 const useAccount = () => {
-  const getAccount = () => {
-    return useQuery<IAccount[]>(API_URL.ACCOUNTS)
+  const getAccount = (date: string) => {
+    return useQuery<IAccount[]>(API_URL.ACCOUNTS, { date })
   }
 
   return {

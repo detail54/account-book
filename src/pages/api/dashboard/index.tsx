@@ -26,7 +26,15 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
     GET: async () => {
       try {
         const [year, month] = date.split('-')
-        const lastDate = new Date(Number(year), Number(month), 0)
+        const lastDate = new Date(
+          Number(year),
+          Number(month),
+          0,
+          23,
+          59,
+          59,
+          999,
+        )
         const firstDate = new Date(
           lastDate.getFullYear(),
           lastDate.getMonth() - 1,

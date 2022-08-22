@@ -6,7 +6,10 @@ export const themeState = atom<boolean>({
   default: false,
 })
 
-export const selectDashBoardDateState = atom<number>({
+const defaultDate = new Date()
+export const selectDashBoardDateState = atom<string>({
   key: ATOM_KEYS.SELECT_DASHBOARD_DATE,
-  default: 1,
+  default: `${defaultDate.getFullYear()}-${
+    defaultDate.getMonth() + 1
+  }-${defaultDate.getDate()}`,
 })

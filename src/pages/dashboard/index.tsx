@@ -45,7 +45,7 @@ const index: NextPage = () => {
   }
 
   const handleSelectDate = (date: number) => {
-    setSelectDate(date)
+    setSelectDate(`${dateFormat}-${date < 10 ? `0${date}` : date}`)
     router.push('detail')
   }
 
