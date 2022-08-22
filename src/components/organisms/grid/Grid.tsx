@@ -6,6 +6,8 @@ import { TSize } from 'styled-components'
 import GridStyles from './Grid.styles'
 
 interface IProps {
+  width?: number
+  height?: number
   gridColumnsCount: number
   gridRowsCount?: number
   gap?: TSize
@@ -13,6 +15,8 @@ interface IProps {
 }
 
 const Grid: React.FC<IProps> = ({
+  width,
+  height,
   gridColumnsCount,
   gridRowsCount,
   contents,
@@ -25,6 +29,8 @@ const Grid: React.FC<IProps> = ({
       gridColumnsCount={gridColumnsCount}
       gridRowsCount={gridRowsCount}
       gap={gap}
+      width={width}
+      height={height}
     >
       {contents.map((content, index) => {
         return (

@@ -2,8 +2,10 @@ import styled, { css, ISkeletonStyleProps, keyframes } from 'styled-components'
 
 const Wrap = styled.div<ISkeletonStyleProps>`
   ${({ theme, width, height }) => css`
-    width: ${width && theme.calcRem(width)};
-    height: ${height && theme.calcRem(height)};
+    width: ${width && typeof width === 'number' ? theme.calcRem(width) : width};
+    height: ${height && typeof height === 'number'
+      ? theme.calcRem(height)
+      : height};
   `}
 `
 

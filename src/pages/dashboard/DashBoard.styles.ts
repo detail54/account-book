@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 const Wrap = styled.div`
   width: 100%;
+  height: auto;
   flex-direction: column;
   padding-top: ${({ theme }) => theme.paddings.big};
 `
@@ -11,7 +12,10 @@ const TotalInfo = styled.div`
   justify-content: left;
   margin-bottom: ${({ theme }) => theme.margins.md};
 
-  & span:nth-child(1) {
+  & span:nth-child(odd) {
+    margin-right: ${({ theme }) => theme.margins.sm};
+  }
+  & span:nth-child(even) {
     margin-right: ${({ theme }) => theme.margins.md};
   }
 `

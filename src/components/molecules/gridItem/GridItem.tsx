@@ -39,7 +39,7 @@ const GridItem: React.FC<IGridItem> = ({
         {texts &&
           texts.map((text, index) => (
             <Text
-              key={`grid-text-${text}`}
+              key={`grid-text-${text || index}`}
               text={text}
               flex={1}
               paddingY='xxxs'

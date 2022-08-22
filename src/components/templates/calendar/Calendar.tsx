@@ -17,7 +17,7 @@ import Styles from './Calendar.styles'
 
 interface IProps {
   date: Date
-  contents: { [key: string]: string }[]
+  contents?: { [key: string]: string }[]
   onChangeDate: (type: 'prev' | 'next') => void
   handleSelectDate: (date: number) => void
 }
@@ -34,24 +34,50 @@ const Calendar: React.FC<IProps> = ({
   const firstDate = new Date(date.getFullYear(), date.getMonth(), 1)
   const lastDate = new Date(date.getFullYear(), date.getMonth() + 1, 0)
 
-  const gridContents: IGridItem[] = contents.map((content, index) => {
-    const day = new Date(
-      `${date.getFullYear()}-${date.getMonth() + 1}-${index + 1}`,
-    ).getDay()
-    const dateFormat =
-      String(index + 1).length === 1 ? `0${index + 1}` : String(index + 1)
+  const gridContents: IGridItem[] | undefined =
+    contents &&
+    contents.map((content, index) => {
+      const day = new Date(
+        `${date.getFullYear()}-${date.getMonth() + 1}-${index + 1}`,
+      ).getDay()
+      const dateFormat =
+        String(index + 1).length === 1 ? `0${index + 1}` : String(index + 1)
 
-    return {
-      title: dateFormat,
-      titleColor: day === 0 ? 'red' : day === 6 ? 'blue' : 'themeColor',
-      texts: Object.values(content),
-      textsColor: ['blue', 'red'],
-      active: true,
-      onClick: () => {
-        handleSelectDate(index + 1)
-      },
-    }
-  })
+      return {
+        title: dateFormat,
+        titleColor: day === 0 ? 'red' : day === 6 ? 'blue' : 'themeColor',
+        texts: Object.values(content),
+        textsColor: ['blue', 'red'],
+        active: true,
+        onClick: () => {
+          handleSelectDate(index + 1)
+        },
+      }
+    })
+
+  const defaultGridContents: IGridItem[] = Array.from(
+    { length: lastDate.getDate() },
+    (v, i) => i,
+  ).map(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    (_, index) => {
+      const day = new Date(
+        `${date.getFullYear()}-${date.getMonth() + 1}-${index + 1}`,
+      ).getDay()
+      const dateFormat =
+        String(index + 1).length === 1 ? `0${index + 1}` : String(index + 1)
+
+      return {
+        title: dateFormat,
+        titleColor: day === 0 ? 'red' : day === 6 ? 'blue' : 'themeColor',
+        textsColor: ['blue', 'red'],
+        active: true,
+        onClick: () => {
+          handleSelectDate(index + 1)
+        },
+      }
+    },
+  )
 
   const beforeContents = Array.from(
     { length: firstDate.getDay() },
@@ -93,9 +119,14 @@ const Calendar: React.FC<IProps> = ({
         />
       </DateBox>
       <Grid
+        height={553}
         gridColumnsCount={7}
         gap='sm'
-        contents={beforeContents.concat(gridContents.concat(afterContents))}
+        contents={
+          gridContents
+            ? beforeContents.concat(gridContents.concat(afterContents))
+            : beforeContents.concat(defaultGridContents.concat(afterContents))
+        }
       />
     </Wrap>
   )

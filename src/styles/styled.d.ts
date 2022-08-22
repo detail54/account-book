@@ -97,6 +97,8 @@ declare module 'styled-components' {
   }
 
   export interface IGridStyleProps extends IStyleProps {
+    width?: number
+    height?: number
     gridColumnsCount: number
     gridRowsCount?: number
     gap?: TSize
@@ -107,8 +109,8 @@ declare module 'styled-components' {
   }
 
   export interface ISkeletonStyleProps {
-    width?: number
-    height?: number
+    width?: number | string
+    height?: number | string
     borderRadius?: number
   }
 }

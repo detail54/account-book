@@ -6,6 +6,7 @@ const Item = styled.div<IGridItemStyleProps>`
     height: 100%;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: space-between;
     transition: 0.3s;
     border: 1px solid transparent;
     padding: ${theme.paddings.xs};
