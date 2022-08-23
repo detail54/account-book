@@ -24,12 +24,13 @@ export interface IAccount {
 }
 
 export interface IInCome {
+  id: number
   user: IUser
+  amount: number
+  memo?: string
   regDt: string
   updatedDt: string
   incomeDt: string
-  amount: number
-  memo?: string
 }
 
 export interface IUser {

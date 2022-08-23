@@ -63,7 +63,7 @@ declare module 'styled-components' {
     colors: Record<TColor, string>
     fontColors: Record<TFontColor, string>
     backgroundColor: string
-    subBackgroundColor: string
+    subBackgroundColor: Record<number, string>
     boxShadow: string
   }
 
@@ -91,9 +91,12 @@ declare module 'styled-components' {
   }
 
   export interface IListItemStyleProps extends IStyleProps {
+    bgColorNumber?: number
     cursor?: string
     hover?: boolean
     active?: boolean
+    numberFlex?: number
+    numberWidth?: number
   }
 
   export interface IImgButtonStyleProps extends IStyleProps {

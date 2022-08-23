@@ -117,7 +117,12 @@ const fontColors: Record<TFontColor, string> = {
 }
 
 const backgroundColor = '#fff'
-const subBackgroundColor = '#eeeeee'
+const subBackgroundColor: Record<number, string> = {
+  0: '#eeeeee',
+  1: '#e6e6e6',
+  2: '#ddd',
+  3: '#c9c9c9',
+}
 
 const boxShadow =
   '0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);'

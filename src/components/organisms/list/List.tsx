@@ -1,6 +1,6 @@
 import React from 'react'
 // conponents & type
-import { TColor, TFontColor, TSize } from 'styled-components'
+import { TSize } from 'styled-components'
 import ListItem, {
   TListItem,
   IListItemProps,
@@ -9,15 +9,25 @@ import ListItem, {
 import Lists from './List.styles'
 
 type ListTypee = 'List'
-export type TContents = Omit<IListItemProps, 'type'>[]
+export type TContents = Omit<IListItemProps, 'type'>
+export type THeader = Pick<
+  IListItemProps,
+  | 'paddingX'
+  | 'paddingY'
+  | 'fontColor'
+  | 'bgColorNumber'
+  | 'content'
+  | 'hover'
+  | 'numberFlex'
+  | 'numberWidth'
+>
 
 interface IProps {
   type: ListTypee
   listItemType: TListItem
-  contents?: TContents
+  header?: THeader
+  contents?: TContents[]
   height?: number
-  bgColor?: TColor
-  fontColor?: TFontColor
   paddingX?: TSize<'zero'>
   paddingY?: TSize<'zero'>
   divide?: boolean
@@ -27,39 +37,15 @@ interface IProps {
 const List: React.FC<IProps> = ({
   type,
   listItemType,
+  header,
   contents,
   height,
-  bgColor,
-  fontColor,
   paddingX = 'zero',
   paddingY = 'zero',
   divide,
   boxShadow,
 }) => {
   const ListEl = Lists[type]
-  const basicListItem =
-    contents &&
-    contents.map((content, index) => (
-      <ListItem
-        key={`list-item-${
-          typeof content.content === 'string' ? content.content : index
-        }`}
-        type={listItemType}
-        paddingX={content.paddingX}
-        paddingY={content.paddingY ? content.paddingY : 'zero'}
-        fontColor={fontColor}
-        bgColor={bgColor}
-        itemNumber={content.itemNumber}
-        content={content.content}
-        button={content.button}
-        buttonSize={content.buttonSize}
-        buttonText={content.buttonText}
-        onClick={content.onClick}
-        buttonClick={content.buttonClick}
-        hover={content.hover}
-        active={content.active}
-      />
-    ))
   return (
     <ListEl
       height={height}
@@ -68,7 +54,47 @@ const List: React.FC<IProps> = ({
       divide={divide}
       boxShadow={boxShadow}
     >
-      {basicListItem}
+      {header && (
+        <ListItem
+          key={`list-header-${
+            typeof header.content === 'string' ? header.content : 'item'
+          }`}
+          type={listItemType}
+          paddingX={header.paddingX}
+          paddingY={header.paddingY ? header.paddingY : 'zero'}
+          fontColor={header.fontColor}
+          bgColorNumber={header.bgColorNumber}
+          itemNumber=' '
+          content={header.content}
+          hover={header.hover}
+          numberFlex={header.numberFlex}
+          numberWidth={header.numberWidth}
+        />
+      )}
+      {contents &&
+        contents.map((content, index) => (
+          <ListItem
+            key={`list-item-${
+              typeof content.content === 'string' ? content.content : index
+            }`}
+            type={listItemType}
+            paddingX={content.paddingX}
+            paddingY={content.paddingY ? content.paddingY : 'zero'}
+            fontColor={content.fontColor}
+            bgColorNumber={content.bgColorNumber}
+            itemNumber={content.itemNumber}
+            content={content.content}
+            button={content.button}
+            buttonSize={content.buttonSize}
+            buttonText={content.buttonText}
+            onClick={content.onClick}
+            buttonClick={content.buttonClick}
+            hover={content.hover}
+            active={content.active}
+            numberFlex={content.numberFlex}
+            numberWidth={content.numberWidth}
+          />
+        ))}
     </ListEl>
   )
 }

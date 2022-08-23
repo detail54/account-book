@@ -1,32 +1,32 @@
+/* eslint-disable no-nested-ternary */
 import styled, { css, IListItemStyleProps } from 'styled-components'
 
 const ListItem = styled.li<IListItemStyleProps>`
   ${({
     fontColor,
-    bgColor,
     paddingX,
     paddingY,
+    bgColorNumber,
     cursor,
     hover,
     active,
     theme,
   }) => css`
     color: ${fontColor ? theme.fontColors[fontColor] : theme.fontColors.black};
-    background-color: ${bgColor ? theme.colors[bgColor] : theme.colors.white};
     padding-top: ${paddingY && theme.paddings[paddingY]};
     padding-bottom: ${paddingY && theme.paddings[paddingY]};
     padding-left: ${paddingX && theme.paddings[paddingX]};
     padding-right: ${paddingX && theme.paddings[paddingX]};
     cursor: ${cursor || 'default'};
-    background-color: ${active
-      ? theme.subBackgroundColor
+    background-color: ${bgColorNumber !== undefined || active
+      ? theme.subBackgroundColor[bgColorNumber || 0]
       : theme.backgroundColor};
 
     ${hover &&
     css`
       &:hover {
         transition: 0.2s;
-        background-color: ${theme.subBackgroundColor};
+        background-color: ${theme.subBackgroundColor[0]};
       }
     `}
   `}
@@ -37,16 +37,19 @@ const LeftListItem = styled(ListItem)`
 `
 
 const NumberListItem = styled(LeftListItem)`
-  & > span:nth-of-type(1) {
-    display: flex;
-    flex: 1;
-    padding: 0 10px;
-  }
+  ${({ numberFlex, numberWidth, theme }) => css`
+    & > span:nth-of-type(1) {
+      display: flex;
+      padding: 0 10px;
+      width: ${numberWidth && theme.calcRem(numberWidth)};
+      flex: ${!numberWidth && numberFlex};
+    }
 
-  & > :nth-child(2) {
-    flex: 10;
-    padding: 0 10px;
-  }
+    & > :nth-child(2) {
+      flex: 10;
+      padding: 0 10px;
+    }
+  `}
 `
 
 const ButtonListItem = styled(LeftListItem)`

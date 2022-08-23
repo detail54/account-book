@@ -12,6 +12,7 @@ const Text = styled.span<ITextStyleProps>`
     padding-left: ${paddingX && theme.paddings[paddingX]};
     padding-right: ${paddingX && theme.paddings[paddingX]};
     flex: ${flex && flex};
+    white-space: pre-line;
   `}
 `
 

@@ -1,7 +1,7 @@
 import React from 'react'
 // interface
 import Button, { ButtonType } from 'components/atoms/button/Button'
-import { TColor, TFontColor, TSize } from 'styled-components'
+import { TFontColor, TSize } from 'styled-components'
 // components
 import Text from 'components/atoms/text/Text'
 // styles
@@ -20,7 +20,7 @@ export interface IListItemProps {
   paddingX?: TSize<'zero'>
   paddingY?: TSize<'zero'>
   fontColor?: TFontColor
-  bgColor?: TColor
+  bgColorNumber?: number
   itemNumber?: number | string
   content?: TContent
   button?: ButtonType
@@ -28,6 +28,8 @@ export interface IListItemProps {
   buttonText?: string
   hover?: boolean
   active?: boolean
+  numberFlex?: number
+  numberWidth?: number
   onClick?: () => void
   buttonClick?: () => void
 }
@@ -37,7 +39,7 @@ const ListItem: React.FC<IListItemProps> = ({
   paddingX,
   paddingY,
   fontColor,
-  bgColor,
+  bgColorNumber,
   itemNumber = 0,
   content,
   button,
@@ -45,12 +47,15 @@ const ListItem: React.FC<IListItemProps> = ({
   buttonText = 'no buttonText',
   hover,
   active,
+  numberFlex,
+  numberWidth,
   onClick,
   buttonClick = () => {},
 }) => {
   const ListItemEl = ListItems[type]
   const numberEl = (type === 'NumberListItem' ||
-    type === 'NumberAndButtonListItem') && <Text text={itemNumber} />
+    type === 'NumberAndButtonListItem') &&
+    itemNumber && <Text text={itemNumber} />
   const buttonEl = (type === 'ButtonListItem' ||
     type === 'NumberAndButtonListItem') && (
     <Button
@@ -66,11 +71,13 @@ const ListItem: React.FC<IListItemProps> = ({
       paddingX={paddingX}
       paddingY={paddingY}
       fontColor={fontColor}
-      bgColor={bgColor}
+      bgColorNumber={bgColorNumber}
       onClick={onClick}
       cursor={onClick && 'pointer'}
       hover={hover}
       active={active}
+      numberFlex={numberFlex}
+      numberWidth={numberWidth}
     >
       {numberEl}
       {typeof content === 'string' || typeof content === 'number' ? (

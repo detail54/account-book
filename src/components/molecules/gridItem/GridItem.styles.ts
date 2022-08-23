@@ -22,7 +22,7 @@ const Item = styled.div<IGridItemStyleProps>`
         height: 110%;
         z-index: 2;
         border: 1px solid ${theme.colors.grey_4};
-        background-color: ${theme.subBackgroundColor};
+        background-color: ${theme.subBackgroundColor[0]};
       }
     `}
   `}
