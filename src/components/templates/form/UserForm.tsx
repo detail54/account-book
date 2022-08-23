@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from 'react'
 import Text from 'components/atoms/text/Text'
 import Input from 'components/atoms/input/Input'
 import Button from 'components/atoms/button/Button'
-import { validationMsg } from 'hooks/config/messages'
+import { validationMsg } from 'config/messages'
 // styles
 import Form from './UserForm.styles'
 

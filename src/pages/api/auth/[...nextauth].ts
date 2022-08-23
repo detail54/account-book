@@ -3,7 +3,7 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import prisma from 'utils/prismaClient'
-import { validationMsg } from 'hooks/config/messages'
+import { validationMsg } from 'config/messages'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 
 export default NextAuth({

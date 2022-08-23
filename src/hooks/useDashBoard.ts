@@ -1,5 +1,5 @@
-import { IDashBoard } from './config/interface'
-import API_URL from './config/urls'
+import { IDashBoard } from '../config/interface'
+import API_URL from '../config/urls'
 import { useQuery } from './useReactQuery'
 
 const useDashBoard = () => {

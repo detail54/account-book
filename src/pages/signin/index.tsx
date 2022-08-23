@@ -7,7 +7,7 @@ import { IUserInfo, TChangeValueType } from 'components/templates/form/UserForm'
 // lib
 import { signIn } from 'next-auth/react'
 // hook
-import { validationMsg } from 'hooks/config/messages'
+import { validationMsg } from 'config/messages'
 // style
 import Wrap from './SignIn.styles'
 // component

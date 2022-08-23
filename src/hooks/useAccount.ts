@@ -1,5 +1,5 @@
-import { IAccount } from './config/interface'
-import API_URL from './config/urls'
+import { IAccount } from '../config/interface'
+import API_URL from '../config/urls'
 import { useQuery } from './useReactQuery'
 
 const useAccount = () => {

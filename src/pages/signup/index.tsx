@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic'
 import { IUserInfo, TChangeValueType } from 'components/templates/form/UserForm'
 // hook
 import useUser from 'hooks/useUser'
-import { validationMsg } from 'hooks/config/messages'
+import { validationMsg } from 'config/messages'
 // style
 import Wrap from './SignUp.styles'
 // component

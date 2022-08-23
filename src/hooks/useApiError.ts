@@ -2,8 +2,8 @@ import { useCallback } from 'react'
 // lib
 import { AxiosError } from 'axios'
 // error handler
-import defaultQueryErrHandlers from './config/defaultQueryErrHandlers'
-import defaultMutationErrHandlers from './config/defaultMutationErrHandlers'
+import defaultQueryErrHandlers from '../config/defaultQueryErrHandlers'
+import defaultMutationErrHandlers from '../config/defaultMutationErrHandlers'
 
 export type TErrorHandlers = Record<
   number | string,

@@ -1,7 +1,7 @@
 import api from 'utils/axios'
 import { UseMutationResult } from 'react-query'
 import { AxiosError, AxiosResponse } from 'axios'
-import API_URL from './config/urls'
+import API_URL from '../config/urls'
 import { useMutation } from './useReactQuery'
 
 const useUserMutation = <T, S>(
