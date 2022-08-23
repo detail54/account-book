@@ -4,7 +4,8 @@ const MainEl = styled.main`
   width: 100%;
   height: 100%;
   justify-content: center;
-  padding: ${({ theme }) => `0 ${theme.paddings.big}`};
+  padding: ${({ theme }) => theme.paddings.big};
+  padding-bottom: 0;
 
   & > div {
     max-width: 1560px;

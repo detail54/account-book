@@ -84,6 +84,18 @@ declare module 'styled-components' {
     size: TSize
   }
 
+  export interface IListStyleProps extends IStyleProps {
+    height?: number
+    divide?: boolean
+    boxShadow?: boolean
+  }
+
+  export interface IListItemStyleProps extends IStyleProps {
+    cursor?: string
+    hover?: boolean
+    active?: boolean
+  }
+
   export interface IImgButtonStyleProps extends IStyleProps {
     invertImgColor?: boolean
   }

@@ -1,15 +1,35 @@
-import styled, { css, IStyleProps } from 'styled-components'
+import styled, { css, IListItemStyleProps } from 'styled-components'
 
-const ListItem = styled.li<IStyleProps>`
-  ${({ fontColor, bgColor, paddingX, paddingY, theme }) => css`
+const ListItem = styled.li<IListItemStyleProps>`
+  ${({
+    fontColor,
+    bgColor,
+    paddingX,
+    paddingY,
+    cursor,
+    hover,
+    active,
+    theme,
+  }) => css`
     color: ${fontColor ? theme.fontColors[fontColor] : theme.fontColors.black};
     background-color: ${bgColor ? theme.colors[bgColor] : theme.colors.white};
     padding-top: ${paddingY && theme.paddings[paddingY]};
     padding-bottom: ${paddingY && theme.paddings[paddingY]};
     padding-left: ${paddingX && theme.paddings[paddingX]};
     padding-right: ${paddingX && theme.paddings[paddingX]};
+    cursor: ${cursor || 'default'};
+    background-color: ${active
+      ? theme.subBackgroundColor
+      : theme.backgroundColor};
+
+    ${hover &&
+    css`
+      &:hover {
+        transition: 0.2s;
+        background-color: ${theme.subBackgroundColor};
+      }
+    `}
   `}
-  border-bottom: 1px solid black;
 `
 
 const LeftListItem = styled(ListItem)`
@@ -17,12 +37,15 @@ const LeftListItem = styled(ListItem)`
 `
 
 const NumberListItem = styled(LeftListItem)`
-  span:nth-child(1) {
-    flex: 0;
+  & > span:nth-of-type(1) {
+    display: flex;
+    flex: 1;
     padding: 0 10px;
   }
-  span:nth-child(2) {
-    flex: 1;
+
+  & > :nth-child(2) {
+    flex: 10;
+    padding: 0 10px;
   }
 `
 
@@ -39,10 +62,10 @@ const NumberAndButtonListItem = styled(LeftListItem)`
   & button {
     flex: 0;
   }
-  span:nth-child(1) {
+  & > span:nth-of-type(1) {
     flex: 0;
   }
-  span:nth-child(2) {
+  & > span:nth-of-type(2) {
     flex: 1;
   }
 `

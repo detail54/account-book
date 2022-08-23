@@ -13,17 +13,21 @@ export type TListItem =
   | 'ButtonListItem'
   | 'NumberAndButtonListItem'
 
+type TContent = string | number | JSX.Element
+
 export interface IListItemProps {
   type: TListItem
   paddingX?: TSize<'zero'>
-  paddingY: TSize<'zero'>
+  paddingY?: TSize<'zero'>
   fontColor?: TFontColor
   bgColor?: TColor
-  itemNumber?: number
-  content: string | number | JSX.Element | undefined
+  itemNumber?: number | string
+  content?: TContent
   button?: ButtonType
   buttonSize?: TSize
   buttonText?: string
+  hover?: boolean
+  active?: boolean
   onClick?: () => void
   buttonClick?: () => void
 }
@@ -39,11 +43,10 @@ const ListItem: React.FC<IListItemProps> = ({
   button,
   buttonSize = 'md',
   buttonText = 'no buttonText',
-  onClick = () => {
-    // eslint-disable-next-line no-alert
-    alert('no onClick attribute')
-  },
-  buttonClick,
+  hover,
+  active,
+  onClick,
+  buttonClick = () => {},
 }) => {
   const ListItemEl = ListItems[type]
   const numberEl = (type === 'NumberListItem' ||
@@ -54,7 +57,7 @@ const ListItem: React.FC<IListItemProps> = ({
       buttonStyle={button}
       size={buttonSize}
       text={buttonText}
-      onClick={onClick}
+      onClick={buttonClick}
     />
   )
 
@@ -64,10 +67,17 @@ const ListItem: React.FC<IListItemProps> = ({
       paddingY={paddingY}
       fontColor={fontColor}
       bgColor={bgColor}
-      onClick={buttonClick}
+      onClick={onClick}
+      cursor={onClick && 'pointer'}
+      hover={hover}
+      active={active}
     >
       {numberEl}
-      <Text text={content} fontColor={fontColor} />
+      {typeof content === 'string' || typeof content === 'number' ? (
+        <Text text={content} fontColor={fontColor} />
+      ) : (
+        content
+      )}
       {buttonEl}
     </ListItemEl>
   )

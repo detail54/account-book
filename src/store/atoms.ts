@@ -15,6 +15,8 @@ const defaultDate = new Date()
 export const selectDashBoardDateState = atom<string>({
   key: setKey(ATOM_KEYS.SELECT_DASHBOARD_DATE),
   default: `${defaultDate.getFullYear()}-${
-    defaultDate.getMonth() + 1
+    defaultDate.getMonth() + 1 < 10
+      ? `0${defaultDate.getMonth() + 1}`
+      : defaultDate.getMonth() + 1
   }-${defaultDate.getDate()}`,
 })

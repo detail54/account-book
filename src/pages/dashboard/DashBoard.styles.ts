@@ -4,7 +4,6 @@ const Wrap = styled.div`
   width: 100%;
   height: auto;
   flex-direction: column;
-  padding-top: ${({ theme }) => theme.paddings.big};
 `
 
 const TotalInfo = styled.div`

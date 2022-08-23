@@ -1,4 +1,4 @@
-import React, { useId } from 'react'
+import React from 'react'
 // conponents & type
 import { TColor, TFontColor, TSize } from 'styled-components'
 import ListItem, {
@@ -9,32 +9,41 @@ import ListItem, {
 import Lists from './List.styles'
 
 type ListTypee = 'List'
+export type TContents = Omit<IListItemProps, 'type'>[]
 
 interface IProps {
   type: ListTypee
   listItemType: TListItem
-  contents?: IListItemProps[]
+  contents?: TContents
+  height?: number
   bgColor?: TColor
   fontColor?: TFontColor
   paddingX?: TSize<'zero'>
   paddingY?: TSize<'zero'>
+  divide?: boolean
+  boxShadow?: boolean
 }
 
 const List: React.FC<IProps> = ({
   type,
   listItemType,
+  contents,
+  height,
   bgColor,
   fontColor,
   paddingX = 'zero',
   paddingY = 'zero',
-  contents,
+  divide,
+  boxShadow,
 }) => {
   const ListEl = Lists[type]
   const basicListItem =
     contents &&
-    contents.map((content) => (
+    contents.map((content, index) => (
       <ListItem
-        key={useId()}
+        key={`list-item-${
+          typeof content.content === 'string' ? content.content : index
+        }`}
         type={listItemType}
         paddingX={content.paddingX}
         paddingY={content.paddingY ? content.paddingY : 'zero'}
@@ -47,10 +56,18 @@ const List: React.FC<IProps> = ({
         buttonText={content.buttonText}
         onClick={content.onClick}
         buttonClick={content.buttonClick}
+        hover={content.hover}
+        active={content.active}
       />
     ))
   return (
-    <ListEl paddingX={paddingX} paddingY={paddingY}>
+    <ListEl
+      height={height}
+      paddingX={paddingX}
+      paddingY={paddingY}
+      divide={divide}
+      boxShadow={boxShadow}
+    >
       {basicListItem}
     </ListEl>
   )

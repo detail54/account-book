@@ -93,6 +93,8 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
           const data = accountDatas.filter(
             (account) => account.paymentDt.getDate() === cur,
           )
+
+          const returnDate = `${date}-${cur < 10 ? `0${cur}` : cur}`
           if (data) {
             const totalIncome = incomeDatas
               .filter((income) => income.incomeDt.getDate() === cur)
@@ -107,7 +109,11 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
               ...acc,
               list: [
                 ...acc.list,
-                { income: totalIncome, expenditure: totalExpenditure },
+                {
+                  date: returnDate,
+                  income: totalIncome,
+                  expenditure: totalExpenditure,
+                },
               ],
               totalIncome: acc.totalIncome + totalIncome,
               totalExpenditure: acc.totalExpenditure + totalExpenditure,
@@ -116,7 +122,10 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
 
           return {
             ...acc,
-            list: [...acc.list, { income: 0, expenditure: 0 }],
+            list: [
+              ...acc.list,
+              { date: returnDate, income: 0, expenditure: 0 },
+            ],
           }
         }, initResultData)
 

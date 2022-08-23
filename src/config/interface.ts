@@ -42,6 +42,7 @@ export interface IUser {
 // dashboard
 export interface IDashBoard {
   list: {
+    date: string
     income: number
     expenditure: number
   }[]
