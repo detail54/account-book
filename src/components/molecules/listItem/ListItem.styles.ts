@@ -21,6 +21,7 @@ const ListItem = styled.li<IListItemStyleProps>`
     background-color: ${bgColorNumber !== undefined || active
       ? theme.subBackgroundColor[bgColorNumber || 0]
       : theme.backgroundColor};
+    transition: 0.2s;
 
     ${hover &&
     css`

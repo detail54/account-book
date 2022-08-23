@@ -13,6 +13,7 @@ const Text = styled.span<ITextStyleProps>`
     padding-right: ${paddingX && theme.paddings[paddingX]};
     flex: ${flex && flex};
     white-space: pre-line;
+    transition: 0.2s;
   `}
 `
 

@@ -32,7 +32,12 @@ const fontColors: Record<TFontColor, string> = {
 }
 
 const backgroundColor = '#202124'
-const subBackgroundColor = '#424347'
+const subBackgroundColor = {
+  0: '#424347',
+  1: '#47494d',
+  2: '#505255',
+  3: '#747679',
+}
 
 const boxShadow =
   '0px 3px 3px -2px rgb(255 255 255 / 80%), 0px 3px 4px 0px rgb(255 255 255 / 86%), 0px 1px 8px 0px rgb(255 255 255 / 88%);'

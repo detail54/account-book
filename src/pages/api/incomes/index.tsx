@@ -13,8 +13,6 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
 
   const apiMethod = method || 'GET'
 
-  console.log('date:::', date)
-
   const handler: { [key: string]: () => void } = {
     GET: async () => {
       try {
@@ -38,8 +36,6 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
           59,
           999,
         )
-        console.log('firstDate:::', firstDate)
-        console.log('lastDate:::', lastDate)
 
         const data = await prisma.income.findMany({
           where: {
@@ -59,8 +55,6 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
             incomeDt: true,
           },
         })
-
-        console.log('data:::', data)
 
         res.status(200).json(data)
         res.end()
