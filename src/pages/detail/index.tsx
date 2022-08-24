@@ -6,10 +6,7 @@ import useIncome from 'hooks/useIncome'
 import useDashBoard from 'hooks/useDashBoard'
 import useDate from 'hooks/useDate'
 // components
-import List, {
-  TListContents,
-  TDefaultListItem,
-} from 'components/organisms/list/List'
+import List, { TListContents } from 'components/organisms/list/List'
 import Text from 'components/atoms/text/Text'
 // store
 import { useRecoilState } from 'recoil'

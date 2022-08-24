@@ -9,7 +9,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   const date = query.date as string
 
   if (!date) {
-    res.status(500).json(new Error('not found "month" param'))
+    res.status(500).json(new Error('not found "date" param'))
   }
 
   if (!token) {

@@ -1,14 +1,11 @@
 import { useCallback } from 'react'
+// type
+import { TErrorHandlers } from 'config/interface'
 // lib
 import { AxiosError } from 'axios'
 // error handler
 import defaultQueryErrHandlers from '../config/defaultQueryErrHandlers'
 import defaultMutationErrHandlers from '../config/defaultMutationErrHandlers'
-
-export type TErrorHandlers = Record<
-  number | string,
-  (error: AxiosError) => void
->
 
 const useApiError = (handlers?: TErrorHandlers) => {
   const handleQueryError = useCallback(

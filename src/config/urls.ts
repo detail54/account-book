@@ -1,4 +1,4 @@
-const API_URL = {
+const API_URL: Readonly<{ [key: string]: string }> = {
   USERS: 'users',
   ACCOUNTS: 'accounts',
   INCOME: 'incomes',

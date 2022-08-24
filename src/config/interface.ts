@@ -1,3 +1,11 @@
+import { AxiosError } from 'axios'
+
+// 에러 핸들러
+export type TErrorHandlers = Record<
+  number | string,
+  (error: AxiosError) => void
+>
+
 // db 스키마
 export interface IStoreCategory {
   name: string

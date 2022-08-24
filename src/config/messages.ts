@@ -1,4 +1,4 @@
-export const validationMsg = {
+export const validationMsg: Readonly<{ [key: string]: string }> = {
   ERROR_ALREADY_ID: '이미 존재하는 아이디 입니다.',
   ERROR_NOT_EXIST_ID: '존재하지 않는 아이디 입니다',
   ERROR_BLANKED_ID: '아이디를 입력해주세요,',

@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios'
-import { TErrorHandlers } from 'hooks/useApiError'
+import { TErrorHandlers } from './interface'
 
 const err404 = (error: AxiosError) => {
   console.log('query 404 error::', error)
