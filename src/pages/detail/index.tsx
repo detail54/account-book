@@ -36,6 +36,7 @@ const Detail: NextPage = () => {
     dashBoardData.list.map((account, index) => {
       return {
         itemNumber: index + 1 < 10 ? `0${index + 1}` : index + 1,
+        numberWidth: 30,
         content: (
           <ListItemContentWrap>
             <ListItemContent>
@@ -65,7 +66,7 @@ const Detail: NextPage = () => {
       const incomeDt = new Date(account.incomeDt)
       return {
         itemNumber: index + 1,
-        numberWidth: 10,
+        numberWidth: 15,
         content: (
           <ListItemContentWrap>
             <Text
@@ -102,7 +103,7 @@ const Detail: NextPage = () => {
       const paymentDt = new Date(account.paymentDt)
       return {
         itemNumber: index + 1,
-        numberWidth: 10,
+        numberWidth: 15,
         content: (
           <ListItemContentWrap>
             <Text

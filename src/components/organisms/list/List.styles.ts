@@ -11,9 +11,11 @@ const List = styled.ul<IListStyleProps>`
     box-shadow: ${boxShadow && theme.boxShadow};
     width: 100%;
     flex-direction: column;
-    scrollbar-width: none;
     ::-webkit-scrollbar {
-      display: none;
+      width: ${theme.calcRem(5)};
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: ${theme.colors.grey_4};
     }
 
     & > li {

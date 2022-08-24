@@ -11,7 +11,8 @@ import {
   QueryFunctionContext,
 } from 'react-query'
 import queryClient from 'utils/reactQuery'
-import useApiError, { TErrorHandlers } from './useApiError'
+import { TErrorHandlers } from 'config/interface'
+import useApiError from './useApiError'
 import api from '../utils/axios'
 
 export type TQueryKey = [string, object | undefined]
@@ -71,11 +72,10 @@ export const useQuery = <T>(
 
 export const useMutation = <T, S>(
   url: string,
-  mutationFn: (data: T | S) => Promise<AxiosResponse<S>>,
   params?: object,
-  errorHandlers?: TErrorHandlers,
   updater?: (oldData: T, newData: S) => T,
   onError?: TMutationErr,
+  errorHandlers?: TErrorHandlers,
   options?: Omit<
     UseMutationOptions<AxiosResponse, AxiosError, T | S>,
     'mutationFn' | 'onMutate' | 'onSettled' | 'onError'
@@ -85,22 +85,25 @@ export const useMutation = <T, S>(
 
   const client = useQueryClient()
 
-  return useMutationOrigin<AxiosResponse, AxiosError, T | S>(mutationFn, {
-    onMutate: async (data) => {
-      await client.cancelQueries([url, params])
+  return useMutationOrigin<AxiosResponse, AxiosError, T | S>(
+    (data) => api.post<S>(url, { data, params }),
+    {
+      onMutate: async (data) => {
+        await client.cancelQueries([url, params])
 
-      const previousData = client.getQueriesData([url, params])
+        const previousData = client.getQueriesData([url, params])
 
-      client.setQueriesData<T>([url, params], (oldData) => {
-        return updater && oldData ? updater(oldData, data as S) : (data as T)
-      })
+        client.setQueriesData<T>([url, params], (oldData) => {
+          return updater && oldData ? updater(oldData, data as S) : (data as T)
+        })
 
-      return previousData
+        return previousData
+      },
+      onError: onError || handleMutationError,
+      onSettled: () => {
+        client.invalidateQueries([url, params])
+      },
+      ...options,
     },
-    onError: onError || handleMutationError,
-    onSettled: () => {
-      client.invalidateQueries([url, params])
-    },
-    ...options,
-  })
+  )
 }
