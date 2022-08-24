@@ -4,6 +4,7 @@ import styled, { css, IListItemStyleProps } from 'styled-components'
 const ListItem = styled.li<IListItemStyleProps>`
   ${({
     fontColor,
+    fontSize,
     paddingX,
     paddingY,
     bgColorNumber,
@@ -12,6 +13,7 @@ const ListItem = styled.li<IListItemStyleProps>`
     active,
     theme,
   }) => css`
+    font-size: ${fontSize && theme.fontSizes[fontSize]};
     color: ${fontColor ? theme.fontColors[fontColor] : theme.fontColors.black};
     padding-top: ${paddingY && theme.paddings[paddingY]};
     padding-bottom: ${paddingY && theme.paddings[paddingY]};

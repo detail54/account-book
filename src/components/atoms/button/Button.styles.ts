@@ -8,6 +8,7 @@ const Button = styled.button<IButtonStyleProps>`
   ${({
     size,
     fontColor,
+    fontSize,
     bgColor,
     marginX,
     marginY,
@@ -17,6 +18,7 @@ const Button = styled.button<IButtonStyleProps>`
   }) => css`
     width: ${theme.buttonWidth[size]};
     height: ${theme.buttonHeight[size]};
+    font-size: ${fontSize && theme.fontSizes[fontSize]};
     color: ${fontColor ? theme.fontColors[fontColor] : theme.fontColors.black};
     background-color: ${bgColor ? theme.colors[bgColor] : theme.colors.white};
     padding-top: ${paddingY && theme.paddings[paddingY]};

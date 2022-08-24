@@ -1,6 +1,6 @@
 import React from 'react'
 // interface
-import { TColor, TFontColor, TSize } from 'styled-components'
+import { TColor, TFontColor, TFontSize, TSize } from 'styled-components'
 // styles
 import Buttons from './Button.styles'
 
@@ -11,6 +11,7 @@ interface IProps {
   buttonStyle?: ButtonType
   size: TSize
   fontColor?: TFontColor
+  fontSize?: TFontSize
   bgColor?: TColor
   marginY?: TSize<'zero'>
   marginX?: TSize<'zero'>
@@ -23,6 +24,7 @@ const Button: React.FC<IProps> = ({
   buttonStyle = 'BasicButton',
   size,
   fontColor,
+  fontSize,
   bgColor,
   marginY,
   marginX,
@@ -36,6 +38,7 @@ const Button: React.FC<IProps> = ({
       onClick={onClick}
       size={size}
       fontColor={fontColor}
+      fontSize={fontSize}
       bgColor={bgColor}
       marginY={marginY}
       marginX={marginX}

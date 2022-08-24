@@ -9,15 +9,27 @@ import ListItem, {
 import Lists from './List.styles'
 
 type ListTypee = 'List'
-export type TContents = Omit<IListItemProps, 'type'>
-export type THeader = Pick<
+export type TListContents = Omit<IListItemProps, 'type'>
+export type TListHeader = Pick<
   IListItemProps,
   | 'paddingX'
   | 'paddingY'
   | 'fontColor'
+  | 'fontSize'
   | 'bgColorNumber'
   | 'content'
   | 'hover'
+  | 'numberFlex'
+  | 'numberWidth'
+>
+export type TDefaultListItem = Pick<
+  IListItemProps,
+  | 'paddingX'
+  | 'paddingY'
+  | 'fontColor'
+  | 'fontSize'
+  | 'bgColorNumber'
+  | 'content'
   | 'numberFlex'
   | 'numberWidth'
 >
@@ -25,8 +37,9 @@ export type THeader = Pick<
 interface IProps {
   type: ListTypee
   listItemType: TListItem
-  header?: THeader
-  contents?: TContents[]
+  header?: TListHeader
+  contents?: TListContents[]
+  defaultContent?: TDefaultListItem
   height?: number
   paddingX?: TSize<'zero'>
   paddingY?: TSize<'zero'>
@@ -39,6 +52,7 @@ const List: React.FC<IProps> = ({
   listItemType,
   header,
   contents,
+  defaultContent,
   height,
   paddingX = 'zero',
   paddingY = 'zero',
@@ -62,6 +76,7 @@ const List: React.FC<IProps> = ({
           type={listItemType}
           paddingX={header.paddingX}
           paddingY={header.paddingY ? header.paddingY : 'zero'}
+          fontSize={header.fontSize}
           fontColor={header.fontColor}
           bgColorNumber={header.bgColorNumber}
           itemNumber=' '
@@ -81,6 +96,7 @@ const List: React.FC<IProps> = ({
             paddingX={content.paddingX}
             paddingY={content.paddingY ? content.paddingY : 'zero'}
             fontColor={content.fontColor}
+            fontSize={content.fontSize}
             bgColorNumber={content.bgColorNumber}
             itemNumber={content.itemNumber}
             content={content.content}
@@ -95,6 +111,20 @@ const List: React.FC<IProps> = ({
             numberWidth={content.numberWidth}
           />
         ))}
+      {!contents?.length && defaultContent && (
+        <ListItem
+          key='list-default'
+          type='ListItem'
+          paddingX={defaultContent.paddingX}
+          paddingY={defaultContent.paddingY ? defaultContent.paddingY : 'zero'}
+          fontColor={defaultContent.fontColor}
+          fontSize={defaultContent.fontSize}
+          bgColorNumber={defaultContent.bgColorNumber}
+          content={defaultContent.content}
+          numberFlex={defaultContent.numberFlex}
+          numberWidth={defaultContent.numberWidth}
+        />
+      )}
     </ListEl>
   )
 }

@@ -6,7 +6,10 @@ import useIncome from 'hooks/useIncome'
 import useDashBoard from 'hooks/useDashBoard'
 import useDate from 'hooks/useDate'
 // components
-import List, { TContents } from 'components/organisms/list/List'
+import List, {
+  TListContents,
+  TDefaultListItem,
+} from 'components/organisms/list/List'
 import Text from 'components/atoms/text/Text'
 // store
 import { useRecoilState } from 'recoil'
@@ -31,7 +34,7 @@ const Detail: NextPage = () => {
     setSelectDate(date)
   }
 
-  const calendarListData: TContents[] | undefined =
+  const calendarListData: TListContents[] | undefined =
     dashBoardData &&
     dashBoardData.list.map((account, index) => {
       return {
@@ -59,7 +62,7 @@ const Detail: NextPage = () => {
       }
     })
 
-  const incomeListData: TContents[] | undefined =
+  const incomeListData: TListContents[] | undefined =
     incomeData &&
     incomeData.map((account, index) => {
       const incomeDt = new Date(account.incomeDt)
@@ -96,7 +99,7 @@ const Detail: NextPage = () => {
       }
     })
 
-  const expenditureListData: TContents[] | undefined =
+  const expenditureListData: TListContents[] | undefined =
     accountData &&
     accountData.map((account, index) => {
       const paymentDt = new Date(account.paymentDt)
@@ -165,6 +168,12 @@ const Detail: NextPage = () => {
             bgColorNumber: 1,
           }}
           contents={incomeListData}
+          defaultContent={{
+            content: '수익 없음',
+            paddingY: 'md',
+            paddingX: 'md',
+            fontSize: 'small',
+          }}
           boxShadow
         />
       </Section>
@@ -188,6 +197,12 @@ const Detail: NextPage = () => {
             bgColorNumber: 1,
           }}
           contents={expenditureListData}
+          defaultContent={{
+            content: '지출 없음',
+            paddingY: 'md',
+            paddingX: 'md',
+            fontSize: 'small',
+          }}
           boxShadow
         />
       </Section>

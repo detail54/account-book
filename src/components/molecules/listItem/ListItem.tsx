@@ -1,7 +1,7 @@
 import React from 'react'
 // interface
 import Button, { ButtonType } from 'components/atoms/button/Button'
-import { TFontColor, TSize } from 'styled-components'
+import { TFontColor, TFontSize, TSize } from 'styled-components'
 // components
 import Text from 'components/atoms/text/Text'
 // styles
@@ -20,6 +20,7 @@ export interface IListItemProps {
   paddingX?: TSize<'zero'>
   paddingY?: TSize<'zero'>
   fontColor?: TFontColor
+  fontSize?: TFontSize
   bgColorNumber?: number
   itemNumber?: number | string
   content?: TContent
@@ -39,6 +40,7 @@ const ListItem: React.FC<IListItemProps> = ({
   paddingX,
   paddingY,
   fontColor,
+  fontSize,
   bgColorNumber,
   itemNumber = 0,
   content,
@@ -55,13 +57,14 @@ const ListItem: React.FC<IListItemProps> = ({
   const ListItemEl = ListItems[type]
   const numberEl = (type === 'NumberListItem' ||
     type === 'NumberAndButtonListItem') &&
-    itemNumber && <Text text={itemNumber} />
+    itemNumber && <Text text={itemNumber} fontSize={fontSize} />
   const buttonEl = (type === 'ButtonListItem' ||
     type === 'NumberAndButtonListItem') && (
     <Button
       buttonStyle={button}
       size={buttonSize}
       text={buttonText}
+      fontSize={fontSize}
       onClick={buttonClick}
     />
   )
@@ -81,7 +84,7 @@ const ListItem: React.FC<IListItemProps> = ({
     >
       {numberEl}
       {typeof content === 'string' || typeof content === 'number' ? (
-        <Text text={content} fontColor={fontColor} />
+        <Text text={content} fontColor={fontColor} fontSize={fontSize} />
       ) : (
         content
       )}
