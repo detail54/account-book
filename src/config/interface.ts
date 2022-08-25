@@ -7,45 +7,61 @@ export type TErrorHandlers = Record<
 >
 
 // db 스키마
-export interface IStoreCategory {
+export interface IApiStoreCategory {
   name: string
-  stores: IStore[]
-  accounts: IAccount[]
+  stores: IApiStore[]
+  accounts: IApiAccount[]
 }
 
-export interface IStore {
-  category: IStoreCategory
+export interface IApiStore {
+  category: IApiStoreCategory
   name: string
-  accounts: IAccount[]
+  accounts: IApiAccount[]
 }
 
-export interface IAccount {
+export interface IApiAccount {
   id: number
-  user: IUser
-  store: IStore
-  category: IStoreCategory
+  user: IApiUser
+  store: IApiStore
+  category: IApiStoreCategory
   amount: number
   memo?: string
-  regDt: string
-  updatedDt: string
-  paymentDt: string
+  regDt: Date
+  updatedDt: Date
+  paymentDt: Date
 }
 
-export interface IInCome {
+export interface IApiInCome {
   id: number
-  user: IUser
+  user: IApiUser
   amount: number
   memo?: string
-  regDt: string
-  updatedDt: string
-  incomeDt: string
+  regDt: Date
+  updatedDt: Date
+  incomeDt: Date
 }
 
-export interface IUser {
+export interface IApiUser {
   userName: string
   password: string
-  accounts: IAccount[]
-  regDt: string
+  accounts: IApiAccount[]
+  regDt: Date
+}
+
+// income
+export interface IIncome {
+  amount: number
+  memo?: string
+  incomeDt: Date
+}
+
+// account
+export interface IAccount {
+  store: string
+  category: string
+  amount: number
+  memo?: string
+  paymentDt: Date
 }
 
 // dashboard

@@ -54,6 +54,7 @@ const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
             buttonStyle='RoundButton'
             size='md'
             bgColor='orange_4'
+            fontColor='black'
             text='로그인'
             onClick={signIn}
           />
@@ -72,6 +73,7 @@ const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
             buttonStyle='RoundButton'
             size='md'
             bgColor='orange_2'
+            fontColor='black'
             text='회원가입'
             onClick={singUp}
           />

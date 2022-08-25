@@ -1,6 +1,9 @@
-import { getCookie } from 'cookies-next'
 import { NextApiRequest, NextApiResponse } from 'next'
+// lib
+import { getCookie } from 'cookies-next'
 import prisma from 'utils/prismaClient'
+// interface
+import { IAccount } from 'config/interface'
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
   const { body, headers, query, method } = req
@@ -66,7 +69,17 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
           },
         })
 
-        res.status(200).json(data)
+        const resData: IAccount[] = data.map((account) => {
+          return {
+            store: account.store.name,
+            category: account.store.name,
+            amount: account.amount,
+            memo: account.memo ? account.memo : undefined,
+            paymentDt: account.paymentDt,
+          }
+        })
+
+        res.status(200).json(resData)
         res.end()
       } catch (e) {
         res.status(500).json(e)

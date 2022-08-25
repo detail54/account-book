@@ -30,13 +30,8 @@ const Detail: NextPage = () => {
   const { data: incomeData } = getIncome(selectDate)
   const { data: dashBoardData } = getDashBoardData(format('YYYY-MM'))
 
-  const onChangeSelectDate = (date: string) => {
-    setSelectDate(date)
-  }
-
-  const onRouteWritePage = () => {
-    router.push('write')
-  }
+  const onChangeSelectDate = (date: string) => setSelectDate(date)
+  const onRouteWritePage = () => router.push('write')
 
   const calendarListData: TListContents[] | undefined =
     dashBoardData &&
@@ -69,8 +64,8 @@ const Detail: NextPage = () => {
 
   const incomeListData: TListContents[] | undefined =
     incomeData &&
-    incomeData.map((account, index) => {
-      const incomeDt = new Date(account.incomeDt)
+    incomeData.map((income, index) => {
+      const incomeDt = new Date(income.incomeDt)
       return {
         itemNumber: index + 1,
         numberWidth: 15,
@@ -90,11 +85,11 @@ const Detail: NextPage = () => {
               fontSize='small'
             />
             <Text
-              text={account.amount.toLocaleString()}
+              text={income.amount.toLocaleString()}
               flex={1}
               fontSize='small'
             />
-            <Text text={account.memo} flex={2} fontSize='small' />
+            <Text text={income.memo} flex={2} fontSize='small' />
           </ListItemContentWrap>
         ),
         paddingY: 'md',
@@ -126,8 +121,8 @@ const Detail: NextPage = () => {
               flex={1}
               fontSize='small'
             />
-            <Text text={account.category.name} flex={1} fontSize='small' />
-            <Text text={account.store.name} flex={1} fontSize='small' />
+            <Text text={account.category} flex={1} fontSize='small' />
+            <Text text={account.store} flex={1} fontSize='small' />
             <Text
               text={account.amount.toLocaleString()}
               flex={1}
