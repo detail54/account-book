@@ -8,6 +8,7 @@ export default createGlobalStyle`
     height: 100vh;
     background-color: ${({ theme }) => theme.backgroundColor};
     color: ${({ theme }) => theme.fontColors.themeColor};
+    transition: 0.2s;
     
     #__next {
       width: 100vw;

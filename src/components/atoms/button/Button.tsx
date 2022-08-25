@@ -16,7 +16,7 @@ interface IProps {
   marginY?: TSize<'zero'>
   marginX?: TSize<'zero'>
   text: string
-  onClick: () => void
+  onClick?: () => void
 }
 
 const Button: React.FC<IProps> = ({

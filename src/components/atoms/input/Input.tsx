@@ -12,7 +12,9 @@ interface IProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void
   placeHolder?: string
+  width?: number | string
   paddingY?: TSize<'zero'>
+  flex?: number
   inputRef?: React.RefObject<HTMLInputElement>
 }
 
@@ -23,7 +25,9 @@ const Input: React.FC<IProps> = ({
   placeHolder = '',
   onChange,
   onKeyPress,
+  width,
   paddingY,
+  flex,
   inputRef,
 }) => {
   const InputEl = Inputs[inputStyle]
@@ -35,7 +39,9 @@ const Input: React.FC<IProps> = ({
       onChange={onChange}
       onKeyPress={onKeyPress}
       placeholder={placeHolder}
+      width={width}
       paddingY={paddingY}
+      flex={flex}
       ref={inputRef}
     />
   )

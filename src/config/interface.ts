@@ -55,6 +55,12 @@ export interface IIncome {
   incomeDt: Date
 }
 
+export interface IAddIncome {
+  amount: string
+  memo: string
+  incomeDt: string
+}
+
 // account
 export interface IAccount {
   store: string
@@ -62,6 +68,14 @@ export interface IAccount {
   amount: number
   memo?: string
   paymentDt: Date
+}
+
+export interface IAddAccount {
+  store: string
+  category: string
+  amount: string
+  memo: string
+  paymentDt: string
 }
 
 // dashboard

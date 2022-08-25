@@ -107,6 +107,11 @@ declare module 'styled-components' {
     flex?: number
   }
 
+  export interface IInputStyleProps extends IStyleProps {
+    width?: number | string
+    flex?: number
+  }
+
   export interface IBoareStyleProps extends IStyleProps {
     height: number
   }

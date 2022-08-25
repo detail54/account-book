@@ -19,7 +19,7 @@ const ListItem = styled.li<IListItemStyleProps>`
     padding-bottom: ${paddingY && theme.paddings[paddingY]};
     padding-left: ${paddingX && theme.paddings[paddingX]};
     padding-right: ${paddingX && theme.paddings[paddingX]};
-    cursor: ${cursor || 'default'};
+    cursor: ${cursor || 'auto'};
     background-color: ${bgColorNumber !== undefined || active
       ? theme.subBackgroundColor[bgColorNumber || 0]
       : theme.backgroundColor};

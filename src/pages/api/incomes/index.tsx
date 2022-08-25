@@ -1,6 +1,9 @@
-import { getCookie } from 'cookies-next'
 import { NextApiRequest, NextApiResponse } from 'next'
+// lib
+import { getCookie } from 'cookies-next'
 import prisma from 'utils/prismaClient'
+// type
+import { IIncome } from 'config/interface'
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
   const { body, headers, query, method } = req
@@ -66,7 +69,15 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
           },
         })
 
-        res.status(200).json(data)
+        const resData: IIncome[] = data.map((income) => {
+          return {
+            amount: income.amount,
+            memo: income.memo ? income.memo : undefined,
+            incomeDt: income.incomeDt,
+          }
+        })
+
+        res.status(200).json(resData)
         res.end()
       } catch (e) {
         res.status(500).json(e)

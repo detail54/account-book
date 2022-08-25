@@ -1,17 +1,17 @@
-import { IInCome } from '../config/interface'
+import { IIncome } from '../config/interface'
 import API_URL from '../config/urls'
 import { useMutation, useQuery } from './useReactQuery'
 
 const useIncome = () => {
   const getIncome = (date: string) => {
-    return useQuery<IInCome[]>(API_URL.INCOME, { date })
+    return useQuery<IIncome[]>(API_URL.INCOME, { date })
   }
 
   const addIncome = (date: string) => {
-    return useMutation<IInCome[], IInCome>(
+    return useMutation<IIncome[], IIncome>(
       API_URL.POSTS,
       { date },
-      (oldData: IInCome[], newData: IInCome) => [...oldData, newData],
+      (oldData: IIncome[], newData: IIncome) => [...oldData, newData],
     )
   }
 

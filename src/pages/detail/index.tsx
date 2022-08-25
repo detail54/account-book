@@ -1,6 +1,5 @@
 import { NextPage } from 'next'
-import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useCallback } from 'react'
 // hook
 import useAccount from 'hooks/useAccount'
 import useIncome from 'hooks/useIncome'
@@ -9,7 +8,7 @@ import useDate from 'hooks/useDate'
 // components
 import List, { TListContents } from 'components/organisms/list/List'
 import Text from 'components/atoms/text/Text'
-import Button from 'components/atoms/button/Button'
+import LinkButton from 'components/atoms/button/LinkButton'
 // store
 import { useRecoilState } from 'recoil'
 import { selectDashBoardDateState } from 'store/atoms'
@@ -20,7 +19,6 @@ const Detail: NextPage = () => {
   const { Wrap, Section, ListItemContentWrap, ListItemContent } = DetailStyles
   const [selectDate, setSelectDate] = useRecoilState(selectDashBoardDateState)
 
-  const router = useRouter()
   const { format } = useDate(new Date(selectDate))
   const { getAccount } = useAccount()
   const { getIncome } = useIncome()
@@ -30,8 +28,10 @@ const Detail: NextPage = () => {
   const { data: incomeData } = getIncome(selectDate)
   const { data: dashBoardData } = getDashBoardData(format('YYYY-MM'))
 
-  const onChangeSelectDate = (date: string) => setSelectDate(date)
-  const onRouteWritePage = () => router.push('write')
+  const onChangeSelectDate = useCallback(
+    (date: string) => setSelectDate(date),
+    [],
+  )
 
   const calendarListData: TListContents[] | undefined =
     dashBoardData &&
@@ -149,12 +149,7 @@ const Detail: NextPage = () => {
           height={600}
           boxShadow
         />
-        <Button
-          size='big'
-          text='내역 추가'
-          onClick={onRouteWritePage}
-          marginY='lg'
-        />
+        <LinkButton size='big' text='내역 추가' link='write' marginY='lg' />
       </Section>
       <Section>
         <Text text='수익' type='BoldText' fontSize='xxxl' />

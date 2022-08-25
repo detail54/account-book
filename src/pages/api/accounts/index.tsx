@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 // lib
 import { getCookie } from 'cookies-next'
 import prisma from 'utils/prismaClient'
-// interface
+// type
 import { IAccount } from 'config/interface'
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
