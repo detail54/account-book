@@ -9,10 +9,12 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
 
   if (!date) {
     res.status(500).json(new Error('not found "date" param'))
+    res.end()
   }
 
   if (!token) {
-    return
+    res.status(500).json(new Error('Token Expiration'))
+    res.end()
   }
 
   const base64Payload = token.split('.')[1]

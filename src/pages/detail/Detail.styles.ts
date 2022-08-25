@@ -21,6 +21,7 @@ const Wrap = styled.div`
 const Section = styled.section`
   ${({ theme }) => css`
     flex-direction: column;
+    align-items: center;
     margin: ${theme.margins.big};
 
     & > span {

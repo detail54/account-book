@@ -62,6 +62,7 @@ const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
             buttonStyle='RoundButton'
             size='md'
             bgColor='grey_4'
+            fontColor='black'
             text='로그아웃'
             onClick={onSignOut}
           />

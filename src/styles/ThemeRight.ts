@@ -36,6 +36,7 @@ const buttonWidth: Record<TSize, string> = {
   md: calcRem(100),
   lg: calcRem(125),
   xl: calcRem(150),
+  big: '100%',
 }
 
 const buttonHeight: Record<TSize, string> = {
@@ -44,6 +45,7 @@ const buttonHeight: Record<TSize, string> = {
   md: calcRem(29),
   lg: calcRem(31),
   xl: calcRem(35),
+  big: calcRem(38),
 }
 
 const breakPoint: Record<TSize, string> = {

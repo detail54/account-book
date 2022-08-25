@@ -19,8 +19,12 @@ const Button = styled.button<IButtonStyleProps>`
     width: ${theme.buttonWidth[size]};
     height: ${theme.buttonHeight[size]};
     font-size: ${fontSize && theme.fontSizes[fontSize]};
-    color: ${fontColor ? theme.fontColors[fontColor] : theme.fontColors.black};
-    background-color: ${bgColor ? theme.colors[bgColor] : theme.colors.white};
+    color: ${fontColor
+      ? theme.fontColors[fontColor]
+      : theme.fontColors.themeColor};
+    background-color: ${bgColor
+      ? theme.colors[bgColor]
+      : theme.backgroundColor};
     padding-top: ${paddingY && theme.paddings[paddingY]};
     padding-bottom: ${paddingY && theme.paddings[paddingY]};
     padding-left: ${paddingX && theme.paddings[paddingX]};
@@ -35,11 +39,11 @@ const Button = styled.button<IButtonStyleProps>`
 `
 
 const BasicButton = styled(Button)`
-  border: 1px solid ${({ theme }) => theme.colors.black_4};
+  border: 1px solid ${({ theme }) => theme.colors.themeColor};
 `
 
 const RoundButton = styled(Button)`
-  border: 1px solid ${({ theme }) => theme.colors.black_4};
+  border: 1px solid ${({ theme }) => theme.colors.themeColor};
   border-radius: ${(props) => props.theme.calcRem(10)};
 `
 

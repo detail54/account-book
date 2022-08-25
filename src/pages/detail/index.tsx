@@ -1,4 +1,5 @@
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import React from 'react'
 // hook
 import useAccount from 'hooks/useAccount'
@@ -8,6 +9,7 @@ import useDate from 'hooks/useDate'
 // components
 import List, { TListContents } from 'components/organisms/list/List'
 import Text from 'components/atoms/text/Text'
+import Button from 'components/atoms/button/Button'
 // store
 import { useRecoilState } from 'recoil'
 import { selectDashBoardDateState } from 'store/atoms'
@@ -18,6 +20,7 @@ const Detail: NextPage = () => {
   const { Wrap, Section, ListItemContentWrap, ListItemContent } = DetailStyles
   const [selectDate, setSelectDate] = useRecoilState(selectDashBoardDateState)
 
+  const router = useRouter()
   const { format } = useDate(new Date(selectDate))
   const { getAccount } = useAccount()
   const { getIncome } = useIncome()
@@ -29,6 +32,10 @@ const Detail: NextPage = () => {
 
   const onChangeSelectDate = (date: string) => {
     setSelectDate(date)
+  }
+
+  const onRouteWritePage = () => {
+    router.push('write')
   }
 
   const calendarListData: TListContents[] | undefined =
@@ -146,6 +153,12 @@ const Detail: NextPage = () => {
           contents={calendarListData}
           height={600}
           boxShadow
+        />
+        <Button
+          size='big'
+          text='내역 추가'
+          onClick={onRouteWritePage}
+          marginY='lg'
         />
       </Section>
       <Section>
