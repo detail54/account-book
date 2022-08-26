@@ -1,15 +1,14 @@
 import styled, { css, IGridItemStyleProps } from 'styled-components'
 
 const Item = styled.div<IGridItemStyleProps>`
-  ${({ theme, active }) => css`
+  ${({ theme, titleAlign, active, itemPadding }) => css`
     width: 100%;
     height: 100%;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: ${titleAlign || 'flex-start'};
     justify-content: space-between;
-    transition: 0.3s;
     border: 1px solid transparent;
-    padding: ${theme.paddings.xs};
+    padding: ${itemPadding ? theme.paddings[itemPadding] : theme.paddings.xs};
     background-color: ${theme.backgroundColor};
     box-shadow: ${theme.boxShadow};
 
@@ -29,6 +28,7 @@ const Item = styled.div<IGridItemStyleProps>`
 `
 
 const Contents = styled.div`
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   padding-left: ${({ theme }) => theme.paddings.xs};

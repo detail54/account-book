@@ -38,9 +38,13 @@ const Grid: React.FC<IProps> = ({
             key={`grid-item${index}`}
             title={content.title}
             titleColor={content.titleColor}
+            titleFontSize={content.titleFontSize}
+            titleAlign={content.titleAlign}
             texts={content.texts}
             textsColor={content.textsColor}
+            textFontSize={content.textFontSize}
             active={content.active}
+            itemPadding={content.itemPadding}
             onClick={content.onClick}
           />
         )

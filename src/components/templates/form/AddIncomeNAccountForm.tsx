@@ -11,6 +11,7 @@ import add from '../../../../public/assets/images/icon/add.png'
 import minus from '../../../../public/assets/images/icon/minus.png'
 // styles
 import AddIncomeNAccountFormStyles from './AddIncomeNAccountForm.styles'
+import DateSelectBox from '../dateSelectBox/DateSelectBox'
 // components
 const Text = dynamic(() => import('components/atoms/text/Text'))
 const Button = dynamic(() => import('components/atoms/button/Button'))
@@ -43,67 +44,66 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
   onSubmit,
 }) => {
   const [isDarkMode] = useRecoilState(themeState)
-  const { Wrap, Form, Section, Buttons, ListItemContentWrap, ListItemContent } =
+  const { Form, SectionWrap, Section, Buttons, ListItemContent } =
     AddIncomeNAccountFormStyles
 
   const addComp = (
     <Img src={add} width={25} height={25} invertImgColor={isDarkMode} />
   )
 
+  const onChangeDate = (
+    type: 'income' | 'account',
+    index: number,
+    date: Date,
+  ) => {
+    if (type === 'income') {
+      handleChangeData('income', index, 'incomeDt', date.toUTCString())
+    } else {
+      handleChangeData('account', index, 'accountDt', date.toUTCString())
+    }
+  }
+
   const incomsListData: TListContents[] | undefined =
     addIncomeDatas &&
     addIncomeDatas.map((income, index) => {
       return {
         content: (
-          <ListItemContentWrap>
-            <ListItemContent>
-              <Input
-                value={income.incomeDt}
-                onChange={(e) =>
-                  handleChangeData(
-                    'income',
-                    index,
-                    'incomeDt',
-                    e.currentTarget.value,
-                  )
-                }
-                flex={2}
-              />
-              <Input
-                value={income.amount}
-                onChange={(e) =>
-                  handleChangeData(
-                    'income',
-                    index,
-                    'amount',
-                    e.currentTarget.value,
-                  )
-                }
-                align='right'
-                flex={1}
-              />
-              <Input
-                value={income.memo}
-                onChange={(e) =>
-                  handleChangeData(
-                    'income',
-                    index,
-                    'memo',
-                    e.currentTarget.value,
-                  )
-                }
-                flex={1}
-              />
-              <ImgButton
-                src={minus}
-                width={15}
-                height={15}
-                flex={0.2}
-                invertImgColor={isDarkMode}
-                onClick={() => removeListItem('income', index)}
-              />
-            </ListItemContent>
-          </ListItemContentWrap>
+          <ListItemContent>
+            <DateSelectBox
+              date={income.incomeDt ? new Date(income.incomeDt) : new Date()}
+              viewDateType='YYYY-MM-DD HH:MM:SS'
+              onChange={(date: Date) => onChangeDate('income', index, date)}
+              flex={2}
+            />
+            <Input
+              value={income.amount}
+              onChange={(e) =>
+                handleChangeData(
+                  'income',
+                  index,
+                  'amount',
+                  e.currentTarget.value,
+                )
+              }
+              align='right'
+              flex={1}
+            />
+            <Input
+              value={income.memo}
+              onChange={(e) =>
+                handleChangeData('income', index, 'memo', e.currentTarget.value)
+              }
+              flex={1}
+            />
+            <ImgButton
+              src={minus}
+              width={15}
+              height={15}
+              flex={0.2}
+              invertImgColor={isDarkMode}
+              onClick={() => removeListItem('income', index)}
+            />
+          </ListItemContent>
         ),
         paddingY: 'md',
         paddingX: 'md',
@@ -115,79 +115,73 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
     addAccountData.map((account, index) => {
       return {
         content: (
-          <ListItemContentWrap>
-            <ListItemContent>
-              <Input
-                value={account.paymentDt}
-                onChange={(e) =>
-                  handleChangeData(
-                    'account',
-                    index,
-                    'paymentDt',
-                    e.currentTarget.value,
-                  )
-                }
-                flex={2}
-              />
-              <Input
-                value={account.category}
-                onChange={(e) =>
-                  handleChangeData(
-                    'account',
-                    index,
-                    'category',
-                    e.currentTarget.value,
-                  )
-                }
-                flex={1}
-              />
-              <Input
-                value={account.store}
-                onChange={(e) =>
-                  handleChangeData(
-                    'account',
-                    index,
-                    'store',
-                    e.currentTarget.value,
-                  )
-                }
-                flex={1}
-              />
-              <Input
-                value={account.amount}
-                onChange={(e) =>
-                  handleChangeData(
-                    'account',
-                    index,
-                    'amount',
-                    e.currentTarget.value,
-                  )
-                }
-                align='right'
-                flex={1}
-              />
-              <Input
-                value={account.memo}
-                onChange={(e) =>
-                  handleChangeData(
-                    'account',
-                    index,
-                    'memo',
-                    e.currentTarget.value,
-                  )
-                }
-                flex={1}
-              />
-              <ImgButton
-                src={minus}
-                width={15}
-                height={15}
-                flex={0.2}
-                invertImgColor={isDarkMode}
-                onClick={() => removeListItem('account', index)}
-              />
-            </ListItemContent>
-          </ListItemContentWrap>
+          <ListItemContent>
+            <DateSelectBox
+              date={
+                account.paymentDt ? new Date(account.paymentDt) : new Date()
+              }
+              viewDateType='YYYY-MM-DD HH:MM:SS'
+              onChange={(date: Date) => onChangeDate('account', index, date)}
+              flex={2}
+            />
+            <Input
+              value={account.category}
+              onChange={(e) =>
+                handleChangeData(
+                  'account',
+                  index,
+                  'category',
+                  e.currentTarget.value,
+                )
+              }
+              flex={1}
+            />
+            <Input
+              value={account.store}
+              onChange={(e) =>
+                handleChangeData(
+                  'account',
+                  index,
+                  'store',
+                  e.currentTarget.value,
+                )
+              }
+              flex={1}
+            />
+            <Input
+              value={account.amount}
+              onChange={(e) =>
+                handleChangeData(
+                  'account',
+                  index,
+                  'amount',
+                  e.currentTarget.value,
+                )
+              }
+              align='right'
+              flex={1}
+            />
+            <Input
+              value={account.memo}
+              onChange={(e) =>
+                handleChangeData(
+                  'account',
+                  index,
+                  'memo',
+                  e.currentTarget.value,
+                )
+              }
+              flex={1}
+            />
+            <ImgButton
+              src={minus}
+              width={15}
+              height={15}
+              flex={0.2}
+              invertImgColor={isDarkMode}
+              onClick={() => removeListItem('account', index)}
+            />
+          </ListItemContent>
         ),
         paddingY: 'md',
         paddingX: 'md',
@@ -195,12 +189,12 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
     })
 
   return (
-    <Wrap>
+    <Form onSubmit={(e) => e.preventDefault()}>
       <Buttons>
         <Button size='md' content='저장' type='submit' onClick={onSubmit} />
         <LinkButton size='md' text='취소' link='detail' />
       </Buttons>
-      <Form>
+      <SectionWrap>
         <Section>
           <Text text='수익 추가' type='BoldText' fontSize='xxxl' />
           <List
@@ -208,12 +202,12 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
             listItemType='ListItem'
             header={{
               content: (
-                <ListItemContentWrap>
+                <ListItemContent>
                   <Text text='수익 날짜' flex={2} fontSize='small' />
                   <Text text='금액' flex={1} fontSize='small' />
                   <Text text='비고' flex={1} fontSize='small' />
                   <Text text=' ' flex={0.2} />
-                </ListItemContentWrap>
+                </ListItemContent>
               ),
               paddingY: 'xxs',
               paddingX: 'md',
@@ -236,14 +230,14 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
             listItemType='ListItem'
             header={{
               content: (
-                <ListItemContentWrap>
+                <ListItemContent>
                   <Text text='지출 날짜' flex={2} fontSize='small' />
                   <Text text='분류' flex={1} fontSize='small' />
                   <Text text='가맹점' flex={1} fontSize='small' />
                   <Text text='금액' flex={1} fontSize='small' />
                   <Text text='비고' flex={1} fontSize='small' />
                   <Text text=' ' flex={0.2} />
-                </ListItemContentWrap>
+                </ListItemContent>
               ),
               paddingY: 'xxs',
               paddingX: 'md',
@@ -259,8 +253,8 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
             ])}
           />
         </Section>
-      </Form>
-    </Wrap>
+      </SectionWrap>
+    </Form>
   )
 }
 

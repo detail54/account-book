@@ -90,6 +90,7 @@ const index: NextPage = () => {
       <Calendar
         date={getDateObj()}
         contents={calendarData}
+        height={553}
         onChangeDate={onChangeDate}
         handleSelectDate={handleSelectDate}
       />

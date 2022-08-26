@@ -1,15 +1,15 @@
 import styled from 'styled-components'
 
-const Wrap = styled.div`
+const Form = styled.form`
   width: 100%;
+  display: flex;
   flex-direction: column;
 `
 
-const Form = styled.form`
-  width: 90%;
-  display: flex;
-  align-items: flex-start;
+const SectionWrap = styled.div`
+  width: 100%;
 
+  align-items: flex-start;
   & > section:nth-of-type(1) {
     margin-right: ${({ theme }) => theme.margins.big};
     flex: 1;
@@ -39,11 +39,6 @@ const Buttons = styled.div`
   }
 `
 
-const ListItemContentWrap = styled.div`
-  width: 100%;
-  justify-content: space-between;
-`
-
 const ListItemContent = styled.div`
   width: 100%;
   justify-content: space-around;
@@ -55,10 +50,9 @@ const ListItemContent = styled.div`
 `
 
 export default {
-  Wrap,
   Form,
+  SectionWrap,
   Section,
   Buttons,
-  ListItemContentWrap,
   ListItemContent,
 }

@@ -24,7 +24,7 @@ const ImgButton: React.FC<IProps> = ({
   marginX,
   invertImgColor,
   flex,
-  onClick,
+  onClick = () => {},
 }) => {
   const ButtonEl = Buttons.ImgButton
   return (

@@ -128,12 +128,23 @@ declare module 'styled-components' {
   }
 
   export interface IGridItemStyleProps extends IStyleProps {
+    titleAlign?: TAlign
     active?: boolean
+    itemPadding?: TSize<'zero'>
   }
 
-  export interface ISkeletonStyleProps {
+  export interface ISkeletonStyleProps extends IStyleProps {
     width?: number | string
     height?: number | string
     borderRadius?: number
+  }
+
+  export interface ISelectStyleProps extends IStyleProps {
+    width?: number | string
+  }
+
+  export interface ICalendarStyleProps extends IStyleProps {
+    smallDateSelectBox?: boolean
+    height?: number
   }
 }

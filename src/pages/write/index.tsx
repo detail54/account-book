@@ -14,7 +14,7 @@ const Write: NextPage = () => {
   const initIncomeData: IAddIncome = {
     amount: '',
     memo: '',
-    incomeDt: '',
+    incomeDt: new Date().toUTCString(),
   }
 
   const initAccountData: IAddAccount = {
@@ -22,7 +22,7 @@ const Write: NextPage = () => {
     category: '',
     amount: '',
     memo: '',
-    paymentDt: '',
+    paymentDt: new Date().toUTCString(),
   }
 
   const [addIncomeDatas, setAddIncomeDatas] = useState<IAddIncome[]>([])
@@ -77,7 +77,9 @@ const Write: NextPage = () => {
     }
   }
 
-  const onSubmit = () => {}
+  const onSubmit = () => {
+    alert('submit')
+  }
 
   return (
     <Wrap>

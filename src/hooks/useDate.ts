@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-type TDateFormat =
+export type TDateFormat =
   | 'YYYY'
   | 'YYYY-MM'
   | 'YYYY-MM-DD'
@@ -9,19 +9,145 @@ type TDateFormat =
   | undefined
 
 const useDate = (dateProps?: Date) => {
-  const [date, setDate] = useState<Date>(dateProps || new Date())
+  const [dateObj, setDateObj] = useState<Date>(dateProps || new Date())
+
+  const getDateObj = () => {
+    return dateObj
+  }
+
+  const getYear = () => {
+    return dateObj.getFullYear()
+  }
+
+  const setYear = (year: number) => {
+    const beforeDate = new Date(dateObj)
+    beforeDate.setFullYear(year)
+
+    setDateObj(beforeDate)
+  }
+
+  const getMonth = () => {
+    return dateObj.getMonth() + 1
+  }
+
+  const setMonth = (month: number) => {
+    const beforeDate = new Date(dateObj)
+    beforeDate.setMonth(month)
+
+    setDateObj(beforeDate)
+  }
+
+  const getDate = () => {
+    return dateObj.getDate()
+  }
+
+  const setDate = (dateNumber: number) => {
+    const beforeDate = new Date(dateObj)
+    beforeDate.setDate(dateNumber)
+
+    setDateObj(beforeDate)
+  }
+
+  const getHour = () => {
+    return dateObj.getHours()
+  }
+
+  const setHour = (hour: number) => {
+    const beforeDate = new Date(dateObj)
+    beforeDate.setHours(hour)
+
+    setDateObj(beforeDate)
+  }
+
+  const getMinute = () => {
+    return dateObj.getMinutes()
+  }
+
+  const setMinute = (minute: number) => {
+    const beforeDate = new Date(dateObj)
+    beforeDate.setMinutes(minute)
+
+    setDateObj(beforeDate)
+  }
+
+  const getSeconds = () => {
+    return dateObj.getSeconds()
+  }
+
+  const setSeconds = (seconds: number) => {
+    const beforeDate = new Date(dateObj)
+    beforeDate.setSeconds(seconds)
+
+    setDateObj(beforeDate)
+  }
+
+  const getLastDate = () => {
+    return new Date(dateObj.getFullYear(), dateObj.getMonth(), 0).getDate()
+  }
+
+  const changeNextMonth = () => {
+    if (dateObj.getMonth() === 11) {
+      setDateObj(
+        new Date(
+          dateObj.getFullYear() + 1,
+          0,
+          1,
+          dateObj.getHours(),
+          dateObj.getMinutes(),
+          dateObj.getSeconds(),
+        ),
+      )
+    } else {
+      setDateObj(
+        new Date(
+          dateObj.getFullYear(),
+          dateObj.getMonth() + 1,
+          1,
+          dateObj.getHours(),
+          dateObj.getMinutes(),
+          dateObj.getSeconds(),
+        ),
+      )
+    }
+  }
+
+  const changePrevMonth = () => {
+    if (dateObj.getMonth() === 0) {
+      setDateObj(
+        new Date(
+          dateObj.getFullYear() - 1,
+          11,
+          1,
+          dateObj.getHours(),
+          dateObj.getMinutes(),
+          dateObj.getSeconds(),
+        ),
+      )
+    } else {
+      setDateObj(
+        new Date(
+          dateObj.getFullYear(),
+          dateObj.getMonth() - 1,
+          1,
+          dateObj.getHours(),
+          dateObj.getMinutes(),
+          dateObj.getSeconds(),
+        ),
+      )
+    }
+  }
 
   const format = (type: TDateFormat) => {
     const leftPad = (value: number) => {
       return value < 10 ? `0${value}` : `${value}`
     }
 
-    const year = date.getFullYear().toString()
-    const month = leftPad(date.getMonth() + 1)
-    const day = leftPad(date.getDate())
-    const hour = leftPad(date.getHours())
-    const minute = leftPad(date.getMinutes())
-    const second = leftPad(date.getSeconds())
+    const year = dateObj.getFullYear().toString()
+    const month = leftPad(dateObj.getMonth() + 1)
+    const day = leftPad(dateObj.getDate())
+    const hour = leftPad(dateObj.getHours())
+    const minute = leftPad(dateObj.getMinutes())
+    const second = leftPad(dateObj.getSeconds())
 
     switch (type) {
       case 'YYYY':
@@ -37,71 +163,29 @@ const useDate = (dateProps?: Date) => {
           ':',
         )}`
       default:
-        return date.toString()
-    }
-  }
-
-  const getDateObj = () => {
-    return date
-  }
-
-  const getYear = () => {
-    return date.getFullYear()
-  }
-
-  const getMonth = () => {
-    return date.getMonth() + 1
-  }
-
-  const getDate = () => {
-    return date.getDate()
-  }
-
-  const getHour = () => {
-    return date.getHours()
-  }
-
-  const getMinute = () => {
-    return date.getMinutes()
-  }
-
-  const getSeconds = () => {
-    return date.getSeconds()
-  }
-
-  const getLastDate = () => {
-    return new Date(date.getFullYear(), date.getMonth(), 0).getDate()
-  }
-
-  const changeNextMonth = () => {
-    if (date.getMonth() === 11) {
-      setDate(new Date(date.getFullYear() + 1, 0))
-    } else {
-      setDate(new Date(date.getFullYear(), date.getMonth() + 1))
-    }
-  }
-
-  const changePrevMonth = () => {
-    if (date.getMonth() === 0) {
-      setDate(new Date(date.getFullYear() - 1, 11))
-    } else {
-      setDate(new Date(date.getFullYear(), date.getMonth() - 1))
+        return dateObj.toString()
     }
   }
 
   return {
-    format,
-    setDate,
     getDateObj,
+    setDateObj,
     getYear,
+    setYear,
     getMonth,
+    setMonth,
     getDate,
+    setDate,
     getHour,
+    setHour,
     getMinute,
+    setMinute,
     getSeconds,
+    setSeconds,
     getLastDate,
     changeNextMonth,
     changePrevMonth,
+    format,
   }
 }
 
