@@ -18,6 +18,7 @@ const List = dynamic(() => import('components/organisms/list/List'))
 const ImgButton = dynamic(() => import('components/atoms/button/ImgButton'))
 const LinkButton = dynamic(() => import('components/atoms/button/LinkButton'))
 const Input = dynamic(() => import('components/atoms/input/Input'))
+const Img = dynamic(() => import('components/atoms/image/Img'))
 
 interface IProps {
   addIncomeDatas: IAddIncome[]
@@ -46,7 +47,7 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
     AddIncomeNAccountFormStyles
 
   const addComp = (
-    <ImgButton src={add} width={25} height={25} invertImgColor={isDarkMode} />
+    <Img src={add} width={25} height={25} invertImgColor={isDarkMode} />
   )
 
   const incomsListData: TListContents[] | undefined =
