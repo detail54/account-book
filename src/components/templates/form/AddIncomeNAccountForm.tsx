@@ -8,6 +8,7 @@ import { useRecoilState } from 'recoil'
 import { themeState } from 'store/atoms'
 // image
 import add from '../../../../public/assets/images/icon/add.png'
+import minus from '../../../../public/assets/images/icon/minus.png'
 // styles
 import AddIncomeNAccountFormStyles from './AddIncomeNAccountForm.styles'
 // components
@@ -22,6 +23,7 @@ interface IProps {
   addIncomeDatas: IAddIncome[]
   addAccountData: IAddAccount[]
   addList: (type: 'income' | 'account') => void
+  removeListItem: (type: 'income' | 'account', index: number) => void
   handleChangeData: (
     type: 'income' | 'account',
     index: number,
@@ -35,6 +37,7 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
   addIncomeDatas,
   addAccountData,
   addList,
+  removeListItem,
   handleChangeData,
   onSubmit,
 }) => {
@@ -75,6 +78,7 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
                     e.currentTarget.value,
                   )
                 }
+                align='right'
                 flex={1}
               />
               <Input
@@ -88,6 +92,13 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
                   )
                 }
                 flex={1}
+              />
+              <ImgButton
+                src={minus}
+                width={15}
+                height={15}
+                flex={0.2}
+                invertImgColor={isDarkMode}
               />
             </ListItemContent>
           </ListItemContentWrap>
@@ -108,7 +119,7 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
                 value={account.paymentDt}
                 onChange={(e) =>
                   handleChangeData(
-                    'income',
+                    'account',
                     index,
                     'paymentDt',
                     e.currentTarget.value,
@@ -120,9 +131,9 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
                 value={account.category}
                 onChange={(e) =>
                   handleChangeData(
-                    'income',
+                    'account',
                     index,
-                    'paymentDt',
+                    'category',
                     e.currentTarget.value,
                   )
                 }
@@ -132,7 +143,7 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
                 value={account.store}
                 onChange={(e) =>
                   handleChangeData(
-                    'income',
+                    'account',
                     index,
                     'store',
                     e.currentTarget.value,
@@ -144,25 +155,33 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
                 value={account.amount}
                 onChange={(e) =>
                   handleChangeData(
-                    'income',
+                    'account',
                     index,
                     'amount',
                     e.currentTarget.value,
                   )
                 }
+                align='right'
                 flex={1}
               />
               <Input
                 value={account.memo}
                 onChange={(e) =>
                   handleChangeData(
-                    'income',
+                    'account',
                     index,
                     'memo',
                     e.currentTarget.value,
                   )
                 }
                 flex={1}
+              />
+              <ImgButton
+                src={minus}
+                width={15}
+                height={15}
+                flex={0.2}
+                invertImgColor={isDarkMode}
               />
             </ListItemContent>
           </ListItemContentWrap>
@@ -190,6 +209,7 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
                   <Text text='수익 날짜' flex={2} fontSize='small' />
                   <Text text='금액' flex={1} fontSize='small' />
                   <Text text='비고' flex={1} fontSize='small' />
+                  <Text text=' ' flex={0.2} />
                 </ListItemContentWrap>
               ),
               paddingY: 'xxs',
@@ -202,7 +222,6 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
                 paddingY: 'xs',
                 paddingX: 'xs',
                 onClick: () => addList('income'),
-                hover: true,
               },
             ])}
           />
@@ -220,6 +239,7 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
                   <Text text='가맹점' flex={1} fontSize='small' />
                   <Text text='금액' flex={1} fontSize='small' />
                   <Text text='비고' flex={1} fontSize='small' />
+                  <Text text=' ' flex={0.2} />
                 </ListItemContentWrap>
               ),
               paddingY: 'xxs',
@@ -232,7 +252,6 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
                 paddingY: 'xs',
                 paddingX: 'xs',
                 onClick: () => addList('account'),
-                hover: true,
               },
             ])}
           />

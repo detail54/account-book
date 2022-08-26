@@ -49,6 +49,7 @@ declare module 'styled-components' {
     | 'grey_4'
     | 'white'
     | 'themeColor'
+  export type TAlign = 'left' | 'center' | 'right'
 
   export interface ITheme {
     calcRem: (size: number) => string
@@ -77,6 +78,7 @@ declare module 'styled-components' {
     marginY?: TSize<'zero'>
     paddingX?: TSize<'zero'>
     paddingY?: TSize<'zero'>
+    flex?: number
   }
 
   export interface DefaultTheme extends ITheme {}
@@ -109,6 +111,7 @@ declare module 'styled-components' {
 
   export interface IInputStyleProps extends IStyleProps {
     width?: number | string
+    align?: TAlign
     flex?: number
   }
 

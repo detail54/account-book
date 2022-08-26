@@ -1,5 +1,5 @@
 import React from 'react'
-import { TSize } from 'styled-components'
+import { TAlign, TSize } from 'styled-components'
 // styles
 import Inputs from './Input.styles'
 
@@ -13,6 +13,7 @@ interface IProps {
   onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void
   placeHolder?: string
   width?: number | string
+  align?: TAlign
   paddingY?: TSize<'zero'>
   flex?: number
   inputRef?: React.RefObject<HTMLInputElement>
@@ -26,6 +27,7 @@ const Input: React.FC<IProps> = ({
   onChange,
   onKeyPress,
   width,
+  align,
   paddingY,
   flex,
   inputRef,
@@ -40,6 +42,7 @@ const Input: React.FC<IProps> = ({
       onKeyPress={onKeyPress}
       placeholder={placeHolder}
       width={width}
+      align={align}
       paddingY={paddingY}
       flex={flex}
       ref={inputRef}

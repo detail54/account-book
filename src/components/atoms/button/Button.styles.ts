@@ -14,6 +14,7 @@ const Button = styled.button<IButtonStyleProps>`
     marginY,
     paddingX,
     paddingY,
+    flex,
     theme,
   }) => css`
     width: ${theme.buttonWidth[size]};
@@ -33,6 +34,7 @@ const Button = styled.button<IButtonStyleProps>`
     margin-bottom: ${marginY && theme.margins[marginY]};
     margin-left: ${marginX && theme.margins[marginX]};
     margin-right: ${marginX && theme.margins[marginX]};
+    flex: ${flex && flex};
     align-items: center;
     justify-content: center;
   `}
@@ -48,11 +50,12 @@ const RoundButton = styled(Button)`
 `
 
 const ImgButton = styled.button<IImgButtonStyleProps>`
-  ${({ theme, marginX, marginY, invertImgColor }) => css`
+  ${({ theme, marginX, marginY, invertImgColor, flex }) => css`
     margin-top: ${marginY && theme.margins[marginY]};
     margin-bottom: ${marginY && theme.margins[marginY]};
     margin-left: ${marginX && theme.margins[marginX]};
     margin-right: ${marginX && theme.margins[marginX]};
+    flex: ${flex && flex};
     background-color: Transparent;
     border: none;
     filter: ${invertImgColor &&

@@ -38,6 +38,20 @@ const Write: NextPage = () => {
     }
   }
 
+  const removeListItem = (type: 'income' | 'account', index: number) => {
+    if (type === 'income') {
+      const beforeData = [...addIncomeDatas]
+      beforeData.splice(index, 1)
+
+      setAddIncomeDatas(beforeData)
+    } else {
+      const beforeData = [...addAccountData]
+      beforeData.splice(index, 1)
+
+      setAddAcountDatas(beforeData)
+    }
+  }
+
   const handleChangeData = (
     type: 'income' | 'account',
     index: number,
@@ -71,6 +85,7 @@ const Write: NextPage = () => {
         addIncomeDatas={addIncomeDatas}
         addAccountData={addAccountData}
         addList={addList}
+        removeListItem={removeListItem}
         handleChangeData={handleChangeData}
         onSubmit={onSubmit}
       />

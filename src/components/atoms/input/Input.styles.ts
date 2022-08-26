@@ -2,7 +2,7 @@
 import styled, { css, IInputStyleProps } from 'styled-components'
 
 const Input = styled.input<IInputStyleProps>`
-  ${({ width, paddingY, flex, theme }) => css`
+  ${({ width, align, paddingY, flex, theme }) => css`
     width: ${width
       ? typeof width === 'number'
         ? theme.calcRem(width)
@@ -13,6 +13,7 @@ const Input = styled.input<IInputStyleProps>`
     font-size: ${theme.fontSizes.base};
     padding-top: ${paddingY && theme.paddings[paddingY]};
     padding-bottom: ${paddingY && theme.paddings[paddingY]};
+    text-align: ${align && align};
     flex: ${flex !== undefined && flex};
   `}
 
