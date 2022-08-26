@@ -59,7 +59,7 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
     if (type === 'income') {
       handleChangeData('income', index, 'incomeDt', date.toUTCString())
     } else {
-      handleChangeData('account', index, 'accountDt', date.toUTCString())
+      handleChangeData('account', index, 'paymentDt', date.toUTCString())
     }
   }
 
