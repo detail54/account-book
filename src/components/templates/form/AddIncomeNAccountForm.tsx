@@ -99,6 +99,7 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
                 height={15}
                 flex={0.2}
                 invertImgColor={isDarkMode}
+                onClick={() => removeListItem('income', index)}
               />
             </ListItemContent>
           </ListItemContentWrap>
@@ -182,6 +183,7 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
                 height={15}
                 flex={0.2}
                 invertImgColor={isDarkMode}
+                onClick={() => removeListItem('account', index)}
               />
             </ListItemContent>
           </ListItemContentWrap>
@@ -194,7 +196,7 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
   return (
     <Wrap>
       <Buttons>
-        <Button size='md' text='저장' type='submit' onClick={onSubmit} />
+        <Button size='md' content='저장' type='submit' onClick={onSubmit} />
         <LinkButton size='md' text='취소' link='detail' />
       </Buttons>
       <Form>

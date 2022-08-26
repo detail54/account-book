@@ -55,7 +55,7 @@ const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
             size='md'
             bgColor='orange_4'
             fontColor='black'
-            text='로그인'
+            content='로그인'
             onClick={signIn}
           />
         ) : (
@@ -64,7 +64,7 @@ const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
             size='md'
             bgColor='grey_4'
             fontColor='black'
-            text='로그아웃'
+            content='로그아웃'
             onClick={onSignOut}
           />
         )}
@@ -74,7 +74,7 @@ const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
             size='md'
             bgColor='orange_2'
             fontColor='black'
-            text='회원가입'
+            content='회원가입'
             onClick={singUp}
           />
         )}

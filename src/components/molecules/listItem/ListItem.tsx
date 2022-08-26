@@ -63,7 +63,7 @@ const ListItem: React.FC<IListItemProps> = ({
     <Button
       buttonStyle={button}
       size={buttonSize}
-      text={buttonText}
+      content={buttonText}
       fontSize={fontSize}
       onClick={buttonClick}
     />
@@ -75,18 +75,40 @@ const ListItem: React.FC<IListItemProps> = ({
       paddingY={paddingY}
       fontColor={fontColor}
       bgColorNumber={bgColorNumber}
-      onClick={onClick}
       cursor={onClick && 'pointer'}
       hover={hover}
       active={active}
       numberFlex={numberFlex}
       numberWidth={numberWidth}
+      onClick={onClick}
     >
-      {numberEl}
-      {typeof content === 'string' || typeof content === 'number' ? (
-        <Text text={content} fontColor={fontColor} fontSize={fontSize} />
+      {onClick ? (
+        <Button
+          buttonStyle='WrapButton'
+          content={
+            <>
+              {numberEl}
+              {typeof content === 'string' || typeof content === 'number' ? (
+                <Text
+                  text={content}
+                  fontColor={fontColor}
+                  fontSize={fontSize}
+                />
+              ) : (
+                content
+              )}
+            </>
+          }
+        />
       ) : (
-        content
+        <>
+          {numberEl}
+          {typeof content === 'string' || typeof content === 'number' ? (
+            <Text text={content} fontColor={fontColor} fontSize={fontSize} />
+          ) : (
+            content
+          )}
+        </>
       )}
       {buttonEl}
     </ListItemEl>

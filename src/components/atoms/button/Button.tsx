@@ -4,18 +4,18 @@ import { TColor, TFontColor, TFontSize, TSize } from 'styled-components'
 // styles
 import Buttons from './Button.styles'
 
-export type ButtonType = 'BasicButton' | 'RoundButton'
+export type ButtonType = 'BasicButton' | 'RoundButton' | 'WrapButton'
 
 interface IProps {
   type?: 'button' | 'submit' | 'reset'
   buttonStyle?: ButtonType
-  size: TSize
+  size?: TSize
   fontColor?: TFontColor
   fontSize?: TFontSize
   bgColor?: TColor
   marginY?: TSize<'zero'>
   marginX?: TSize<'zero'>
-  text: string
+  content: string | JSX.Element
   onClick?: () => void
 }
 
@@ -28,7 +28,7 @@ const Button: React.FC<IProps> = ({
   bgColor,
   marginY,
   marginX,
-  text,
+  content,
   onClick,
 }) => {
   const ButtonEl = Buttons[buttonStyle]
@@ -43,7 +43,7 @@ const Button: React.FC<IProps> = ({
       marginY={marginY}
       marginX={marginX}
     >
-      {text}
+      {content}
     </ButtonEl>
   )
 }

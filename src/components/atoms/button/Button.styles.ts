@@ -17,8 +17,8 @@ const Button = styled.button<IButtonStyleProps>`
     flex,
     theme,
   }) => css`
-    width: ${theme.buttonWidth[size]};
-    height: ${theme.buttonHeight[size]};
+    width: ${theme.buttonWidth[size || 'md']};
+    height: ${theme.buttonHeight[size || 'md']};
     font-size: ${fontSize && theme.fontSizes[fontSize]};
     color: ${fontColor
       ? theme.fontColors[fontColor]
@@ -49,6 +49,13 @@ const RoundButton = styled(Button)`
   border-radius: ${(props) => props.theme.calcRem(10)};
 `
 
+const WrapButton = styled(Button)`
+  width: 100%;
+  height: auto;
+  border: none;
+  display: flex;
+`
+
 const ImgButton = styled.button<IImgButtonStyleProps>`
   ${({ theme, marginX, marginY, invertImgColor, flex }) => css`
     margin-top: ${marginY && theme.margins[marginY]};
@@ -69,4 +76,5 @@ export default {
   BasicButton,
   RoundButton,
   ImgButton,
+  WrapButton,
 }

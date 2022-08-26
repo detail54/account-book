@@ -20,16 +20,29 @@ const ListItem = styled.li<IListItemStyleProps>`
     padding-left: ${paddingX && theme.paddings[paddingX]};
     padding-right: ${paddingX && theme.paddings[paddingX]};
     cursor: ${cursor || 'auto'};
-    background-color: ${bgColorNumber !== undefined || active
-      ? theme.subBackgroundColor[bgColorNumber || 0]
-      : theme.backgroundColor};
-    transition: 0.2s;
+
+    ${bgColorNumber !== undefined || active
+      ? css`
+          &,
+          & > * {
+            background-color: ${theme.subBackgroundColor[bgColorNumber || 0]};
+          }
+        `
+      : css`
+          &,
+          & > * {
+            background-color: ${theme.backgroundColor};
+          }
+        `}
 
     ${hover &&
     css`
       &:hover {
-        transition: 0.2s;
-        background-color: ${theme.subBackgroundColor[0]};
+        &,
+        & > * {
+          transition: 0.2s;
+          background-color: ${theme.subBackgroundColor[0]};
+        }
       }
     `}
   `}
@@ -41,7 +54,8 @@ const LeftListItem = styled(ListItem)`
 
 const NumberListItem = styled(LeftListItem)`
   ${({ numberFlex, numberWidth, theme }) => css`
-    & > span:nth-of-type(1) {
+    & > span:nth-of-type(1),
+    & > button > span:nth-of-type(1) {
       display: flex;
       padding: 0 10px;
       width: ${numberWidth && theme.calcRem(numberWidth)};

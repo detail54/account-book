@@ -100,7 +100,7 @@ const UserForm: React.FC<IProps> = ({
           </>
         )}
         {error && <Text text={error} paddingY='xs' fontColor='red' />}
-        <Button text={type} onClick={onSubmit} size='md' marginY='sm' />
+        <Button content={type} onClick={onSubmit} size='md' marginY='sm' />
       </Form>
     </>
   )

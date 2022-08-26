@@ -83,7 +83,7 @@ declare module 'styled-components' {
 
   export interface DefaultTheme extends ITheme {}
   export interface IButtonStyleProps extends IStyleProps {
-    size: TSize
+    size?: TSize
   }
 
   export interface IListStyleProps extends IStyleProps {
