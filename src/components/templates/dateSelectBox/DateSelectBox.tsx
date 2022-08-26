@@ -155,7 +155,7 @@ const DateSelectBox: React.FC<IProps> = ({
           </SelectWrap>
           <Calendar
             date={getDateObj()}
-            height={150}
+            height={205}
             dateAlign='center'
             dateFontSize='xs'
             datePadding='xxxs'

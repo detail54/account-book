@@ -112,8 +112,8 @@ const Calendar: React.FC<IProps> = ({
   })
 
   return (
-    <Wrap>
-      <DateBox smallDateSelectBox={smallDateSelectBox} height={height}>
+    <Wrap height={height}>
+      <DateBox smallDateSelectBox={smallDateSelectBox}>
         <ImgButton
           src={leftArrow}
           width={smallDateSelectBox ? 15 : 30}
