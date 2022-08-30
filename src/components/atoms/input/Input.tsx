@@ -45,6 +45,7 @@ const Input: React.FC<IProps> = ({
       align={align}
       paddingY={paddingY}
       flex={flex}
+      autoComplete={type === 'password' ? 'on' : 'off'}
       ref={inputRef}
     />
   )

@@ -5,6 +5,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   const { body, headers, query, method } = req
 
   const apiMethod = method || 'GET'
+  console.log('body.data:::')
 
   const handler: { [key: string]: () => void } = {
     GET: async () => {
