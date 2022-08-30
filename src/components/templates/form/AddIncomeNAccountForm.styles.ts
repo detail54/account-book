@@ -43,8 +43,8 @@ const ListItemContent = styled.div`
   width: 100%;
   justify-content: space-around;
 
-  & > input {
-    width: 80%;
+  & > * {
+    width: 100%;
     margin: ${({ theme }) => `0 ${theme.margins.xxs}`};
   }
 `
