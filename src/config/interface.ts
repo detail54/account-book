@@ -48,6 +48,12 @@ export interface IApiUser {
   regDt: Date
 }
 
+// user
+export interface IAddUser {
+  userName: string
+  password: string
+}
+
 // income
 export interface IIncome {
   amount: number

@@ -10,6 +10,7 @@ export default (request: NextRequest, event: NextFetchEvent) => {
     pathname.startsWith('/signin') ||
     pathname.startsWith('/signup') ||
     pathname.startsWith('/api/auth') ||
+    pathname.startsWith('/api/users') ||
     pathname === '/'
   ) {
     return NextResponse.next()

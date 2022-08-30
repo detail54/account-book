@@ -50,7 +50,6 @@ const SignUp: NextPage = () => {
       await addUserMutation.mutateAsync({
         userName: userInfo.userName,
         password: userInfo.password,
-        accounts: {},
       })
       router.push('/signin')
     } catch (e) {
