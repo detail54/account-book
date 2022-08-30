@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
+// hook
+import useIncome from 'hooks/useIncome'
 // type
 import { IAddIncome, IAddAccount } from 'config/interface'
 // styles
@@ -11,6 +14,11 @@ const AddIncomeNAccountForm = dynamic(
 )
 
 const Write: NextPage = () => {
+  const router = useRouter()
+
+  const { addIncomes } = useIncome()
+  const incomeMutation = addIncomes()
+
   const initIncomeData: IAddIncome = {
     amount: '',
     memo: '',
@@ -77,8 +85,15 @@ const Write: NextPage = () => {
     }
   }
 
-  const onSubmit = () => {
-    alert('submit')
+  const onSubmit = async () => {
+    try {
+      const reqData = addIncomeDatas.filter((data) => data.amount !== '')
+      await incomeMutation.mutateAsync(reqData)
+
+      router.push('detail')
+    } catch (e) {
+      console.log('add income err::', e)
+    }
   }
 
   return (

@@ -31,7 +31,7 @@ export interface IApiAccount {
   paymentDt: Date
 }
 
-export interface IApiInCome {
+export interface IApiIncome {
   id: number
   user: IApiUser
   amount: number
@@ -57,7 +57,7 @@ export interface IAddUser {
 // income
 export interface IIncome {
   amount: number
-  memo?: string
+  memo?: string | null
   incomeDt: Date
 }
 

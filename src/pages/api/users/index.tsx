@@ -4,7 +4,6 @@ import prisma from 'utils/prismaClient'
 export default (req: NextApiRequest, res: NextApiResponse) => {
   const { body, headers, query, method } = req
 
-  console.log('body.data:::')
   const apiMethod = method || 'GET'
 
   const handler: { [key: string]: () => void } = {

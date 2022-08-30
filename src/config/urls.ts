@@ -1,4 +1,13 @@
-const API_URL: Readonly<{ [key: string]: string }> = {
+interface IApiUrl {
+  USERS: string
+  ACCOUNTS: string
+  INCOME: string
+  STORES: string
+  STORE_CATEGORYS: string
+  DASH_BOARD: string
+}
+
+const API_URL: Readonly<IApiUrl> = {
   USERS: 'users',
   ACCOUNTS: 'accounts',
   INCOME: 'incomes',

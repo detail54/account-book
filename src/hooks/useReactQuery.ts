@@ -100,8 +100,8 @@ export const useMutation = <T, S>(
         return previousData
       },
       onError: onError || handleMutationError,
-      onSettled: () => {
-        client.invalidateQueries([url, params])
+      onSettled: async () => {
+        await client.invalidateQueries()
       },
       ...options,
     },

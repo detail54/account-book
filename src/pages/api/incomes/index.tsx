@@ -3,17 +3,11 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { getCookie } from 'cookies-next'
 import prisma from 'utils/prismaClient'
 // type
-import { IIncome } from 'config/interface'
+import { IAddIncome, IIncome } from 'config/interface'
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
   const { body, headers, query, method } = req
   const token = getCookie('next-auth.session-token', { req, res }) as string
-  const date = query.date as string
-
-  if (!date) {
-    res.status(500).json(new Error('not found "date" param'))
-    res.end()
-  }
 
   if (!token) {
     res.status(500).json(new Error('Token Expiration'))
@@ -28,6 +22,13 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
 
   const handler: { [key: string]: () => void } = {
     GET: async () => {
+      const date = query.date as string
+
+      if (!date) {
+        res.status(500).json(new Error('not found "date" param'))
+        res.end()
+      }
+
       try {
         // eslint-disable-next-line @typescript-eslint/naming-convention
         const [year, month, _date] = date.split('-')
@@ -85,13 +86,42 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
       }
     },
     POST: async () => {
-      try {
-        const data = await prisma.account.create({
-          data: body.data,
+      const addIncomesData: IAddIncome[] = body.data
+      const resDatas: IIncome[] = []
+
+      const addIncomes = async (index: number) => {
+        const incomeData: IAddIncome = addIncomesData[index]
+        if (!incomeData) {
+          return
+        }
+
+        const data: IIncome = await prisma.income.create({
+          data: {
+            userId,
+            incomeDt: new Date(incomeData.incomeDt),
+            amount: Number(incomeData.amount),
+            memo: incomeData.memo,
+          },
+          select: {
+            amount: true,
+            memo: true,
+            incomeDt: true,
+          },
         })
-        res.status(200).json(data)
+
+        resDatas.push(data)
+
+        addIncomes(index + 1)
+      }
+
+      try {
+        await addIncomes(0)
+
+        res.status(200).json(resDatas)
+        res.end()
       } catch (e) {
         res.status(500).json(e)
+        res.end()
       }
     },
   }
