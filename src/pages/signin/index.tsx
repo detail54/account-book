@@ -1,13 +1,17 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 // type
 import { IUserInfo, TChangeValueType } from 'components/templates/form/UserForm'
 // lib
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 // hook
 import { validationMsg } from 'config/messages'
+import { useRouter } from 'next/router'
+// store
+import { useRecoilState } from 'recoil'
+import { lasePageState } from 'store/atoms'
 // style
 import Wrap from './SignIn.styles'
 // component
@@ -15,11 +19,18 @@ const Text = dynamic(() => import('components/atoms/text/Text'))
 const UserForm = dynamic(() => import('components/templates/form/UserForm'))
 
 const SingIn: NextPage = () => {
+  const { data: session } = useSession()
+  const router = useRouter()
+  const [lastPage] = useRecoilState(lasePageState)
   const [errorMsg, setErrorMsg] = useState<string | undefined>()
   const [userInfo, setUserInfo] = useState<IUserInfo>({
     userName: '',
     password: '',
   })
+
+  useEffect(() => {
+    if (session) router.push('dashboard')
+  }, [session])
 
   const login = async () => {
     if (!userInfo.userName) {
@@ -43,7 +54,12 @@ const SingIn: NextPage = () => {
     } else {
       // 커스텀 로그인의 경우 새로고침을 해야 세션 정상 반영되어 router를 사용하지않고
       // dashbord로 바로 리다이렉트 시킴.
-      window.location.href = `${process.env.NEXT_PUBLIC_HOST}/dashboard`
+      const path = lastPage
+        ? `${process.env.NEXT_PUBLIC_HOST}/${lastPage}`
+        : `${process.env.NEXT_PUBLIC_HOST}/dashboard`
+
+      router.push(path || 'dashboard')
+      // window.location.href = path
     }
   }
 
