@@ -4,7 +4,11 @@ import { useMutation, useQuery } from './useReactQuery'
 
 const useIncome = () => {
   const getIncome = (date: string) => {
-    return useQuery<IIncome[]>(API_URL.INCOME, { date })
+    return useQuery<IIncome[]>(API_URL.INCOME, { date }, undefined, undefined, {
+      refetchOnMount: true,
+      refetchOnWindowFocus: true,
+      refetchOnReconnect: true,
+    })
   }
 
   const addIncomes = () => {
