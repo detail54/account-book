@@ -44,9 +44,11 @@ const Calendar: React.FC<IProps> = ({
 }) => {
   const [isDarkTheme] = useRecoilState(themeState)
   const { Wrap, DateBox } = Styles
-  const dateStr = `${date.getFullYear()}-${date.getMonth() + 1}`
   const firstDate = new Date(date.getFullYear(), date.getMonth(), 1)
   const lastDate = new Date(date.getFullYear(), date.getMonth() + 1, 0)
+  const dateStr = `${date.getFullYear()}-${
+    date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
+  }`
 
   const gridContents: IGridItem[] | undefined =
     contents &&

@@ -1,3 +1,4 @@
+import { leftPad } from 'hooks/useDate'
 import { atom } from 'recoil'
 import { ATOM_KEYS } from 'store'
 import { v1 } from 'uuid'
@@ -14,9 +15,7 @@ export const themeState = atom<boolean>({
 const defaultDate = new Date()
 export const selectDashBoardDateState = atom<string>({
   key: setKey(ATOM_KEYS.SELECT_DASHBOARD_DATE),
-  default: `${defaultDate.getFullYear()}-${
-    defaultDate.getMonth() + 1 < 10
-      ? `0${defaultDate.getMonth() + 1}`
-      : defaultDate.getMonth() + 1
-  }-${defaultDate.getDate()}`,
+  default: `${defaultDate.getFullYear()}-${leftPad(
+    defaultDate.getMonth() + 1,
+  )}-${leftPad(defaultDate.getDate())}`,
 })

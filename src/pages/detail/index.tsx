@@ -89,7 +89,7 @@ const Detail: NextPage = () => {
               flex={1}
               fontSize='small'
             />
-            <Text text={income.memo} flex={2} fontSize='small' />
+            <Text text={income.memo || ''} flex={2} fontSize='small' />
           </ListItemContentWrap>
         ),
         paddingY: 'md',

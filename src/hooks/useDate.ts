@@ -8,6 +8,10 @@ export type TDateFormat =
   | 'YYYY-MM-DD HH:MM:SS'
   | undefined
 
+export const leftPad = (value: number) => {
+  return value < 10 ? `0${value}` : `${value}`
+}
+
 const useDate = (dateProps?: Date) => {
   const [dateObj, setDateObj] = useState<Date>(dateProps || new Date())
 
@@ -138,10 +142,6 @@ const useDate = (dateProps?: Date) => {
   }
 
   const format = (type: TDateFormat) => {
-    const leftPad = (value: number) => {
-      return value < 10 ? `0${value}` : `${value}`
-    }
-
     const year = dateObj.getFullYear().toString()
     const month = leftPad(dateObj.getMonth() + 1)
     const day = leftPad(dateObj.getDate())
