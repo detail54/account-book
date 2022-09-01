@@ -7,6 +7,8 @@ export default new QueryClient({
       refetchOnMount: false,
       refetchOnReconnect: false,
       refetchOnWindowFocus: false,
+      staleTime: 1000 * 60 * 2,
+      cacheTime: 1000 * 60 * 5,
     },
   },
 })

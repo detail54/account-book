@@ -36,9 +36,13 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
           999,
         )
         const firstDate = new Date(
-          lastDate.getFullYear(),
-          lastDate.getMonth() - 1,
+          Number(year),
+          Number(month) - 1,
           1,
+          0,
+          0,
+          0,
+          0,
         )
 
         const accountDatas = await prisma.account.findMany({

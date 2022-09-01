@@ -2,7 +2,7 @@ import { NextRequest, NextFetchEvent, NextResponse } from 'next/server'
 
 export default (request: NextRequest, event: NextFetchEvent) => {
   const { pathname } = request.nextUrl
-  console.log(pathname)
+  // console.log(pathname)
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/favicon.ico') ||
