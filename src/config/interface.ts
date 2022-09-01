@@ -6,48 +6,6 @@ export type TErrorHandlers = Record<
   (error: AxiosError) => void
 >
 
-// db 스키마
-export interface IApiStoreCategory {
-  name: string
-  stores: IApiStore[]
-  accounts: IApiAccount[]
-}
-
-export interface IApiStore {
-  category: IApiStoreCategory
-  name: string
-  accounts: IApiAccount[]
-}
-
-export interface IApiAccount {
-  id: number
-  user: IApiUser
-  store: IApiStore
-  category: IApiStoreCategory
-  amount: number
-  memo?: string
-  regDt: Date
-  updatedDt: Date
-  paymentDt: Date
-}
-
-export interface IApiIncome {
-  id: number
-  user: IApiUser
-  amount: number
-  memo?: string
-  regDt: Date
-  updatedDt: Date
-  incomeDt: Date
-}
-
-export interface IApiUser {
-  userName: string
-  password: string
-  accounts: IApiAccount[]
-  regDt: Date
-}
-
 // user
 export interface IAddUser {
   userName: string
@@ -72,7 +30,7 @@ export interface IAccount {
   store: string
   category: string
   amount: number
-  memo?: string
+  memo?: string | null
   paymentDt: Date
 }
 

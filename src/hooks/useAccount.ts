@@ -1,6 +1,6 @@
-import { IAccount } from '../config/interface'
+import { IAccount, IAddAccount } from '../config/interface'
 import API_URL from '../config/urls'
-import { useQuery } from './useReactQuery'
+import { useMutation, useQuery } from './useReactQuery'
 
 const useAccount = () => {
   const getAccount = (date: string) => {
@@ -17,8 +17,13 @@ const useAccount = () => {
     )
   }
 
+  const addAccounts = () => {
+    return useMutation<IAddAccount[], IAddAccount[]>(API_URL.ACCOUNTS)
+  }
+
   return {
     getAccount,
+    addAccounts,
   }
 }
 

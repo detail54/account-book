@@ -81,13 +81,12 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
         res.status(200).json(resData)
         res.end()
       } catch (e) {
-        res.status(500).json(e)
+        res.status(500)
         res.end()
       }
     },
     POST: async () => {
       const addIncomesData: IAddIncome[] = body.data
-      const resDatas: IIncome[] = []
 
       const addIncomes = async (index: number) => {
         const incomeData: IAddIncome = addIncomesData[index]
@@ -95,21 +94,14 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
           return
         }
 
-        const data: IIncome = await prisma.income.create({
+        await prisma.income.create({
           data: {
             userId,
             incomeDt: new Date(incomeData.incomeDt),
             amount: Number(incomeData.amount),
             memo: incomeData.memo,
           },
-          select: {
-            amount: true,
-            memo: true,
-            incomeDt: true,
-          },
         })
-
-        resDatas.push(data)
 
         addIncomes(index + 1)
       }
@@ -117,10 +109,10 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
       try {
         await addIncomes(0)
 
-        res.status(200).json(resDatas)
+        res.status(200)
         res.end()
       } catch (e) {
-        res.status(500).json(e)
+        res.status(500)
         res.end()
       }
     },
