@@ -12,6 +12,11 @@ export const themeState = atom<boolean>({
   default: false,
 })
 
+export const lastPageState = atom<string>({
+  key: setKey(ATOM_KEYS.LAST_PAGE),
+  default: '',
+})
+
 const defaultDate = new Date()
 export const selectDashBoardDateState = atom<string>({
   key: setKey(ATOM_KEYS.SELECT_DASHBOARD_DATE),

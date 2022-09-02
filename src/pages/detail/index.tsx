@@ -1,4 +1,5 @@
 import { NextPage } from 'next'
+import { AppProps } from 'next/app'
 import React, { useCallback } from 'react'
 // hook
 import useAccount from 'hooks/useAccount'
@@ -15,7 +16,7 @@ import { selectDashBoardDateState } from 'store/atoms'
 // style
 import DetailStyles from './Detail.styles'
 
-const Detail: NextPage = () => {
+const Detail: NextPage<AppProps> = () => {
   const { Wrap, Section, ListItemContentWrap, ListItemContent } = DetailStyles
   const [selectDate, setSelectDate] = useRecoilState(selectDashBoardDateState)
 
@@ -128,7 +129,7 @@ const Detail: NextPage = () => {
               flex={1}
               fontSize='small'
             />
-            <Text text={account.memo} flex={2} fontSize='small' />
+            <Text text={account.memo || ''} flex={2} fontSize='small' />
           </ListItemContentWrap>
         ),
         paddingY: 'md',

@@ -1,10 +1,36 @@
+import React, { useEffect } from 'react'
 import { NextPage } from 'next'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
-import React from 'react'
+// hook
+import { useSession } from 'next-auth/react'
+// store
+import { useRecoilState } from 'recoil'
+import { lastPageState } from 'store/atoms'
+// style
 import MainEl from './Main.styles'
 
 const Main: NextPage<AppProps> = ({ Component, pageProps, router }) => {
+  const { data: session } = useSession()
+  const [lastPage, setLastPage] = useRecoilState(lastPageState)
+
+  useEffect(() => {
+    if (!session) {
+      const path = router.asPath
+
+      if (
+        !path.startsWith('/session-timeout') &&
+        !path.startsWith('/signin') &&
+        !path.startsWith('/signup') &&
+        path !== '/'
+      ) {
+        const pageName = path.substring(1, path.length)
+        setLastPage(pageName)
+        router.push(`session-timeout?page=${pageName}`)
+      }
+    }
+  }, [session])
+
   const domain = `https://도메인명`
   const currentUrl = `${domain}/${router.asPath}`
   const pageName =

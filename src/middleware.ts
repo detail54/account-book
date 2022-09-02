@@ -19,7 +19,7 @@ export default (request: NextRequest, event: NextFetchEvent) => {
   const cookie = request.cookies.get('next-auth.session-token')
 
   if (!cookie) {
-    return NextResponse.redirect(new URL('/session-timeout', request.url))
+    // return NextResponse.redirect(new URL(`/session-timeout`, request.url))
   }
 
   return null

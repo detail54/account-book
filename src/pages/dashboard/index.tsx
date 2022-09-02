@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import React from 'react'
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import React from 'react'
+import { AppProps } from 'next/app'
 // hook
 import useDate from 'hooks/useDate'
 import useDashBoard from 'hooks/useDashBoard'
@@ -32,6 +33,7 @@ const index: NextPage = () => {
 
   const calendarData =
     dashBoardData &&
+    dashBoardData.list &&
     dashBoardData.list.map((data) => {
       return {
         income: `+ ${data.income.toLocaleString()}`,
@@ -61,7 +63,9 @@ const index: NextPage = () => {
         >
           <Text
             text={
-              dashBoardData ? dashBoardData.totalIncome.toLocaleString() : 0
+              dashBoardData && dashBoardData.totalIncome
+                ? dashBoardData.totalIncome.toLocaleString()
+                : 0
             }
             fontColor='blue'
             fontSize='xl'
@@ -77,7 +81,7 @@ const index: NextPage = () => {
         >
           <Text
             text={
-              dashBoardData
+              dashBoardData && dashBoardData.totalExpenditure
                 ? dashBoardData.totalExpenditure.toLocaleString()
                 : 0
             }
