@@ -168,6 +168,7 @@ const Detail: NextPage<AppProps> = () => {
                 <Text text='비고' flex={2} fontSize='small' />
               </ListItemContentWrap>
             ),
+            numberWidth: 15,
             paddingY: 'xxs',
             paddingX: 'md',
             bgColorNumber: 1,
@@ -197,6 +198,7 @@ const Detail: NextPage<AppProps> = () => {
                 <Text text='비고' flex={2} fontSize='small' />
               </ListItemContentWrap>
             ),
+            numberWidth: 15,
             paddingY: 'xxs',
             paddingX: 'md',
             bgColorNumber: 1,

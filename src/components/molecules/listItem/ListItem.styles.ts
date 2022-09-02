@@ -62,7 +62,8 @@ const NumberListItem = styled(LeftListItem)`
       flex: ${!numberWidth && numberFlex};
     }
 
-    & > :nth-child(2) {
+    & > :nth-child(2),
+    & > button > :nth-child(2) {
       flex: 10;
       padding: 0 10px;
     }

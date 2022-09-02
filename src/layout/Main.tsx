@@ -32,7 +32,6 @@ const Main: NextPage<AppProps> = ({ Component, pageProps, router }) => {
         }
       }
     }
-    return () => {}
   }, [session])
 
   const domain = `https://${process.env.NEXT_PUBLIC_HOST}`

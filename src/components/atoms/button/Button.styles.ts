@@ -53,7 +53,6 @@ const WrapButton = styled(Button)`
   height: auto;
   border: none;
   display: flex;
-  border: none;
 `
 
 const ImgButton = styled.button<IImgButtonStyleProps>`
