@@ -14,6 +14,7 @@ const Main: NextPage<AppProps> = ({ Component, pageProps, router }) => {
   const { data: session } = useSession()
   const [lastPage, setLastPage] = useRecoilState(lastPageState)
 
+  // 세션 확인하여 마지막 방문 페이지 저장
   useEffect(() => {
     if (!session) {
       const path = router.asPath
@@ -26,10 +27,17 @@ const Main: NextPage<AppProps> = ({ Component, pageProps, router }) => {
       ) {
         const pageName = path.substring(1, path.length)
         setLastPage(pageName)
-        router.push(`session-timeout?page=${pageName}`)
       }
     }
   }, [session])
+
+  // 마지막 방문 페이지가 있을 경우에만 해당 페이지로 이동시키기 위해
+  // session-timeout 쿼리에 페이지 마지막 방문 페이지 이름을 남겨둠.
+  useEffect(() => {
+    if (!session && lastPage) {
+      router.push(`session-timeout?page=${lastPage}`)
+    }
+  }, [lastPage])
 
   const domain = `https://도메인명`
   const currentUrl = `${domain}/${router.asPath}`
