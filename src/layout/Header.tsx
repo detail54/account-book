@@ -1,4 +1,5 @@
 import React from 'react'
+import dynamic from 'next/dynamic'
 // lib
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
@@ -13,6 +14,8 @@ import HeaderStyles from './Header.styles'
 // image
 import sun from '../../public/assets/images/icon/sun.png'
 import moon from '../../public/assets/images/icon/moon.png'
+// components
+const LinkButton = dynamic(() => import('components/atoms/button/LinkButton'))
 
 interface IProps {
   isDarkMode: boolean
@@ -41,7 +44,19 @@ const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
 
   return (
     <HeaderEl>
-      <UserInfo>{!session ? '' : `${session.user?.name} 가계부`}</UserInfo>
+      <UserInfo>
+        {session && (
+          <LinkButton
+            link='dashboard'
+            text={`${session.user?.name} 가계부`}
+            size='lg'
+            fontSize='xxl'
+            fontColor='white'
+            bgColor='black_1'
+            noneBorder
+          />
+        )}
+      </UserInfo>
       <Buttons>
         <ImgButton
           src={isDarkTheme ? moon : sun}

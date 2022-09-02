@@ -7,6 +7,7 @@ import styled, {
 const Button = styled.button<IButtonStyleProps>`
   ${({
     size,
+    noneBorder,
     fontColor,
     fontSize,
     bgColor,
@@ -37,15 +38,13 @@ const Button = styled.button<IButtonStyleProps>`
     flex: ${flex && flex};
     align-items: center;
     justify-content: center;
+    border: ${noneBorder ? 'none' : `1px solid ${theme.colors.themeColor}`};
   `}
 `
 
-const BasicButton = styled(Button)`
-  border: 1px solid ${({ theme }) => theme.colors.themeColor};
-`
+const BasicButton = styled(Button)``
 
 const RoundButton = styled(Button)`
-  border: 1px solid ${({ theme }) => theme.colors.themeColor};
   border-radius: ${(props) => props.theme.calcRem(10)};
 `
 
@@ -54,6 +53,7 @@ const WrapButton = styled(Button)`
   height: auto;
   border: none;
   display: flex;
+  border: none;
 `
 
 const ImgButton = styled.button<IImgButtonStyleProps>`
