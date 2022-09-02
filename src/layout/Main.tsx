@@ -25,21 +25,17 @@ const Main: NextPage<AppProps> = ({ Component, pageProps, router }) => {
         !path.startsWith('/signup') &&
         path !== '/'
       ) {
-        const pageName = path.substring(1, path.length)
-        setLastPage(pageName)
+        setLastPage(path.substring(1, path.length))
+
+        if (lastPage) {
+          router.push(`session-timeout?page=${lastPage}`)
+        }
       }
     }
+    return () => {}
   }, [session])
 
-  // 마지막 방문 페이지가 있을 경우에만 해당 페이지로 이동시키기 위해
-  // session-timeout 쿼리에 페이지 마지막 방문 페이지 이름을 남겨둠.
-  useEffect(() => {
-    if (!session && lastPage) {
-      router.push(`session-timeout?page=${lastPage}`)
-    }
-  }, [lastPage])
-
-  const domain = `https://도메인명`
+  const domain = `https://${process.env.NEXT_PUBLIC_HOST}`
   const currentUrl = `${domain}/${router.asPath}`
   const pageName =
     router.pathname === '/' ? '' : router.pathname.replace('/', '/ ')

@@ -24,7 +24,7 @@ interface IProps {
 
 const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
   const router = useRouter()
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
   const { HeaderEl, UserInfo, Buttons } = HeaderStyles
   const [isDarkTheme, setIsDarkTheme] = useRecoilState(themeState)
 
@@ -64,7 +64,7 @@ const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
           height={30}
           onClick={handleChangeTheme}
         />
-        {!session ? (
+        {status !== 'loading' && !session && (
           <Button
             buttonStyle='RoundButton'
             size='md'
@@ -73,7 +73,8 @@ const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
             content='로그인'
             onClick={signIn}
           />
-        ) : (
+        )}
+        {status !== 'loading' && session && (
           <Button
             buttonStyle='RoundButton'
             size='md'
@@ -83,7 +84,7 @@ const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
             onClick={onSignOut}
           />
         )}
-        {!session && (
+        {status !== 'loading' && !session && (
           <Button
             buttonStyle='RoundButton'
             size='md'

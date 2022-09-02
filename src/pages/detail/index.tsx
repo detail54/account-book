@@ -1,4 +1,5 @@
 import { NextPage } from 'next'
+import dynamic from 'next/dynamic'
 import { AppProps } from 'next/app'
 import React, { useCallback } from 'react'
 // hook
@@ -6,15 +7,17 @@ import useAccount from 'hooks/useAccount'
 import useIncome from 'hooks/useIncome'
 import useDashBoard from 'hooks/useDashBoard'
 import useDate from 'hooks/useDate'
-// components
-import List, { TListContents } from 'components/organisms/list/List'
-import Text from 'components/atoms/text/Text'
-import LinkButton from 'components/atoms/button/LinkButton'
+// type
+import { TListContents } from 'components/organisms/list/List'
 // store
 import { useRecoilState } from 'recoil'
 import { selectDashBoardDateState } from 'store/atoms'
 // style
 import DetailStyles from './Detail.styles'
+// components
+const List = dynamic(() => import('components/organisms/list/List'))
+const Text = dynamic(() => import('components/atoms/text/Text'))
+const LinkButton = dynamic(() => import('components/atoms/button/LinkButton'))
 
 const Detail: NextPage<AppProps> = () => {
   const { Wrap, Section, ListItemContentWrap, ListItemContent } = DetailStyles
@@ -147,7 +150,7 @@ const Detail: NextPage<AppProps> = () => {
           type='List'
           listItemType='NumberListItem'
           contents={calendarListData}
-          height={600}
+          height={585}
           boxShadow
         />
         <LinkButton size='big' text='내역 추가' link='write' marginY='lg' />
