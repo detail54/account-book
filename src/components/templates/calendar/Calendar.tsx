@@ -21,7 +21,7 @@ interface IProps {
   date: Date
   smallDateSelectBox?: boolean
   contents?: { [key: string]: string }[]
-  height: number
+  height?: number
   dateAlign?: TAlign
   datePadding?: TSize<'zero'>
   dateFontSize?: TFontSize
