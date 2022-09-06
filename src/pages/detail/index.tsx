@@ -1,26 +1,32 @@
+import React, { useCallback } from 'react'
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import { AppProps } from 'next/app'
-import React, { useCallback } from 'react'
 // hook
 import useAccount from 'hooks/useAccount'
 import useIncome from 'hooks/useIncome'
 import useDashBoard from 'hooks/useDashBoard'
 import useDate from 'hooks/useDate'
 // type
+import { IAccount, IIncome } from 'config/interface'
 import { TListContents } from 'components/organisms/list/List'
 // store
 import { useRecoilState } from 'recoil'
-import { selectDashBoardDateState } from 'store/atoms'
+import { detailModalState, selectDashBoardDateState } from 'store/atoms'
 // style
 import DetailStyles from './Detail.styles'
 // components
 const List = dynamic(() => import('components/organisms/list/List'))
+const Title = dynamic(() => import('components/atoms/title/Title'))
 const Text = dynamic(() => import('components/atoms/text/Text'))
 const LinkButton = dynamic(() => import('components/atoms/button/LinkButton'))
+const DetailModal = dynamic(
+  () => import('components/templates/modal/DetailModal'),
+)
 
 const Detail: NextPage<AppProps> = () => {
   const { Wrap, Section, ListItemContentWrap, ListItemContent } = DetailStyles
+  const [detailModalData, setDetailModalData] = useRecoilState(detailModalState)
   const [selectDate, setSelectDate] = useRecoilState(selectDashBoardDateState)
 
   const { format } = useDate(new Date(selectDate))
@@ -32,10 +38,39 @@ const Detail: NextPage<AppProps> = () => {
   const { data: incomeData } = getIncome(selectDate)
   const { data: dashBoardData } = getDashBoardData(format('YYYY-MM'))
 
+  const incomeItemNames: Record<keyof Omit<IIncome, 'id'>, string> = {
+    incomeDt: '시간',
+    amount: '금액',
+    memo: '비고',
+  }
+  const accountItemNames: Record<keyof Omit<IAccount, 'id'>, string> = {
+    paymentDt: '결제시간',
+    category: '분류',
+    store: '가맹점',
+    amount: '금액',
+    memo: '비고',
+  }
+
   const onChangeSelectDate = useCallback(
     (date: string) => setSelectDate(date),
     [],
   )
+
+  const handleChangeData = (data: IAccount | IIncome) => {
+    const { id } = data
+    setDetailModalData({
+      ...detailModalData,
+      content: data,
+    })
+  }
+
+  const handleCloseModal = useCallback(() => {
+    setDetailModalData({
+      open: false,
+      header: '',
+      content: undefined,
+    })
+  }, [])
 
   const calendarListData: TListContents[] | undefined =
     dashBoardData &&
@@ -99,7 +134,13 @@ const Detail: NextPage<AppProps> = () => {
         paddingY: 'md',
         paddingX: 'md',
         hover: true,
-        onClick: () => {},
+        onClick: () => {
+          setDetailModalData({
+            open: true,
+            header: '수익 상세',
+            content: income,
+          })
+        },
       }
     })
 
@@ -138,14 +179,20 @@ const Detail: NextPage<AppProps> = () => {
         paddingY: 'md',
         paddingX: 'md',
         hover: true,
-        onClick: () => {},
+        onClick: () => {
+          setDetailModalData({
+            open: true,
+            header: '지출 상세',
+            content: account,
+          })
+        },
       }
     })
 
   return (
     <Wrap>
       <Section>
-        <Text text={selectDate} type='BoldText' fontSize='xxxl' />
+        <Title text={selectDate} type='H3' />
         <List
           type='List'
           listItemType='NumberListItem'
@@ -156,16 +203,20 @@ const Detail: NextPage<AppProps> = () => {
         <LinkButton size='big' text='내역 추가' link='write' marginY='lg' />
       </Section>
       <Section>
-        <Text text='수익' type='BoldText' fontSize='xxxl' />
+        <Title text='수익' type='H3' />
         <List
           type='List'
           listItemType='NumberListItem'
           header={{
             content: (
               <ListItemContentWrap>
-                <Text text='시간' flex={1} fontSize='small' />
-                <Text text='금액' flex={1} fontSize='small' />
-                <Text text='비고' flex={2} fontSize='small' />
+                <Text
+                  text={incomeItemNames.incomeDt}
+                  flex={1}
+                  fontSize='small'
+                />
+                <Text text={incomeItemNames.amount} flex={1} fontSize='small' />
+                <Text text={incomeItemNames.memo} flex={2} fontSize='small' />
               </ListItemContentWrap>
             ),
             numberWidth: 15,
@@ -184,18 +235,30 @@ const Detail: NextPage<AppProps> = () => {
         />
       </Section>
       <Section>
-        <Text text='지출' type='BoldText' fontSize='xxxl' />
+        <Title text='지출' type='H3' />
         <List
           type='List'
           listItemType='NumberListItem'
           header={{
             content: (
               <ListItemContentWrap>
-                <Text text='결제시간' flex={1} fontSize='small' />
-                <Text text='분류' flex={1} fontSize='small' />
-                <Text text='가맹점' flex={1} fontSize='small' />
-                <Text text='금액' flex={1} fontSize='small' />
-                <Text text='비고' flex={2} fontSize='small' />
+                <Text
+                  text={accountItemNames.paymentDt}
+                  flex={1}
+                  fontSize='small'
+                />
+                <Text
+                  text={accountItemNames.category}
+                  flex={1}
+                  fontSize='small'
+                />
+                <Text text={accountItemNames.store} flex={1} fontSize='small' />
+                <Text
+                  text={accountItemNames.amount}
+                  flex={1}
+                  fontSize='small'
+                />
+                <Text text={accountItemNames.memo} flex={2} fontSize='small' />
               </ListItemContentWrap>
             ),
             numberWidth: 15,
@@ -213,6 +276,17 @@ const Detail: NextPage<AppProps> = () => {
           boxShadow
         />
       </Section>
+      {detailModalData.open && (
+        <DetailModal
+          open={detailModalData.open}
+          header={detailModalData.header}
+          data={detailModalData.content}
+          incomeItemNames={incomeItemNames}
+          accountItemNames={accountItemNames}
+          handleChangeData={handleChangeData}
+          onClose={handleCloseModal}
+        />
+      )}
     </Wrap>
   )
 }

@@ -20,14 +20,15 @@ const ModalBgShow = keyframes`
 
 const Wrap = styled.div`
   ${({ theme }) => css`
-    width: 50%;
+    width: 30%;
+    max-width: 500px;
     flex-direction: column;
     align-items: flex-start;
     position: fixed;
     z-index: 5;
-    top: 0;
-    left: 0;
-    transform: translate(50%, 50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     padding: ${theme.paddings.big};
     background-color: ${theme.backgroundColor};
     box-shadow: ${theme.boxShadow};
@@ -38,9 +39,16 @@ const Wrap = styled.div`
   `}
 `
 
-const CloseButtonWrap = styled.div`
+const ButtonWrap = styled.div<IModalStyleProps>`
   width: 100%;
-  justify-content: right;
+  ${({ theme, align }) => css`
+    justify-content: ${align || 'center'};
+
+    & button {
+      margin-left: ${theme.margins.md};
+      margin-right: ${theme.margins.md};
+    }
+  `}
 `
 
 const Blind = styled.div<IModalStyleProps>`
@@ -64,6 +72,6 @@ const Blind = styled.div<IModalStyleProps>`
 
 export default {
   Wrap,
-  CloseButtonWrap,
+  ButtonWrap,
   Blind,
 }

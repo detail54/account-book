@@ -72,6 +72,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
 
         const resData: IIncome[] = data.map((income) => {
           return {
+            id: income.id,
             amount: income.amount,
             memo: income.memo ? income.memo : undefined,
             incomeDt: income.incomeDt,

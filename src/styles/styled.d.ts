@@ -85,7 +85,8 @@ declare module 'styled-components' {
   export interface DefaultTheme extends ITheme {}
 
   export interface IModalStyleProps {
-    blindBg: boolean
+    blindBg?: boolean
+    align?: TAlign
   }
 
   export interface IButtonStyleProps extends IStyleProps {

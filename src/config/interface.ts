@@ -14,6 +14,7 @@ export interface IAddUser {
 
 // income
 export interface IIncome {
+  id: number
   amount: number
   memo?: string | null
   incomeDt: Date
@@ -27,6 +28,7 @@ export interface IAddIncome {
 
 // account
 export interface IAccount {
+  id: number
   store: string
   category: string
   amount: number

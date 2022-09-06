@@ -9,7 +9,9 @@ const Input = styled.input<IInputStyleProps>`
         : width
       : '100%'};
     border: none;
-    border-bottom: 1px solid ${theme.colors.black_4};
+    color: ${theme.colors.themeColor};
+    border-bottom: 1px solid ${theme.colors.themeColor};
+    background-color: ${theme.backgroundColor};
     font-size: ${theme.fontSizes.base};
     padding-top: ${paddingY && theme.paddings[paddingY]};
     padding-bottom: ${paddingY && theme.paddings[paddingY]};

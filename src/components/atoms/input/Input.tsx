@@ -17,6 +17,7 @@ interface IProps {
   paddingY?: TSize<'zero'>
   flex?: number
   inputRef?: React.RefObject<HTMLInputElement>
+  readOnly?: boolean
 }
 
 const Input: React.FC<IProps> = ({
@@ -31,6 +32,7 @@ const Input: React.FC<IProps> = ({
   paddingY,
   flex,
   inputRef,
+  readOnly,
 }) => {
   const InputEl = Inputs[inputStyle]
 
@@ -47,6 +49,7 @@ const Input: React.FC<IProps> = ({
       flex={flex}
       autoComplete={type === 'password' ? 'on' : 'off'}
       ref={inputRef}
+      readOnly={readOnly}
     />
   )
 }

@@ -75,6 +75,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
 
         const resData: IAccount[] = data.map((account) => {
           return {
+            id: account.id,
             store: account.store.name,
             category: account.store.name,
             amount: account.amount,
