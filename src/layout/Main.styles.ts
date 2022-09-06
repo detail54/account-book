@@ -13,4 +13,6 @@ const MainEl = styled.main`
   }
 `
 
-export default MainEl
+export default {
+  MainEl,
+}

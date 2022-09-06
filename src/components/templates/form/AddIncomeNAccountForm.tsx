@@ -13,6 +13,7 @@ import minus from '../../../../public/assets/images/icon/minus.png'
 import AddIncomeNAccountFormStyles from './AddIncomeNAccountForm.styles'
 import DateSelectBox from '../dateSelectBox/DateSelectBox'
 // components
+const Title = dynamic(() => import('components/atoms/title/Title'))
 const Text = dynamic(() => import('components/atoms/text/Text'))
 const Button = dynamic(() => import('components/atoms/button/Button'))
 const List = dynamic(() => import('components/organisms/list/List'))
@@ -196,7 +197,7 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
       </Buttons>
       <SectionWrap>
         <Section>
-          <Text text='수익 추가' type='BoldText' fontSize='xxxl' />
+          <Title text='수익 추가' type='H3' />
           <List
             type='List'
             listItemType='ListItem'
@@ -224,7 +225,7 @@ const AddIncomeNAccountForm: React.FC<IProps> = ({
           />
         </Section>
         <Section>
-          <Text text='지출 추가' type='BoldText' fontSize='xxxl' />
+          <Title text='지출 추가' type='H3' />
           <List
             type='List'
             listItemType='ListItem'

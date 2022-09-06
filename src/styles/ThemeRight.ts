@@ -5,6 +5,7 @@ import {
   TFontSize,
   TFontWeight,
   TSize,
+  TTitleSize,
 } from 'styled-components'
 
 const calcRem = (size: number) => `${size / 16}rem`
@@ -18,7 +19,15 @@ const fontSizes: Record<TFontSize, string> = {
   xl: calcRem(20),
   xxl: calcRem(24),
   xxxl: calcRem(32),
-  titleSize: calcRem(48),
+}
+
+const titleSizes: Record<TTitleSize, string> = {
+  h1: calcRem(48),
+  h2: calcRem(46),
+  h3: calcRem(44),
+  h4: calcRem(42),
+  h5: calcRem(40),
+  h6: calcRem(38),
 }
 
 const fontWeight: Record<TSize, TFontWeight> = {
@@ -132,6 +141,7 @@ const boxShadow =
 const theme: DefaultTheme = {
   calcRem,
   fontSizes,
+  titleSizes,
   fontWeight,
   buttonWidth,
   buttonHeight,

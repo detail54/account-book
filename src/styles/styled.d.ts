@@ -21,7 +21,7 @@ declare module 'styled-components' {
     | 'xl'
     | 'xxl'
     | 'xxxl'
-    | 'titleSize'
+  export type TTitleSize = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   export type TFontWeight = 100 | 200 | 300 | 400 | 500 | 600
   export type TFontColor =
     | 'themeColor'
@@ -54,6 +54,7 @@ declare module 'styled-components' {
   export interface ITheme {
     calcRem: (size: number) => string
     fontSizes: Record<TFontSize, string>
+    titleSizes: Record<TTitleSize, string>
     fontWeight: Record<TSize, TFontWeight>
     buttonWidth: Record<TSize, string>
     buttonHeight: Record<TSize, string>
@@ -82,6 +83,11 @@ declare module 'styled-components' {
   }
 
   export interface DefaultTheme extends ITheme {}
+
+  export interface IDetailModalStyleProps {
+    blindBg: boolean
+  }
+
   export interface IButtonStyleProps extends IStyleProps {
     size?: TSize
     noneBorder?: boolean

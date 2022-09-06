@@ -25,7 +25,7 @@ const Section = styled.section`
   flex-direction: column;
   align-items: flex-start;
 
-  & > span {
+  & > h3 {
     margin-bottom: ${({ theme }) => theme.margins.md};
   }
 `

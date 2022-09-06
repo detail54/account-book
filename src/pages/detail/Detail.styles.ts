@@ -24,7 +24,7 @@ const Section = styled.section`
     align-items: center;
     margin: ${theme.margins.big};
 
-    & > span {
+    & > h3 {
       margin-bottom: ${theme.margins.xl};
     }
   `}

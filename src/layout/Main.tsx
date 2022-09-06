@@ -8,9 +8,10 @@ import { useSession } from 'next-auth/react'
 import { useRecoilState } from 'recoil'
 import { lastPageState } from 'store/atoms'
 // style
-import MainEl from './Main.styles'
+import MainStyles from './Main.styles'
 
 const Main: NextPage<AppProps> = ({ Component, pageProps, router }) => {
+  const { MainEl } = MainStyles
   const { data: session } = useSession()
   const [lastPage, setLastPage] = useRecoilState(lastPageState)
 
