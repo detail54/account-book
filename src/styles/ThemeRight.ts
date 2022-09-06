@@ -22,12 +22,12 @@ const fontSizes: Record<TFontSize, string> = {
 }
 
 const titleSizes: Record<TTitleSize, string> = {
-  h1: calcRem(48),
-  h2: calcRem(46),
-  h3: calcRem(44),
-  h4: calcRem(42),
-  h5: calcRem(40),
-  h6: calcRem(38),
+  h1: calcRem(40),
+  h2: calcRem(38),
+  h3: calcRem(36),
+  h4: calcRem(34),
+  h5: calcRem(32),
+  h6: calcRem(30),
 }
 
 const fontWeight: Record<TSize, TFontWeight> = {

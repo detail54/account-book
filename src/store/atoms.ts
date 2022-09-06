@@ -1,6 +1,6 @@
 import { leftPad } from 'hooks/useDate'
 import { atom } from 'recoil'
-import { ATOM_KEYS } from 'store'
+import { ATOM_KEYS, IDetailModalDataState } from 'store'
 import { v1 } from 'uuid'
 
 const setKey = (key: string) => {
@@ -23,4 +23,13 @@ export const selectDashBoardDateState = atom<string>({
   default: `${defaultDate.getFullYear()}-${leftPad(
     defaultDate.getMonth() + 1,
   )}-${leftPad(defaultDate.getDate())}`,
+})
+
+export const detailModalState = atom<IDetailModalDataState>({
+  key: setKey(ATOM_KEYS.DETAIL_MODAL_DATA),
+  default: {
+    open: false,
+    header: '',
+    content: undefined,
+  },
 })

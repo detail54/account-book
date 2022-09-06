@@ -84,7 +84,7 @@ declare module 'styled-components' {
 
   export interface DefaultTheme extends ITheme {}
 
-  export interface IDetailModalStyleProps {
+  export interface IModalStyleProps {
     blindBg: boolean
   }
 

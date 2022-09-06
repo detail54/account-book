@@ -1,12 +1,12 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const MainEl = styled.main`
   width: 100%;
   height: 100%;
   justify-content: center;
-  padding: ${({ theme }) => theme.paddings.big};
-  padding-bottom: 0;
-  margin-bottom: ${({ theme }) => theme.margins.big};
+  ${({ theme }) => css`
+    padding: ${theme.paddings.big};
+  `}
 
   & > div {
     max-width: 1560px;
