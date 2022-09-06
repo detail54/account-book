@@ -10,7 +10,7 @@ const ImgButton = dynamic(() => import('components/atoms/button/ImgButton'))
 
 interface IProps {
   isOpen: boolean
-  header: string
+  header?: string
   children: JSX.Element
   onClose: () => void
 }
@@ -33,7 +33,7 @@ const Modal: React.FC<IProps> = ({ isOpen, header, children, onClose }) => {
                 invertImgColor
               />
             </CloseButtonWrap>
-            <Title text={header} />
+            {header && <Title text={header} />}
             {children}
           </Wrap>
           <Blind blindBg={isOpen} onClick={onClose} />
