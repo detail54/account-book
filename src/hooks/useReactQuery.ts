@@ -82,7 +82,7 @@ export const useMutation = <T, S>(
       'mutationFn' | 'onMutate' | 'onSettled' | 'onError'
     >
   },
-  method: 'POST' | 'PUT' | 'PATCH',
+  method: 'POST' | 'PUT' | 'PATCH' | 'DELETE',
 ): UseMutationResult<AxiosResponse, AxiosError, T | S> => {
   const { url, params, updater, onError, errorHandlers, options } = mutationData
   const { handleMutationError } = useApiError(errorHandlers)

@@ -27,11 +27,20 @@ const Main: NextPage<AppProps> = ({ Component, pageProps, router }) => {
         !path.startsWith('/signup') &&
         path !== '/'
       ) {
-        setLastPage(path.substring(1, path.length))
+        const pathFormat = path.substring(1, path.length)
+        setLastPage(pathFormat)
 
-        if (lastPage) {
-          router.push(`session-timeout?page=${lastPage}`)
-        }
+        if (lastPage) router.push(`session-timeout?page=${pathFormat}`)
+      }
+    } else {
+      const path = router.asPath
+
+      if (
+        path.startsWith('/signin') ||
+        path.startsWith('/signup') ||
+        path === '/'
+      ) {
+        router.push('dashboard')
       }
     }
   }, [session])
