@@ -18,7 +18,6 @@ const Main: NextPage<AppProps> = ({ Component, pageProps, router }) => {
   // 세션 확인하여 마지막 방문 페이지 저장
   useEffect(() => {
     if (!session) {
-      sessionStorage.removeItem('session-token')
       const path = router.asPath
 
       if (

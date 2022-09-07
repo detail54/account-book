@@ -30,12 +30,14 @@ const Detail: NextPage<AppProps> = () => {
   const [selectDate, setSelectDate] = useRecoilState(selectDashBoardDateState)
 
   const { format } = useDate(new Date(selectDate))
-  const { getAccount, updateAccount } = useAccount()
-  const { getIncome, updateIncome } = useIncome()
+  const { getAccount, updateAccount, deleteAccount } = useAccount()
+  const { getIncome, updateIncome, deleteIncome } = useIncome()
   const { getDashBoardData } = useDashBoard()
 
-  const accountMutation = updateAccount()
-  const incomeMutation = updateIncome()
+  const accountUpdateMutation = updateAccount()
+  const incomeUpdateMutation = updateIncome()
+  const accountDeleteMutation = deleteAccount()
+  const incomeDeleteMutation = deleteIncome()
 
   const { data: accountData } = getAccount(selectDate)
   const { data: incomeData } = getIncome(selectDate)
@@ -69,10 +71,20 @@ const Detail: NextPage<AppProps> = () => {
 
   const handleChangeData = (data: IAccount | IIncome) => {
     if ('store' in data) {
-      accountMutation.mutateAsync(data)
+      accountUpdateMutation.mutateAsync(data)
       handleCloseModal()
     } else {
-      incomeMutation.mutateAsync(data)
+      incomeUpdateMutation.mutateAsync(data)
+      handleCloseModal()
+    }
+  }
+
+  const handleDeleteData = (data: IAccount | IIncome) => {
+    if ('store' in data) {
+      accountDeleteMutation.mutateAsync(data.id)
+      handleCloseModal()
+    } else {
+      incomeDeleteMutation.mutateAsync(data.id)
       handleCloseModal()
     }
   }
@@ -289,6 +301,7 @@ const Detail: NextPage<AppProps> = () => {
           incomeItemNames={incomeItemNames}
           accountItemNames={accountItemNames}
           handleChangeData={handleChangeData}
+          handleDeleteData={handleDeleteData}
           onClose={handleCloseModal}
         />
       )}

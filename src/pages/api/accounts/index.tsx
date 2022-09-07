@@ -11,8 +11,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   const token = getCookie('next-auth.session-token', { req, res }) as string
 
   if (!token) {
-    res.status(500)
-    res.end()
+    return
   }
 
   const base64Payload = token.split('.')[1]
@@ -220,6 +219,23 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
             categoryId: category!.id,
             amount: updateAccountData.amount,
             memo: updateAccountData.memo,
+          },
+        })
+
+        res.status(200)
+        res.end()
+      } catch (e) {
+        res.status(500)
+        res.end()
+      }
+    },
+    DELETE: async () => {
+      const deleteAccountId: number = body
+
+      try {
+        await prisma.account.delete({
+          where: {
+            id: deleteAccountId,
           },
         })
 

@@ -10,8 +10,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   const token = getCookie('next-auth.session-token', { req, res }) as string
 
   if (!token) {
-    res.status(500).json(new Error('Token Expiration'))
-    res.end()
+    return
   }
 
   const base64Payload = token.split('.')[1]
@@ -128,6 +127,23 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
           data: {
             ...updateIncomeData,
             incomeDt: new Date(updateIncomeData.incomeDt),
+          },
+        })
+
+        res.status(200)
+        res.end()
+      } catch (e) {
+        res.status(500)
+        res.end()
+      }
+    },
+    DELETE: async () => {
+      const deleteIncomeId: number = body
+
+      try {
+        await prisma.income.delete({
+          where: {
+            id: deleteIncomeId,
           },
         })
 

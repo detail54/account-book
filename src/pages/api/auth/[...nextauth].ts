@@ -41,10 +41,9 @@ export default NextAuth({
     }),
   ],
   jwt: {
-    maxAge: 5,
+    maxAge: 60 * 5,
     encode: async ({ secret, token }) => {
       const encodedToken = jwt.sign(token!, secret)
-      // sessionStorage.setItem('session-token', encodedToken)
 
       return encodedToken
     },

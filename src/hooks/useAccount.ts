@@ -35,10 +35,20 @@ const useAccount = () => {
     )
   }
 
+  const deleteAccount = () => {
+    return useMutation<number, number>(
+      {
+        url: API_URL.ACCOUNTS,
+      },
+      'DELETE',
+    )
+  }
+
   return {
     getAccount,
     addAccounts,
     updateAccount,
+    deleteAccount,
   }
 }
 

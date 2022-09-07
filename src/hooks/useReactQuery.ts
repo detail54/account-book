@@ -95,6 +95,8 @@ export const useMutation = <T, S>(
         return api.put<S>(url, { data, params })
       case 'PATCH':
         return api.patch<S>(url, { data, params })
+      case 'DELETE':
+        return api.delete<S>(url, { data, params })
       default:
         return api.post<S>(url, { data, params })
     }

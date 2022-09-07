@@ -16,6 +16,7 @@ interface IProps {
   incomeItemNames: Record<keyof Omit<IIncome, 'id'>, string>
   accountItemNames: Record<keyof Omit<IAccount, 'id'>, string>
   handleChangeData: (data: IAccount | IIncome) => void
+  handleDeleteData: (data: IAccount | IIncome) => void
   onClose: () => void
 }
 
@@ -26,6 +27,7 @@ const DetailModal: React.FC<IProps> = ({
   incomeItemNames,
   accountItemNames,
   handleChangeData,
+  handleDeleteData,
   onClose,
 }) => {
   const { Contents } = DetailModalStyles
@@ -59,6 +61,11 @@ const DetailModal: React.FC<IProps> = ({
       key='수정버튼'
       content={isReviseMode ? '완료' : '수정하기'}
       onClick={handleChangeButtonAttr}
+    />,
+    <Button
+      key='삭제버튼'
+      content='삭제'
+      onClick={() => modalData && handleDeleteData(modalData)}
     />,
     <Button key='닫기버튼' content='닫기' onClick={onClose} />,
   ]

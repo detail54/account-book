@@ -33,7 +33,6 @@ const Header: React.FC<IProps> = ({ isDarkMode, onChangeTheme }) => {
   }
 
   const onSignOut = () => {
-    sessionStorage.removeItem('session-token')
     signOut({ callbackUrl: '/' })
   }
 
