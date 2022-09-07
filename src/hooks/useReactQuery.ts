@@ -90,16 +90,14 @@ export const useMutation = <T, S>(
   const client = useQueryClient()
 
   const mutationFn = (data: T | S) => {
-    switch (method) {
-      case 'PUT':
-        return api.put<S>(url, { data, params })
-      case 'PATCH':
-        return api.patch<S>(url, { data, params })
-      case 'DELETE':
-        return api.delete<S>(url, { data, params })
-      default:
-        return api.post<S>(url, { data, params })
+    const apis = {
+      POST: api.post<S>(url, { data, params }),
+      PUT: api.put<S>(url, { data, params }),
+      PATCH: api.patch<S>(url, { data, params }),
+      DELETE: api.delete<S>(url, { data, params }),
     }
+
+    return apis[method]
   }
 
   return useMutationOrigin<AxiosResponse, AxiosError, T | S>(
