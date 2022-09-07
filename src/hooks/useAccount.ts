@@ -1,4 +1,4 @@
-import { IAccount, IAddAccount } from '../config/interface'
+import { IAccount, IAddAccount } from 'config/interface'
 import API_URL from '../config/urls'
 import { useMutation, useQuery } from './useReactQuery'
 

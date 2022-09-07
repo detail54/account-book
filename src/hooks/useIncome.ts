@@ -1,4 +1,4 @@
-import { IAddIncome, IIncome } from '../config/interface'
+import { IAddIncome, IIncome } from 'config/interface'
 import API_URL from '../config/urls'
 import { useMutation, useQuery } from './useReactQuery'
 
