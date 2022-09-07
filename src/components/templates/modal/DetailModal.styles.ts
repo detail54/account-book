@@ -19,6 +19,12 @@ const Content = styled.article`
     & > input {
       margin-top: ${theme.margins.lg};
     }
+
+    & > div > div {
+      padding-bottom: 2px;
+      margin-top: ${theme.margins.lg};
+      border-bottom: 1px solid ${theme.colors.themeColor};
+    }
   `}
 `
 

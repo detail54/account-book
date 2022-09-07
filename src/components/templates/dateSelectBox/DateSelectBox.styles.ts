@@ -1,15 +1,16 @@
-import styled, { css, IStyleProps } from 'styled-components'
+import styled, { css, IDateSelectBoxStyleProps } from 'styled-components'
 
-const Wrap = styled.div<IStyleProps>`
+const Wrap = styled.div<IDateSelectBoxStyleProps>`
   width: 100%;
   position: relative;
   flex: ${({ flex }) => flex && flex};
 `
 
-const DateBox = styled.div`
-  ${({ theme }) => css`
+const DateBox = styled.div<IDateSelectBoxStyleProps>`
+  ${({ theme, align }) => css`
     width: 100%;
     cursor: pointer;
+    justify-content: ${align && align};
 
     & > span:nth-of-type(1) {
       margin-right: ${theme.margins.md};

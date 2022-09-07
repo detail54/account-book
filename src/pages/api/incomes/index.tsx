@@ -117,6 +117,27 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
         res.end()
       }
     },
+    PUT: async () => {
+      const updateIncomeData: IIncome = body.data
+
+      try {
+        await prisma.income.update({
+          where: {
+            id: updateIncomeData.id,
+          },
+          data: {
+            ...updateIncomeData,
+            incomeDt: new Date(updateIncomeData.incomeDt),
+          },
+        })
+
+        res.status(200)
+        res.end()
+      } catch (e) {
+        res.status(500)
+        res.end()
+      }
+    },
   }
 
   handler[apiMethod]()

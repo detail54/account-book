@@ -155,4 +155,8 @@ declare module 'styled-components' {
     smallDateSelectBox?: boolean
     height?: number
   }
+
+  export interface IDateSelectBoxStyleProps extends IStyleProps {
+    align?: TAlign
+  }
 }

@@ -9,6 +9,7 @@ import DetailModalStyles from './DetailModal.styles'
 // components
 const Title = dynamic(() => import('components/atoms/title/Title'))
 const Input = dynamic(() => import('components/atoms/input/Input'))
+const DateSelectBox = dynamic(() => import('../dateSelectBox/DateSelectBox'))
 
 interface IProps {
   isReviseMode: boolean
@@ -42,14 +43,11 @@ const DetailModalContents: React.FC<IProps> = ({
       case 'string':
         return value
       case 'number':
-        return value.toLocaleString()
+        return isReviseMode ? value.toString() : value.toLocaleString()
       default:
         return value ? new Date(value).toLocaleString() : ''
     }
   }
-
-  type TAccountKeys = keyof Omit<IAccount, 'id'>
-  type TIncomeKeys = keyof Omit<IIncome, 'id'>
 
   const itemNames =
     modalData && 'store' in modalData
@@ -61,18 +59,29 @@ const DetailModalContents: React.FC<IProps> = ({
       <>
         {Object.keys(accountItemNames).map((item, index) => {
           const accountData = modalData as IAccount
-          const dataKey = item as TAccountKeys
+          const dataKey = item as keyof Omit<IAccount, 'id'>
 
           return (
             <Content key={`지출상세-${dataKey}`}>
               <Title type='H6' text={itemNames[index]} />
-              <Input
-                value={accountData ? formatValue(accountData[dataKey]) : ''}
-                onChange={(e) =>
-                  handleChangeModalData(item, e.currentTarget.value)
-                }
-                readOnly={!isReviseMode}
-              />
+              {isReviseMode && index === 0 ? (
+                <DateSelectBox
+                  date={new Date(accountData.paymentDt)}
+                  viewDateType='YYYY-MM-DD HH:MM:SS'
+                  onChange={(_date: Date) =>
+                    handleChangeModalData(item, _date.toISOString())
+                  }
+                  align='left'
+                />
+              ) : (
+                <Input
+                  value={accountData ? formatValue(accountData[dataKey]) : ''}
+                  onChange={(e) =>
+                    handleChangeModalData(item, e.currentTarget.value)
+                  }
+                  readOnly={!isReviseMode}
+                />
+              )}
             </Content>
           )
         })}
@@ -81,18 +90,29 @@ const DetailModalContents: React.FC<IProps> = ({
       <>
         {Object.keys(incomeItemNames).map((item, index) => {
           const incomeData = modalData as IIncome
-          const dataKey = item as TIncomeKeys
+          const dataKey = item as keyof Omit<IIncome, 'id'>
 
           return (
             <Content key={`지출상세-${dataKey}`}>
               <Title type='H6' text={itemNames[index]} />
-              <Input
-                value={incomeData ? formatValue(incomeData[dataKey]) : ''}
-                onChange={(e) =>
-                  handleChangeModalData(item, e.currentTarget.value)
-                }
-                readOnly={!isReviseMode}
-              />
+              {isReviseMode && index === 0 ? (
+                <DateSelectBox
+                  date={new Date(incomeData.incomeDt)}
+                  viewDateType='YYYY-MM-DD HH:MM:SS'
+                  onChange={(_date: Date) =>
+                    handleChangeModalData(item, _date.toISOString())
+                  }
+                  align='left'
+                />
+              ) : (
+                <Input
+                  value={incomeData ? formatValue(incomeData[dataKey]) : ''}
+                  onChange={(e) =>
+                    handleChangeModalData(item, e.currentTarget.value)
+                  }
+                  readOnly={!isReviseMode}
+                />
+              )}
             </Content>
           )
         })}

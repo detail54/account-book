@@ -12,12 +12,27 @@ const useIncome = () => {
   }
 
   const addIncomes = () => {
-    return useMutation<IAddIncome[], IAddIncome[]>(API_URL.INCOME)
+    return useMutation<IAddIncome[], IAddIncome[]>(
+      {
+        url: API_URL.INCOME,
+      },
+      'POST',
+    )
+  }
+
+  const updateIncome = () => {
+    return useMutation<IIncome, IIncome>(
+      {
+        url: API_URL.INCOME,
+      },
+      'PUT',
+    )
   }
 
   return {
     getIncome,
     addIncomes,
+    updateIncome,
   }
 }
 

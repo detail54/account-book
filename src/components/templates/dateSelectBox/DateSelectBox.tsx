@@ -5,6 +5,8 @@ import useDate, { TDateFormat } from 'hooks/useDate'
 // store
 import { useRecoilState } from 'recoil'
 import { themeState } from 'store/atoms'
+// type
+import { TAlign } from 'styled-components'
 // style
 import DateSelectBoxStyles from './DateSelectBox.styles'
 // image
@@ -20,6 +22,7 @@ interface IProps {
   viewDateType: TDateFormat
   onChange: (date: Date) => void
   flex?: number
+  align?: TAlign
 }
 
 const DateSelectBox: React.FC<IProps> = ({
@@ -27,6 +30,7 @@ const DateSelectBox: React.FC<IProps> = ({
   viewDateType,
   onChange,
   flex,
+  align,
 }) => {
   const { Wrap, DateBox, CalendarBox, SelectWrap } = DateSelectBoxStyles
 
@@ -119,7 +123,7 @@ const DateSelectBox: React.FC<IProps> = ({
 
   return (
     <Wrap flex={flex} ref={CalendarRef}>
-      <DateBox onClick={handleOpenCalendar}>
+      <DateBox align={align} onClick={handleOpenCalendar}>
         <Text text={format(viewDateType)} />
         <Img
           src={calendar}

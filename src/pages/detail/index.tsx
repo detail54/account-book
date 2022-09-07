@@ -30,9 +30,12 @@ const Detail: NextPage<AppProps> = () => {
   const [selectDate, setSelectDate] = useRecoilState(selectDashBoardDateState)
 
   const { format } = useDate(new Date(selectDate))
-  const { getAccount } = useAccount()
-  const { getIncome } = useIncome()
+  const { getAccount, updateAccount } = useAccount()
+  const { getIncome, updateIncome } = useIncome()
   const { getDashBoardData } = useDashBoard()
+
+  const accountMutation = updateAccount()
+  const incomeMutation = updateIncome()
 
   const { data: accountData } = getAccount(selectDate)
   const { data: incomeData } = getIncome(selectDate)
@@ -56,14 +59,6 @@ const Detail: NextPage<AppProps> = () => {
     [],
   )
 
-  const handleChangeData = (data: IAccount | IIncome) => {
-    const { id } = data
-    setDetailModalData({
-      ...detailModalData,
-      content: data,
-    })
-  }
-
   const handleCloseModal = useCallback(() => {
     setDetailModalData({
       open: false,
@@ -71,6 +66,16 @@ const Detail: NextPage<AppProps> = () => {
       content: undefined,
     })
   }, [])
+
+  const handleChangeData = (data: IAccount | IIncome) => {
+    if ('store' in data) {
+      accountMutation.mutateAsync(data)
+      handleCloseModal()
+    } else {
+      incomeMutation.mutateAsync(data)
+      handleCloseModal()
+    }
+  }
 
   const calendarListData: TListContents[] | undefined =
     dashBoardData &&
@@ -128,7 +133,7 @@ const Detail: NextPage<AppProps> = () => {
               flex={1}
               fontSize='small'
             />
-            <Text text={income.memo || ''} flex={2} fontSize='small' />
+            <Text text={income.memo || '-'} flex={2} fontSize='small' />
           </ListItemContentWrap>
         ),
         paddingY: 'md',
@@ -173,7 +178,7 @@ const Detail: NextPage<AppProps> = () => {
               flex={1}
               fontSize='small'
             />
-            <Text text={account.memo || ''} flex={2} fontSize='small' />
+            <Text text={account.memo || '-'} flex={2} fontSize='small' />
           </ListItemContentWrap>
         ),
         paddingY: 'md',

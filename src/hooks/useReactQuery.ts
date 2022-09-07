@@ -71,22 +71,37 @@ export const useQuery = <T>(
 }
 
 export const useMutation = <T, S>(
-  url: string,
-  params?: object,
-  updater?: (oldData: T, newData: S) => T,
-  onError?: TMutationErr,
-  errorHandlers?: TErrorHandlers,
-  options?: Omit<
-    UseMutationOptions<AxiosResponse, AxiosError, T | S>,
-    'mutationFn' | 'onMutate' | 'onSettled' | 'onError'
-  >,
+  mutationData: {
+    url: string
+    params?: object
+    updater?: (oldData: T, newData: S) => T
+    onError?: TMutationErr
+    errorHandlers?: TErrorHandlers
+    options?: Omit<
+      UseMutationOptions<AxiosResponse, AxiosError, T | S>,
+      'mutationFn' | 'onMutate' | 'onSettled' | 'onError'
+    >
+  },
+  method: 'POST' | 'PUT' | 'PATCH',
 ): UseMutationResult<AxiosResponse, AxiosError, T | S> => {
+  const { url, params, updater, onError, errorHandlers, options } = mutationData
   const { handleMutationError } = useApiError(errorHandlers)
 
   const client = useQueryClient()
 
+  const mutationFn = (data: T | S) => {
+    switch (method) {
+      case 'PUT':
+        return api.put<S>(url, { data, params })
+      case 'PATCH':
+        return api.patch<S>(url, { data, params })
+      default:
+        return api.post<S>(url, { data, params })
+    }
+  }
+
   return useMutationOrigin<AxiosResponse, AxiosError, T | S>(
-    (data) => api.post<S>(url, { data, params }),
+    (data) => mutationFn(data),
     {
       onMutate: async (data) => {
         await client.cancelQueries([url, params])

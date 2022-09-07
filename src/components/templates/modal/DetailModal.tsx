@@ -4,10 +4,10 @@ import dynamic from 'next/dynamic'
 import { IAccount, IIncome } from 'config/interface'
 // style
 import DetailModalStyles from './DetailModal.styles'
-import DetailModalContents from './DetailModalContents'
 // components
 const Modal = dynamic(() => import('components/organisms/modal/Modal'))
 const Button = dynamic(() => import('components/atoms/button/Button'))
+const DetailModalContents = dynamic(() => import('./DetailModalContents'))
 
 interface IProps {
   open: boolean
@@ -47,9 +47,13 @@ const DetailModal: React.FC<IProps> = ({
     if (!isReviseMode) {
       setIsReviseMode(true)
     } else if (modalData) {
-      handleChangeData(modalData)
+      handleChangeData({
+        ...modalData,
+        amount: Number(String(modalData.amount).replace(/,/g, '')),
+      })
     }
   }
+
   const buttons = [
     <Button
       key='수정버튼'
@@ -62,7 +66,7 @@ const DetailModal: React.FC<IProps> = ({
   return (
     <Modal
       isOpen={open}
-      header={isReviseMode ? `${header} (수정)` : header}
+      header={isReviseMode ? `${header} (수정중)` : header}
       onClose={onClose}
       buttons={buttons}
     >

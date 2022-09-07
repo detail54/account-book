@@ -18,12 +18,27 @@ const useAccount = () => {
   }
 
   const addAccounts = () => {
-    return useMutation<IAddAccount[], IAddAccount[]>(API_URL.ACCOUNTS)
+    return useMutation<IAddAccount[], IAddAccount[]>(
+      {
+        url: API_URL.ACCOUNTS,
+      },
+      'POST',
+    )
+  }
+
+  const updateAccount = () => {
+    return useMutation<IAccount, IAccount>(
+      {
+        url: API_URL.ACCOUNTS,
+      },
+      'PUT',
+    )
   }
 
   return {
     getAccount,
     addAccounts,
+    updateAccount,
   }
 }
 

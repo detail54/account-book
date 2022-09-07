@@ -166,6 +166,70 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
         res.end()
       }
     },
+    PUT: async () => {
+      const updateAccountData: IAccount = body.data
+      let category = await prisma.storeCategory.findUnique({
+        where: {
+          name: updateAccountData.category,
+        },
+      })
+
+      if (!category) {
+        await prisma.storeCategory.create({
+          data: {
+            name: updateAccountData.category,
+          },
+        })
+
+        category = await prisma.storeCategory.findUnique({
+          where: {
+            name: updateAccountData.category,
+          },
+        })
+      }
+
+      let store = await prisma.store.findUnique({
+        where: {
+          name: updateAccountData.store,
+        },
+      })
+
+      if (!store) {
+        await prisma.store.create({
+          data: {
+            name: updateAccountData.store,
+            categoryId: category!.id,
+          },
+        })
+
+        store = await prisma.store.findUnique({
+          where: {
+            name: updateAccountData.store,
+          },
+        })
+      }
+
+      try {
+        await prisma.account.update({
+          where: {
+            id: updateAccountData.id,
+          },
+          data: {
+            paymentDt: new Date(updateAccountData.paymentDt),
+            storeId: store!.id,
+            categoryId: category!.id,
+            amount: updateAccountData.amount,
+            memo: updateAccountData.memo,
+          },
+        })
+
+        res.status(200)
+        res.end()
+      } catch (e) {
+        res.status(500)
+        res.end()
+      }
+    },
   }
 
   handler[apiMethod]()
