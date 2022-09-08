@@ -8,7 +8,7 @@ import { IUserInfo, TChangeValueType } from 'components/templates/form/UserForm'
 import useUser from 'hooks/useUser'
 import { validationMsg } from 'config/messages'
 // style
-import Wrap from './SignUp.styles'
+import Wrap from '../../styles/pages/SignUp.styles'
 // component
 const Text = dynamic(() => import('components/atoms/text/Text'))
 const UserForm = dynamic(() => import('components/templates/form/UserForm'))

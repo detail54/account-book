@@ -14,7 +14,7 @@ import { TListContents } from 'components/organisms/list/List'
 import { useRecoilState } from 'recoil'
 import { detailModalState, selectDashBoardDateState } from 'store/atoms'
 // style
-import DetailStyles from './Detail.styles'
+import DetailStyles from '../../styles/pages/Detail.styles'
 // components
 const List = dynamic(() => import('components/organisms/list/List'))
 const Title = dynamic(() => import('components/atoms/title/Title'))

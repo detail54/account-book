@@ -10,7 +10,7 @@ import { signIn } from 'next-auth/react'
 // hook
 import { validationMsg } from 'config/messages'
 // style
-import Wrap from './SignIn.styles'
+import Wrap from '../../styles/pages/SignIn.styles'
 // component
 const Text = dynamic(() => import('components/atoms/text/Text'))
 const UserForm = dynamic(() => import('components/templates/form/UserForm'))

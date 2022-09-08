@@ -11,7 +11,7 @@ import useDashBoard from 'hooks/useDashBoard'
 import { useRecoilState } from 'recoil'
 import { selectDashBoardDateState } from 'store/atoms'
 // styte
-import DashBoardStyles from './DashBoard.styles'
+import DashBoardStyles from '../../styles/pages/DashBoard.styles'
 // component
 const Skeleton = dynamic(() => import('components/atoms/skeleton/Skeleton'))
 const Text = dynamic(() => import('components/atoms/text/Text'))

@@ -8,7 +8,7 @@ import useAccount from 'hooks/useAccount'
 // type
 import { IAddIncome, IAddAccount } from 'config/interface'
 // styles
-import WriteStyles from './Write.styles'
+import WriteStyles from '../../styles/pages/Write.styles'
 // components
 const AddIncomeNAccountForm = dynamic(
   () => import('components/templates/form/AddIncomeNAccountForm'),
