@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:account.db"
+}
+
+model StoreCategory {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  stores   Store[]
+  accounts Account[]
+}
+
+model Store {
+  id         Int           @id @default(autoincrement())
+  category   StoreCategory @relation(fields: [categoryId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  categoryId Int
+  name       String        @unique
+  accounts   Account[]
+}
+
+model Account {
+  id         Int           @id @default(autoincrement())
+  user       User          @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId     Int
+  regDt      DateTime      @default(now())
+  updatedDt  DateTime      @updatedAt
+  paymentDt  DateTime
+  category   StoreCategory @relation(fields: [categoryId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  categoryId Int
+  store      Store         @relation(fields: [storeId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  storeId    Int
+  amount     Int
+  memo       String?
+}
+
+model Income {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId    Int
+  regDt     DateTime @default(now())
+  updatedDt DateTime @updatedAt
+  incomeDt  DateTime
+  amount    Int
+  memo      String?
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  userName String
+  password String
+  incomes  Income[]
+  accounts Account[]
+  regDt    DateTime  @default(now())
+
+  @@unique([userName])
+}
