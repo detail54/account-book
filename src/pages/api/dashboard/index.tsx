@@ -47,7 +47,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
 
         const accountDatas = await prisma.account.findMany({
           where: {
-            userId,
+            id: userId,
             paymentDt: {
               gte: firstDate,
               lte: lastDate,
