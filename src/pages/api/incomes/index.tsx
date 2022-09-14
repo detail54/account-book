@@ -138,7 +138,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
       }
     },
     DELETE: async () => {
-      const deleteIncomeId: number = body
+      const deleteIncomeId: string = body
 
       try {
         await prisma.income.delete({

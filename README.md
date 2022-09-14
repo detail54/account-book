@@ -4,9 +4,28 @@
 
 # Start
 
-> - git clone https://github.com/detail54/account-book.git
-> - yarn install
-> - yarn dev
+> 1. <strong>git clone https://github.com/detail54/account-book.git</strong>
+> 2. <strong>root경로에 3가지 env파일 생성</strong><br> - .env.local<br> - .env.develop<br> - .env.production<br>
+> 3. <strong>env파일 필요 데이터 (공통)</strong><br>- HOSTNAME = \<HOST NAME\><br>- PORT = \<PORT\><br>- DATABASE_URL = \<mongoDB URL\><br>- NEXT_PUBLIC_SECRET = \<SECRET CODE\><br>- NEXT_PUBLIC_APP_API_SERVER_URL = `/api`<br>- NEXT_PUBLIC_HOST = `http://$HOSTNAME:$PORT`<br>- NEXTAUTH_URL = `$NEXT_PUBLIC_HOST`
+> 4. <strong>yarn install</strong>
+> 5. <strong>초기 실행시 mongoDB의 collections는 비워두어야 한다.</strong><br>(prisma/schema.prisma 의 모델들과 mongodb의 collections가 동일해야 하기 떄문.)
+> 6. <strong>yarn prisma db push 명령어 대신 실행환경에 맞게 아래 script의 dbpush:\*\*\*\* 사용</strong>
+> 7. <strong>yarn dev / yarn build / yarn start</strong>
+
+# script
+
+```json
+  "scripts": {
+    "dev": "env-cmd -f .env.local next dev",
+    "build": "env-cmd -f .env.production next build",
+    "start": "env-cmd -f .env.development next start",
+    "lint": "next lint",
+    // prisma schema 변경후 "prisma db push" 명령어 대신 아래 스크립트 사용.
+    "dbpush:local": "env-cmd -f .env.local prisma db push",
+    "dbpush:develop": "env-cmd -f .env.develop prisma db push",
+    "dbpush:production": "env-cmd -f .env.production prisma db push"
+  },
+```
 
 # dependencies
 
@@ -55,7 +74,7 @@
   }
 ```
 
-- database: sqlite
+- database: mongoDB
 - prisma: db컨트롤
 - cookies-next: http header의 쿠키정보를 가져오기위해 사용
 - jsonwebtoken: jwt 인코딩, 디코딩하기 위해 사용
@@ -66,3 +85,4 @@
 - uuid: 개발중 파일이 변경되면 빌드를 하면서 atom의 state가 재 선언되는데<br />
   이때 해당 이전에 생성된 atom의 고유 key값을 재사용 하면서 에러가 발생한다.<br />
   성능적인 이슈는 없다고 하지만 에러메세지가 뜨지 않게 하기위해 난수를 생성하여 key값 지정하는데 사용.
+- env-cmd: 환경변수 분기하기 위해 사용

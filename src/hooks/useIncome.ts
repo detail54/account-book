@@ -30,7 +30,7 @@ const useIncome = () => {
   }
 
   const deleteIncome = () => {
-    return useMutation<number, number>(
+    return useMutation<string, string>(
       {
         url: API_URL.INCOME,
       },

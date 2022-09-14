@@ -230,7 +230,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
       }
     },
     DELETE: async () => {
-      const deleteAccountId: number = body
+      const deleteAccountId: string = body
 
       try {
         await prisma.account.delete({

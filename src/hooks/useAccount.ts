@@ -36,7 +36,7 @@ const useAccount = () => {
   }
 
   const deleteAccount = () => {
-    return useMutation<number, number>(
+    return useMutation<string, string>(
       {
         url: API_URL.ACCOUNTS,
       },

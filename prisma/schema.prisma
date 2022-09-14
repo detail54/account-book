@@ -3,44 +3,44 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:account.db"
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
 model StoreCategory {
-  id       Int       @id @default(autoincrement())
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
   name     String    @unique
   stores   Store[]
   accounts Account[]
 }
 
 model Store {
-  id         Int           @id @default(autoincrement())
+  id         String        @id @default(auto()) @map("_id") @db.ObjectId
   category   StoreCategory @relation(fields: [categoryId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  categoryId Int
+  categoryId String        @db.ObjectId
   name       String        @unique
   accounts   Account[]
 }
 
 model Account {
-  id         Int           @id @default(autoincrement())
+  id         String        @id @default(auto()) @map("_id") @db.ObjectId
   user       User          @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  userId     Int
+  userId     String        @db.ObjectId
   regDt      DateTime      @default(now())
   updatedDt  DateTime      @updatedAt
   paymentDt  DateTime
   category   StoreCategory @relation(fields: [categoryId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  categoryId Int
+  categoryId String        @db.ObjectId
   store      Store         @relation(fields: [storeId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  storeId    Int
+  storeId    String        @db.ObjectId
   amount     Int
   memo       String?
 }
 
 model Income {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   user      User     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  userId    Int
+  userId    String   @db.ObjectId
   regDt     DateTime @default(now())
   updatedDt DateTime @updatedAt
   incomeDt  DateTime
@@ -49,7 +49,7 @@ model Income {
 }
 
 model User {
-  id       Int       @id @default(autoincrement())
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
   userName String
   password String
   incomes  Income[]
