@@ -15,6 +15,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   if (!token) {
     return
   }
+  console.log('method::', method)
 
   const base64Payload = token.split('.')[1]
   const payload = Buffer.from(base64Payload, 'base64')
@@ -94,42 +95,46 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
           { length: lastDate.getDate() },
           (v, i) => i + 1,
         ).reduce((acc, cur) => {
-          // const data = accountDatas.filter(
-          //   (account) => account.paymentDt.getDate() === cur,
-          // )
+          const data = accountDatas.filter(
+            (account) => account.paymentDt.getDate() === cur,
+          )
 
-          // const returnDate = `${date}-${cur < 10 ? `0${cur}` : cur}`
-          // if (data) {
-          //   const totalIncome = incomeDatas
-          //     .filter((income) => income.incomeDt.getDate() === cur)
-          //     .reduce((_acc, _cur) => {
-          //       return _acc + _cur.amount
-          //     }, 0)
-          //   const totalExpenditure = data.reduce((_acc, _cur) => {
-          //     return _acc + _cur.amount
-          //   }, 0)
+          const returnDate = `${date}-${cur < 10 ? `0${cur}` : cur}`
+          if (data) {
+            const totalIncome = incomeDatas
+              .filter((income) => income.incomeDt.getDate() === cur)
+              .reduce((_acc, _cur) => {
+                return _acc + _cur.amount
+              }, 0)
+            const totalExpenditure = data.reduce((_acc, _cur) => {
+              return _acc + _cur.amount
+            }, 0)
 
-          //   return {
-          //     ...acc,
-          //     list: [
-          //       ...acc.list,
-          //       {
-          //         date: returnDate,
-          //         income: totalIncome,
-          //         expenditure: totalExpenditure,
-          //       },
-          //     ],
-          //     totalIncome: acc.totalIncome + totalIncome,
-          //     totalExpenditure: acc.totalExpenditure + totalExpenditure,
-          //   }
-          // }
+            return {
+              ...acc,
+              list: [
+                ...acc.list,
+                {
+                  date: returnDate,
+                  income: totalIncome,
+                  expenditure: totalExpenditure,
+                },
+              ],
+              totalIncome: acc.totalIncome + totalIncome,
+              totalExpenditure: acc.totalExpenditure + totalExpenditure,
+            }
+          }
 
           return {
             ...acc,
-            list: [],
+            list: [
+              ...acc.list,
+              { date: returnDate, income: 0, expenditure: 0 },
+            ],
           }
         }, initResultData)
 
+        console.log('hihihi')
         res.status(200).json(resultData)
         res.end()
       } catch (e) {
