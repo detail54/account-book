@@ -8,6 +8,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   const token = getCookie('next-auth.session-token', { req, res }) as string
   const date = query.date as string
 
+  console.log('hihihih')
   if (!date) {
     res.status(500).json(new Error('not found "date" param'))
   }
