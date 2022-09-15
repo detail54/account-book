@@ -3,7 +3,6 @@ import React from 'react'
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import { AppProps } from 'next/app'
 // hook
 import useDate from 'hooks/useDate'
 import useDashBoard from 'hooks/useDashBoard'
