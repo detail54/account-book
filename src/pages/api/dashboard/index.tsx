@@ -15,7 +15,6 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   if (!token) {
     return
   }
-  console.log('method::', method)
 
   const base64Payload = token.split('.')[1]
   const payload = Buffer.from(base64Payload, 'base64')
@@ -134,7 +133,6 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
           }
         }, initResultData)
 
-        console.log('hihihi')
         res.status(200).json(resultData)
         res.end()
       } catch (e) {
