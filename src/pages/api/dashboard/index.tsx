@@ -21,6 +21,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   const userId = JSON.parse(payload.toString()).id
 
   const apiMethod = method || 'GET'
+  console.log(':::dashboard API:::')
 
   const handler: { [key: string]: () => void } = {
     GET: async () => {
@@ -136,6 +137,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
           test: 'test',
         }
 
+        console.log('result:::', result)
         res.status(200).json(result)
         res.end()
       } catch (e) {
