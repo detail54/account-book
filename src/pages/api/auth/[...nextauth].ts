@@ -23,6 +23,7 @@ export default NextAuth({
             userName: credentials?.userName,
           },
         })
+        console.log('authhihihihihihi')
 
         if (!user) throw new Error(validationMsg.ERROR_NOT_EXIST_ID)
         if (user) {
