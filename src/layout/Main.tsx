@@ -29,7 +29,7 @@ const Main: NextPage<AppProps> = ({ Component, pageProps, router }) => {
         const pathFormat = path.substring(1, path.length)
         setLastPage(pathFormat)
 
-        if (lastPage) router.push(`session-timeout?page=${pathFormat}`)
+        // if (lastPage) router.push(`session-timeout?page=${pathFormat}`)
       }
     } else {
       const path = router.asPath
@@ -39,7 +39,7 @@ const Main: NextPage<AppProps> = ({ Component, pageProps, router }) => {
         path.startsWith('/signup') ||
         path === '/'
       ) {
-        router.push('dashboard')
+        // router.push('dashboard')
       }
     }
   }, [session])
