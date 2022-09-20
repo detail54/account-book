@@ -5,20 +5,20 @@ import prisma from 'utils/prismaClient'
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
   const { body, headers, query, method } = req
-  const token = getCookie('next-auth.session-token', { req, res }) as string
-  const date = query.date as string
+  // const token = getCookie('next-auth.session-token', { req, res }) as string
+  // const date = query.date as string
 
-  if (!date) {
-    res.status(500).json(new Error('not found "date" param'))
-  }
+  // if (!date) {
+  //   res.status(500).json(new Error('not found "date" param'))
+  // }
 
-  if (!token) {
-    res.status(500).json(new Error('not found "token" param'))
-  }
+  // if (!token) {
+  //   res.status(500).json(new Error('not found "token" param'))
+  // }
 
-  const base64Payload = token.split('.')[1]
-  const payload = Buffer.from(base64Payload, 'base64')
-  const userId = JSON.parse(payload.toString()).id
+  // const base64Payload = token.split('.')[1]
+  // const payload = Buffer.from(base64Payload, 'base64')
+  // const userId = JSON.parse(payload.toString()).id
 
   const apiMethod = method || 'GET'
 
