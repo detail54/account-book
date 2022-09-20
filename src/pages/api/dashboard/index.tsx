@@ -13,7 +13,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   if (!token) {
-    return
+    res.status(500).json(new Error('not found "token" param'))
   }
 
   const base64Payload = token.split('.')[1]
