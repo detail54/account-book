@@ -1,5 +1,5 @@
-import { getCookie } from 'cookies-next'
-import { IDashBoard } from 'config/interface'
+// import { getCookie } from 'cookies-next'
+// import { IDashBoard } from 'config/interface'
 import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from 'utils/prismaClient'
 
