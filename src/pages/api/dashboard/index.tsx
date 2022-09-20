@@ -136,7 +136,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
           test: 'test',
         }
 
-        res.json(result)
+        res.status(200).json(result)
       } catch (e) {
         res.status(500)
       }
