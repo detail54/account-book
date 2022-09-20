@@ -3,7 +3,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from 'utils/prismaClient'
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { body, headers, query, method } = req
   // const token = getCookie('next-auth.session-token', { req, res }) as string
   // const date = query.date as string
