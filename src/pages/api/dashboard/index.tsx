@@ -145,5 +145,5 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   // }
 
   // handler[apiMethod]()
-  res.status(200).json({ message: 'okokok' })
+  res.json({ message: 'okokok' })
 }
