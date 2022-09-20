@@ -145,5 +145,5 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
     },
   }
 
-  handler[apiMethod]()
+  handler.GET()
 }
