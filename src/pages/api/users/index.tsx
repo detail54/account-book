@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from 'utils/prismaClient'
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
-  console.log('userhihihihihihi')
   const { body, headers, query, method } = req
 
   const apiMethod = method || 'GET'
